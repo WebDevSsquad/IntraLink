@@ -41,13 +41,13 @@ pool.connect((err, client, release) => {
   pool.end(); // Close the pool after the connection check
 });
 
-//  pool.query(`insert into public."User" (username,email,password,firstname,lastname)  values ('the fearmaker','midoamr20@gmail.com','jashdflkjhasdkfjhaskljdfh48456s4ad','muhammad','amr');`, (err, result) => {
-//   if (err) {
-//     console.error("Error executing query:", err.stack);
-//     return;
-//   }
-//   console.log("Result:", result.rows);
-// });
+ pool.query(`insert into public."User" (username,email,password,firstname,lastname)  values ('the fearmaker','midoamr20@gmail.com','jashdflkjhasdkfjhaskljdfh48456s4ad','muhammad','amr');`, (err, result) => {
+  if (err) {
+    console.error("Error executing query:", err.stack);
+    return;
+  }
+  console.log("Result:", result.rows);
+});
 
 
 //app.use("/auth", authRouter);

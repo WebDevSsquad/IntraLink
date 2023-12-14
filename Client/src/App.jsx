@@ -1,46 +1,27 @@
-import { useState } from "react";
-import useLocalStorage from "use-local-storage";
+import { Provider } from "react-redux";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+//import useLocalStorage from "use-local-storage";
 import "./App.css";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import Register from "./pages/register/register";
+import store from "./slices/store";
 
 function App() {
-  const [count, setCount] = useState(0);
-  const defaultTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
-  const [theme, setTheme] = useLocalStorage("theme", defaultTheme);
-  const switchTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
+  // const defaultTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+  //   ? "dark"
+  //   : "light";
+  // const [theme, setTheme] = useLocalStorage("theme", defaultTheme);
+  // const switchTheme = () => {
+  //   setTheme(theme === "dark" ? "light" : "dark");
+  // };
   return (
-    <>
-      <div className="container" data-theme={theme}>
-        <div className="special">
-          <button onClick={switchTheme}>Switch</button>
-        </div>
-        <div>
-          <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-            <img src={viteLogo} className="logo" alt="Vite logo" />
-          </a>
-          <a href="https://react.dev" target="_blank" rel="noreferrer">
-            <img src={reactLogo} className="logo react" alt="React logo" />
-          </a>
-        </div>
-        <h1>Vite + React</h1>
-        <div className="card">
-          <button onClick={() => setCount((count) => count + 1)}>
-            count is {count}
-          </button>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test HMR
-          </p>
-        </div>
-        <p className="read-the-docs">
-          Click on the Vite and React logos to learn more
-        </p>
-      </div>
-    </>
+    <Provider store={store} >
+      <Router>
+        <Routes>
+          <Route path="/logIn" Component={Register} />
+          <Route path="/signUp" Component={Register} />
+        </Routes>
+      </Router>
+    </Provider>
   );
 }
 
