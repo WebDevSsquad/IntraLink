@@ -36,7 +36,7 @@ export default function Register() {
   const theme = useSelector((state) => state.user.theme);
 
   const onSubmit = () => {
-    if (ConfirmPassword !== Password) {
+    if (ConfirmPassword !== Password && location.pathname === "/signup") {
       setDontMatch(true);
       if (ConfirmPasswordRef.current) {
         ConfirmPasswordRef.current.value = "";
@@ -52,7 +52,7 @@ export default function Register() {
 
     const url = `http://localhost:8080/auth${location.pathname}`;
 
-    const login = {
+    const logIn = {
       username: UserName,
       password: Password,
     };
@@ -65,11 +65,11 @@ export default function Register() {
       email: Email,
       password: Password,
     };
-
+     console.log("signup");
     fetch(url, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify(location.pathname === "/login" ? login : signup),
+      body: JSON.stringify(location.pathname === "/logIn" ? logIn : signup),
     })
       .then((res) => {
         ok = res.ok;
@@ -77,6 +77,7 @@ export default function Register() {
         return res.json();
       })
       .then((data) => {
+        console.log(data);
         if (ok) {
           if (data.image !== undefined) dispatch(updatePicture(data.image));
 
@@ -363,7 +364,7 @@ export default function Register() {
                 value={location.pathname === "/signup" ? "Sign Up" : "Log In"}
                 className="submit"
               />
-              {location.pathname === "/login"? signup:<></>}
+              {location.pathname === "/logIn"? signup:<></>}
             </div>
           </form>
         </div>

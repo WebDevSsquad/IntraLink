@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { User, logInSchema, signUpSchema } from "../models/user.js";
+import pool from "../db.js";
+import { logInSchema, signUpSchema } from "../models/user.js";
 const authController = {
   signup: async (req, res) => {
     // Validate the request body against the sign up schema
@@ -10,24 +11,50 @@ const authController = {
       return res.status(422).json(error.details);
     }
     try {
-      const { email, password } = req.body;
-      // Check if the user already exists
-      let user = await User.findOne({ email });
-      if (user) {
+      const { email, password, username } = req.body;
+      // Check if the user already exists 
+      let checkusername = await pool.query(`SELECT EXISTS (
+                                          SELECT 1
+                                          FROM public."User"
+                                          WHERE username = '${username}'
+                                        );`);
+
+      if (checkusername) {
+        console.log("Username is already taken");
+        return res.status(400).json({ error: "Username is already taken" });
+      }
+      
+      let checkEmail = await pool.query(`SELECT EXISTS (
+                                                SELECT 1
+                                                FROM public."User"
+                                                WHERE email = '${email}'
+                                            );`);
+
+      if (checkEmail) {
         console.log("Email is already taken");
         return res.status(400).json({ error: "Email is already taken" });
       }
 
+     
+
       // Hash the password before saving it to the database
       const hashedPassword = await bcrypt.hash(password, 10);
-      user = new User({ ...req.body, password: hashedPassword });
 
-      await user.save();
+      let user =
+        await pool.query(`INSERT INTO public."User" (username,email,password,firstname,lastname) 
+                                  VALUES ('${req.body.username}',
+                                  '${req.body.email}',
+                                  '${hashedPassword}',
+                                  '${req.body.firstname}'
+                                  ,'${req.body.lastname}');`);
+
+      let user_id = await pool.query(
+        `SELECT user_id FROM public."User" WHERE username = '${username}'`
+      );
       // Generate a JWT token containing the user's id
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      const token = jwt.sign({ id: user_id.rows[0] }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES_IN,
       });
-
       res
         .status(201)
         .json({ message: "User created successfully", user, token });
@@ -47,17 +74,31 @@ const authController = {
     }
 
     try {
-      const { email, password } = req.body;
+      
+      const { username, password } = req.body;
 
       // Check if the user exists
-      const user = await User.findOne({ email }, "+password");
-      if (!user) {
+      // Check if the user already exists
+      let checkusername = await pool.query(`SELECT EXISTS (
+                                              SELECT 1
+                                              FROM public."User"
+                                              WHERE username = '${username}'
+                                          );`);
+
+      if (!checkusername) {
         return res.status(400).json({
-          error: "Invalid email",
+          error: "Invalid username",
         });
       }
+      let userData = await pool.query(
+        `SELECT * FROM public."User" WHERE username = '${username}'`
+      );
       // Check if the password is correct
-      const isValidPassword = await bcrypt.compare(password, user.password);
+      const isValidPassword = await bcrypt.compare(
+        password,
+        userData.rows[0].password
+      );
+
       if (!isValidPassword) {
         return res.status(400).json({
           error: "Invalid password",
@@ -65,11 +106,18 @@ const authController = {
       }
 
       // Generate a JWT token containing the user's id
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRES_IN,
-      });
-      console.log(user);
-      const image = user.image;
+      const token = jwt.sign(
+        { id: userData.rows[0].user_id },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: process.env.JWT_EXPIRES_IN,
+        }
+      );
+
+      console.log(userData.rows[0]);
+
+      const image = userData.rows[0].image;
+
       res.status(200).json({ message: "Logged in successfully", token, image });
     } catch (error) {
       console.log(error);
@@ -80,15 +128,19 @@ const authController = {
   },
   updateImage: async (req, res) => {
     try {
-      const { image, id, imageName } = req.body;
+      const { image, user_id } = req.body;
 
-      const user = await User.findByIdAndUpdate(id, {
-        image: image,
-        imageName: imageName,
-      });
+      const user = await pool.query(`SELECT EXISTS (
+                                        SELECT 1
+                                        FROM public."User"
+                                        WHERE user_id = '${user_id}'
+                                    );`);
       if (!user) {
         res.status(404).json({ message: "Couldn't find user" });
       }
+      await pool.query(
+        `UPDATE public."User" SET image = '${image}' WHERE user_id = '${user_id};`
+      );
       res.status(200).json({ message: "Updated in successfully" });
     } catch (error) {
       console.log(error);
