@@ -363,7 +363,7 @@ export default function Register() {
                 value={location.pathname === "/signup" ? "Sign Up" : "Log In"}
                 className="submit"
               />
-              {location.pathname === "/logIn"? signup:<></>}
+              {location.pathname === "/login"? signup:<></>}
             </div>
           </form>
         </div>

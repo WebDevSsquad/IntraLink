@@ -14,7 +14,7 @@ function App() {
   //   setTheme(theme === "dark" ? "light" : "dark");
   // };
   return (
-    <Provider store={store} >
+    <Provider store={store}>
       <Router>
         <Routes>
           <Route path="/login" element={<Register />} />
