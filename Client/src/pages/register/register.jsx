@@ -52,12 +52,12 @@ export default function Register() {
 
     const url = `http://localhost:8080/auth${location.pathname}`;
 
-    const logIn = {
+    const login = {
       username: UserName,
       password: Password,
     };
 
-    const signUp = {
+    const signup = {
       image: `/${theme}User.png`,
       username: UserName,
       firstname: FirstName,
@@ -69,7 +69,7 @@ export default function Register() {
     fetch(url, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify(location.pathname === "/logIn" ? logIn : signUp),
+      body: JSON.stringify(location.pathname === "/login" ? login : signup),
     })
       .then((res) => {
         ok = res.ok;
@@ -146,7 +146,7 @@ export default function Register() {
   };
 
   const username = (
-    <div className={location.pathname === "/signUp"?"input-box":"input-box username_login"}>
+    <div className={location.pathname === "/signup"?"input-box":"input-box username_login"}>
       <input
         type="text"
         className="input-control"
@@ -246,7 +246,7 @@ export default function Register() {
   );
 
   const password = (
-    <div className={location.pathname === "/signUp"?"input-box":"input-box password_login"}>
+    <div className={location.pathname === "/signup"?"input-box":"input-box password_login"}>
       <input
         type={SeePassword ? "text" : "password"}
         className="input-control"
@@ -326,17 +326,17 @@ export default function Register() {
 
   const elements = [
     username,
-    location.pathname === "/signUp" && email,
-    location.pathname === "/signUp" && firstName,
-    location.pathname === "/signUp" && lastName,
+    location.pathname === "/signup" && email,
+    location.pathname === "/signup" && firstName,
+    location.pathname === "/signup" && lastName,
     password,
-    location.pathname === "/signUp" && confirmPassword,
+    location.pathname === "/signup" && confirmPassword,
   ];
 
-  const signUp = (
+  const signup = (
     <p className="noAccount">
       {`Don't have an account? `}
-      <Link to="/signUp">
+      <Link to="/signup">
         <span className="register">Sign Up</span>
       </Link>
     </p>
@@ -354,16 +354,16 @@ export default function Register() {
               onSubmit();
               return false;
             }}
-            className={location.pathname === "/signUp"?"form":"form_login" }
+            className={location.pathname === "/signup"?"form":"form_login" }
           >
             {elements}
             <div className="submit-container">
               <input
                 type="submit"
-                value={location.pathname === "/signUp" ? "Sign Up" : "Log In"}
+                value={location.pathname === "/signup" ? "Sign Up" : "Log In"}
                 className="submit"
               />
-              {location.pathname === "/logIn" && signUp}
+              {location.pathname === "/logIn"? signup:<></>}
             </div>
           </form>
         </div>
