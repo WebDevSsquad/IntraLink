@@ -12,30 +12,30 @@ const authController = {
     }
     try {
       const { email, password, username } = req.body;
-      // Check if the user already exists 
+      // Check if the user already exists
       let checkusername = await pool.query(`SELECT EXISTS (
                                           SELECT 1
                                           FROM public."User"
                                           WHERE username = '${username}'
                                         );`);
+      console.log(username);
+      console.log(checkusername);
 
-      if (checkusername) {
+      if (checkusername.rows[0].exists) {
         console.log("Username is already taken");
         return res.status(400).json({ error: "Username is already taken" });
       }
-      
+
       let checkEmail = await pool.query(`SELECT EXISTS (
                                                 SELECT 1
                                                 FROM public."User"
                                                 WHERE email = '${email}'
                                             );`);
 
-      if (checkEmail) {
+      if (checkEmail.rows[0].exists) {
         console.log("Email is already taken");
         return res.status(400).json({ error: "Email is already taken" });
       }
-
-     
 
       // Hash the password before saving it to the database
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -74,7 +74,6 @@ const authController = {
     }
 
     try {
-      
       const { username, password } = req.body;
 
       // Check if the user exists
@@ -85,7 +84,7 @@ const authController = {
                                               WHERE username = '${username}'
                                           );`);
 
-      if (!checkusername) {
+      if (!checkusername.rows[0].exists) {
         return res.status(400).json({
           error: "Invalid username",
         });

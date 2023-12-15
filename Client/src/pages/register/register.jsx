@@ -52,7 +52,7 @@ export default function Register() {
 
     const url = `http://localhost:8080/auth${location.pathname}`;
 
-    const logIn = {
+    const login = {
       username: UserName,
       password: Password,
     };
@@ -65,11 +65,11 @@ export default function Register() {
       email: Email,
       password: Password,
     };
-     console.log("signup");
+    console.log("signup");
     fetch(url, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify(location.pathname === "/logIn" ? logIn : signup),
+      body: JSON.stringify(location.pathname === "/login" ? login : signup),
     })
       .then((res) => {
         ok = res.ok;
@@ -147,7 +147,13 @@ export default function Register() {
   };
 
   const username = (
-    <div className={location.pathname === "/signup"?"input-box":"input-box username_login"}>
+    <div
+      className={
+        location.pathname === "/signup"
+          ? "input-box"
+          : "input-box username_login"
+      }
+    >
       <input
         type="text"
         className="input-control"
@@ -247,7 +253,13 @@ export default function Register() {
   );
 
   const password = (
-    <div className={location.pathname === "/signup"?"input-box":"input-box password_login"}>
+    <div
+      className={
+        location.pathname === "/signup"
+          ? "input-box"
+          : "input-box password_login"
+      }
+    >
       <input
         type={SeePassword ? "text" : "password"}
         className="input-control"
@@ -257,9 +269,9 @@ export default function Register() {
         required
         ref={PasswordRef}
       />
-      {(wrongPassword && (
+      {wrongPassword && (
         <div className="wrong">Wrong password please try again</div>
-      )) }
+      )}
       <label htmlFor="password" className="label-control">
         Password
       </label>
@@ -280,7 +292,7 @@ export default function Register() {
         ref={ConfirmPasswordRef}
         onChange={(e) => setConfirmPassword(e.target.value)}
       />
-      { (dontMatch && <div className="wrong">Passwords do not match</div>)}
+      {dontMatch && <div className="wrong">Passwords do not match</div>}
       <label htmlFor="confirmPassword" className="label-control">
         Confirm Password
       </label>
@@ -355,7 +367,7 @@ export default function Register() {
               onSubmit();
               return false;
             }}
-            className={location.pathname === "/signup"?"form":"form_login" }
+            className={location.pathname === "/signup" ? "form" : "form_login"}
           >
             {elements}
             <div className="submit-container">
@@ -364,7 +376,7 @@ export default function Register() {
                 value={location.pathname === "/signup" ? "Sign Up" : "Log In"}
                 className="submit"
               />
-              {location.pathname === "/logIn"? signup:<></>}
+              {location.pathname !== "/signup" && signup}
             </div>
           </form>
         </div>
