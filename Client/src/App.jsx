@@ -4,6 +4,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
 import Register from "./pages/register/register";
 import store from "./slices/store";
+import Chat from "./pages/realtime-chat/Chat";
 
 function App() {
   // const defaultTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -19,6 +20,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Register />} />
           <Route path="/signup" element={<Register />} />
+          <Route path="/chat" element={<Chat />} />
         </Routes>
       </Router>
     </Provider>

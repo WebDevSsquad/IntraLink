@@ -1,0 +1,39 @@
+.chat {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  font-size: large;
+  color: black;
+}
+
+.chatMenu {
+  flex: 6;
+  border-right: 0.5px solid grey;
+}
+
+.chatBox {
+  flex: 11;
+  border-right: 0.5px solid grey;
+}
+
+/* .chatOnline {
+  flex: 7;
+} */
+
+.chatMenuWrapper,
+.chatBoxWrapper,
+.chatOnlineWrapper {
+  padding: 10px;
+  /* background-color: aqua; */
+  height: 100%;
+}
+
+.chatMenuInput {
+  width: 90%;
+  background-color: white;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
