@@ -4,6 +4,7 @@
   display: flex;
   font-size: large;
   color: black;
+  font-family: "Poppins", sans-serif;
 }
 
 .chatMenu {
@@ -16,6 +17,20 @@
   border-right: 0.5px solid grey;
 }
 
+.chatBoxTop {
+  height: 85%;
+  overflow-y: scroll;
+}
+
+.chatBoxBottom {
+  height: 15%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: var(--primary-100); */
+}
+
 /* .chatOnline {
   flex: 7;
 } */
@@ -24,7 +39,6 @@
 .chatBoxWrapper,
 .chatOnlineWrapper {
   padding: 10px;
-  /* background-color: aqua; */
   height: 100%;
 }
 
@@ -36,4 +50,18 @@
   padding-left: 10px;
   border-radius: 10px;
   margin-bottom: 20px;
+}
+
+.chatBoxInput {
+  height: 90px;
+  flex: 2;
+  margin-right: 20px;
+  resize: none;
+  border-radius: 10px;
+  padding: 10px;
+  outline: none;
+}
+
+.btnSend {
+  /* flex: 1; */
 }

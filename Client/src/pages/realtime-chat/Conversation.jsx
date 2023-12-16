@@ -11,14 +11,8 @@ export default function Conversation({
   return (
     <div className="conversation">
       <div className="imgContainer">
-        <img
-          className="imgConversation"
-          src={imgSrc}
-          // src=
-          // src=
-          alt=""
-        />
-        <div className={`status ${isOnline ? "online" : "offline"}`}></div>
+        <img className="imgConversation" src={imgSrc} alt="" />
+        <div className={`status ${isOnline ? "online" : ""}`}></div>
       </div>
       <div className="conversation-info">
         <span className="nameConversation">{name}</span>
@@ -27,7 +21,6 @@ export default function Conversation({
           <span className="dateConversation">{date}</span>
         </div>
       </div>
-      {/* Abby Kingston */}
     </div>
   );
 }

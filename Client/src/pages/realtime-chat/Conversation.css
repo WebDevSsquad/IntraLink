@@ -37,18 +37,13 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: green;
   right: 5px;
   bottom: 0px;
   z-index: 2;
 }
 
 .online {
-  background-color: green;
-}
-
-.offline {
-  background-color: red;
+  background-color: var(--online);
 }
 
 .conversation-info {
@@ -66,16 +61,19 @@
 .nameConversation {
   font-size: 16px;
   text-align: start;
+  font-weight: 700;
 }
 
 .dateConversation {
   font-size: 12px;
   text-align: end;
   flex: 1;
+  color: #0c0c0c90;
 }
 
 .textConversation {
   font-size: 12px;
   text-align: start;
   flex: 2;
+  color: #0c0c0c90;
 }
