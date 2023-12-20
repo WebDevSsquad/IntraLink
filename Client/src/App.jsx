@@ -4,6 +4,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
 import Register from "./pages/register/register";
 import store from "./slices/store";
+import LandingPage from "./pages/landing_page/landing_page";
 
 function App() {
   // const defaultTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -17,6 +18,7 @@ function App() {
     <Provider store={store}>
       <Router>
         <Routes>
+          <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Register />} />
           <Route path="/signup" element={<Register />} />
         </Routes>
