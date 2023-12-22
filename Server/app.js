@@ -1,9 +1,10 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
-import pool from './db.js'; // Import the pool
+import pool from "./db.js"; // Import the pool
 import authMiddleware from "./middlewares/auth.middleware.js";
 import authRouter from "./routers/auth.route.js";
+import chatRouter from "./routers/chatRoute.js";
 
 dotenv.config();
 
@@ -31,6 +32,8 @@ pool.connect((err, client, release) => {
 });
 
 app.use("/auth", authRouter);
+
+app.use("/chat", chatRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

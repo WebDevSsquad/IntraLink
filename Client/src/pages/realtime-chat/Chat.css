@@ -44,7 +44,7 @@
 
 .chatMenuInput {
   width: 90%;
-  background-color: white;
+  background-color: var(--bg-100);
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 10px;

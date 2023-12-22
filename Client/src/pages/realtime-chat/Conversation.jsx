@@ -7,6 +7,7 @@ export default function Conversation({
   content,
   date,
   isOnline,
+  isCurrentUserSender,
 }) {
   return (
     <div className="conversation">
@@ -17,7 +18,9 @@ export default function Conversation({
       <div className="conversation-info">
         <span className="nameConversation">{name}</span>
         <div className="text-info">
-          <span className="textConversation">{content}</span>
+          <span className="textConversation">
+            {(isCurrentUserSender ? "You : " : "") + content}
+          </span>
           <span className="dateConversation">{date}</span>
         </div>
       </div>
