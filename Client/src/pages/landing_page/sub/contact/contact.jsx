@@ -1,8 +1,10 @@
 import { useForm } from "@formspree/react";
-import greencheck from "../../../../assets/check_green.svg";
+import { useState } from "react";
+import greencheck from "../../../../assets/check_submit.svg";
 import "./contact.css";
 export default function Contact() {
   const [state, handleSubmit] = useForm("xqkrzglb");
+  const [succeeded, setSucceeded] = useState(false);
 
   const curve = (
     <div className="custom-shape-divider-top-1703246710">
@@ -105,7 +107,16 @@ export default function Contact() {
           <div className="contact-form home_contact">
             <form
               autoComplete="on"
-              onSubmit={handleSubmit}
+              onSubmit={(e) => {
+                handleSubmit(e).then(() => {
+                  if (state.succeeded) {
+                    setSucceeded(true);
+                    setTimeout(() => {
+                      setSucceeded(false);
+                    }, 3000);
+                  }
+                });
+              }}
               className="form"
               method="POST"
             >
@@ -114,13 +125,18 @@ export default function Contact() {
                 <label className="message">Message</label>
                 <textarea name="Message"></textarea>
               </div>
-              <div className="submit-container home_send">
+              <div className={`submit-container home_send `}>
                 <button
                   type="submit"
-                  className={`send`}
+                  className={`send ${succeeded ? "success" : ""}`}
                   disabled={state.submitting}
                 >
-                  Send
+                  <span  className={` ${succeeded && "vanish"}`}>Send</span>
+                  <img
+                    src={greencheck}
+                    alt="check"
+                    className={`${succeeded ? "check_img" : "vanish"}`}
+                  />
                 </button>
               </div>
             </form>
