@@ -17,8 +17,8 @@ function App() {
     <Provider store={store}>
       <Router>
         <Routes>
-          <Route path="/login" element={<Register />} />
-          <Route path="/signup" element={<Register />} />
+          <Route exact path="/login" element={<Register />} />
+          <Route exact path="/signup" element={<Register />} />
         </Routes>
       </Router>
     </Provider>
