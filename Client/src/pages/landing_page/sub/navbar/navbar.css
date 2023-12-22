@@ -6,7 +6,6 @@
   height: 10vh;
   width: 100vw;
   background-color: var(--bg-100);
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   z-index: 100;
   backdrop-filter: blur(3px);
   border-radius: 10px;
@@ -28,12 +27,13 @@
 }
 .navbar-container a {
   color: var(--text-100);
+  font-weight: 1000;
 }
 .navbar-container a:hover {
   cursor: pointer;
   color: var(--accent-100);
 }
-.register {
+.register2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -44,10 +44,10 @@
   margin-left: 20px;
   cursor: default;
 }
-.navbar-container .login {
+.navbar-container .login2 {
   color: var(--accent-200);
 }
-.navbar-container .signup {
+.navbar-container .signup2 {
   color: var(--bg-100);
   width: 9rem;
   background-image: linear-gradient(
@@ -65,13 +65,16 @@
     #80d1fb,
     #8cd7ff
   );
-  -webkit-box-shadow: 0px 10px 24px -7px rgba(153, 181, 200, 1);
-  -moz-box-shadow: 0px 10px 24px -7px rgba(153, 181, 200, 1);
-  box-shadow: 0px 10px 24px -7px rgba(153, 181, 200, 1);
+  box-shadow: 10px 10px 14px 1px rgba(00, 00, 00, 0.2);
   border-radius: 30px;
   padding: 0.5rem;
+  transition: all 0.5s;
 }
-.navbar-container .login:hover,
-.signup:hover {
+.navbar-container .signup2:hover {
+  transform: translateZ(-2px);
+  box-shadow: none;
+}
+.navbar-container .login2:hover,
+.signup2:hover {
   cursor: pointer;
 }

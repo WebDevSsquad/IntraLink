@@ -41,16 +41,15 @@ export default function Navbar() {
           </div>
         </Link>
         <a href="#home">Home</a>
-        <a href="#about">About us</a>
         <a href="#services">Services</a>
         <a href="#pricing">Pricing</a>
         <a href="#contact">Contact us</a>
-        <div className="register">
+        <div className="register2">
           <Link to="/login" style={{ textDecoration: "none" }}>
-            <div className="login">Log in</div>
+            <div className="login2">Log in</div>
           </Link>
           <Link to="/signup" style={{ textDecoration: "none" }}>
-            <div className="signup">Sign up</div>
+            <div className="signup2">Sign up</div>
           </Link>
         </div>
       </nav>
