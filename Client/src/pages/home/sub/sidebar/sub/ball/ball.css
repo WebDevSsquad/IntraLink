@@ -1,0 +1,42 @@
+.ball-container{
+    position: absolute;
+    background-color: var(--bg-100);
+    border-radius: 100%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    cursor: pointer;
+    transition: all 1s;
+    z-index: 200;
+
+}
+.specific_icon{
+    position: relative;
+    left:.95rem;
+    transition: all 1s;
+}
+.ball-container:hover{
+    width: 12rem;
+    border-radius: 80px;
+    padding-left: .95rem;
+}
+.ball-container:hover .specific_icon{
+    position: relative;
+    left:0rem;
+}
+.ball_name{
+    display: none;
+    cursor: pointer;
+    color:var(--primary-300);
+    font-size: 1.3rem;
+    font-weight: 700;
+    transition: all 1s;
+}
+.ball-container:hover .ball_name{
+    display: inline;
+    position: relative;
+    left:-2rem;
+}

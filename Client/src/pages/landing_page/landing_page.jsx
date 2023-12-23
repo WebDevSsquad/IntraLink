@@ -1,6 +1,6 @@
 import "./landing_page.css";
 import Contact from "./sub/contact/contact";
-import Home from "./sub/home/home";
+import Hero from "./sub/hero/hero";
 import Navbar from "./sub/navbar/navbar";
 import Pricing from "./sub/pricing/pricing";
 import Services from "./sub/services/services";
@@ -10,7 +10,7 @@ export default function LandingPage() {
     <>
       <div className="landing_page">
         <Navbar />
-        <Home />
+        <Hero />
         <Services />
         <Pricing />
         <Contact />

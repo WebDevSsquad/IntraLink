@@ -45,7 +45,7 @@ export default function Register() {
       return;
     }
     setDontMatch(false);
-    dispatch(updatePicture(`/${theme}User.png`));
+    dispatch(updatePicture(`/assets/${theme}User.png`));
 
     let ok = false;
     let status = 200;
@@ -58,7 +58,7 @@ export default function Register() {
     };
 
     const signup = {
-      image: `/${theme}User.png`,
+      image: `/assets/${theme}User.png`,
       username: UserName,
       firstname: FirstName,
       lastname: LastName,

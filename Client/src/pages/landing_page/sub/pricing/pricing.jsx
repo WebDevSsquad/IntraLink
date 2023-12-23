@@ -1,6 +1,6 @@
-import check from "../../../../assets/check.svg";
-import greencheck from "../../../../assets/check_green.svg";
-import redxmark from "../../../../assets/xmark_red.svg";
+import check from "/assets/check.svg";
+import greencheck from "/assets/check_green.svg";
+import redxmark from "/assets/xmark_red.svg";
 import "./pricing.css";
 export default function Pricing() {
   return (
