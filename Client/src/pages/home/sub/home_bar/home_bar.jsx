@@ -1,5 +1,6 @@
 import userphoto from "/assets/jogosaturu.jpeg";
-import rankicon from "/assets/rank.svg";
+import rankiconPM from "/assets/rankPM.svg";
+import rankiconTM from "/assets/rankTM.svg";
 import searchicon from "/assets/search.svg";
 import "./home_bar.css";
 export default function HomeBar() {
@@ -10,12 +11,12 @@ export default function HomeBar() {
           <div className="homeBar_username">Ichigo</div>
           <div className="homeBar_rank">
             <div className="rankname taskmanager">TM</div>
-            <img src={rankicon} className="rank_icon" />
+            <img src={rankiconTM} className="rank_icon" />
             <div className="homebar_user_rank">50</div>
           </div>
           <div className="homeBar_rank">
             <div className="rankname  projectmanager">PM</div>
-            <img src={rankicon} className="rank_icon" />
+            <img src={rankiconPM} className="rank_icon" />
             <div className="homebar_user_rank">48</div>
           </div>
         </div>

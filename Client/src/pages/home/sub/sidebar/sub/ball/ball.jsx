@@ -1,7 +1,10 @@
 import PropTypes from "prop-types";
 import { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateTheme } from "../../../../../../slices/userReducer";
 import "./ball.css";
 export default function Ball({ specific, speed, display }) {
+  const dispatch = useDispatch();
   const ballContainerRef = useRef(null);
   if (ballContainerRef.current != null) {
     ballContainerRef.current.style.pointerEvents = "none";
@@ -29,11 +32,28 @@ export default function Ball({ specific, speed, display }) {
       }, 1000 + (speed - 1) * 200);
     }
   }
+  let theme = useSelector((state) => state.user.theme);
+  if (specific == "Dark") {
+    theme = theme.charAt(0).toUpperCase() + theme.slice(1);
+    theme = theme === "Dark" ? "Light" : "Dark";
+  } else {
+    theme = specific;
+  }
+  const handleDarkMode = () => {
+    if (theme === "Dark" || theme === "Light") {
+      dispatch(updateTheme(theme.toLowerCase()));
+    }
+  };
+
   return (
     <>
-      <div ref={ballContainerRef} className={`ball-container ${specific}`}>
-        <img src={`/assets/${specific}.svg`} className="specific_icon" />
-        <div className="ball_name">{specific}</div>
+      <div
+        onClick={handleDarkMode}
+        ref={ballContainerRef}
+        className={`ball-container ${theme}`}
+      >
+        <img src={`/assets/${theme}.svg`} className="specific_icon" />
+        <div className="ball_name">{theme}</div>
       </div>
     </>
   );

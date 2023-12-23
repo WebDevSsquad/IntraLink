@@ -4,9 +4,7 @@ const initialState = {
   loggedIn: false,
   fetch: false,
   expires: false,
-  theme: window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light",
+  theme: "light",
   picture: "/lightUser.png",
   firstName: "",
   lastName: "",

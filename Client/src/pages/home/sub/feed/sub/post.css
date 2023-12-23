@@ -1,0 +1,122 @@
+.post-container {
+  background-color: var(--bg-100);
+  color: var(--text-100);
+  width: 30rem;
+  height: auto;
+  padding: 1rem;
+  margin: 5rem;
+  border-radius: 30px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 3px 2px 32px -11px rgba(0, 0, 0, 0.5);
+}
+.post-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+}
+.post_rank_icon {
+  margin-right: 10px;
+}
+.post_project_manager_rank {
+  font-size: large;
+  font-weight: 800;
+  color: var(--accent-200);
+}
+.post-top-left {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
+}
+.post_user_info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.post-username {
+  color: var(--text-300);
+  font-size: 1rem;
+  font-weight: 700;
+}
+.post-date {
+  color: var(--bg-300);
+  font-size: 0.6rem;
+}
+.post-bottom-right {
+  align-self: flex-end;
+}
+.join_button {
+  color: var(--bg-100);
+  width: 9rem;
+  font-size: 1.3rem;
+  background-image: linear-gradient(
+    to right,
+    #1b7dd8,
+    #0b89dd,
+    #0794e2,
+    #169fe5,
+    #29aae8,
+    #3bb1eb,
+    #4ab9ed,
+    #58c0f0,
+    #67c6f4,
+    #74cbf7,
+    #80d1fb,
+    #8cd7ff
+  );
+  box-shadow: 10px 10px 14px 1px rgba(00, 00, 00, 0.2);
+  border-radius: 30px;
+  padding: 0.5rem;
+  transition: all 0.5s;
+}
+.post-bottom-right:hover .join_button {
+  transform: translateZ(-2px);
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.post-center {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0.5rem;
+  justify-content: center;
+  align-items: flex-start;
+}
+.post-text {
+  color: var(--text-100);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+.post-profile-img_container {
+  width: 3rem;
+  height: 3rem;
+  overflow: hidden;
+  border-radius: 100%;
+  box-shadow: 10px 10px 14px 1px rgba(00, 00, 00, 0.2);
+}
+.post-profile-img {
+  
+  width: 100%;
+  height: auto;
+}
+.post-img_container {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  border-radius: 20px;
+}
+.post-img {
+  border-radius: 20px;
+  width: 100%;
+  height: auto;
+}

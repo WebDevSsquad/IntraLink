@@ -16,9 +16,10 @@
   height: 4rem;
   overflow: hidden;
   border-radius: 100%;
+  box-shadow: 10px 10px 14px 1px rgba(00, 00, 00, 0.2);
 }
 .userphoto img {
-  width: 3rem;
+  width: 4rem;
   height: auto;
 }
 
@@ -79,6 +80,7 @@
 }
 .homebar_user_rank {
   font-weight: 900;
+  color: var(--accent-200);
 }
 .homeBar_username {
   font-size: large;
