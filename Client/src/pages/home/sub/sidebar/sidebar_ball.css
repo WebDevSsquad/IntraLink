@@ -11,7 +11,7 @@
     flex-direction: row;
     cursor: pointer;
     transition: all 1s;
-    z-index: 200;
+    z-index: 201;
   }
   .Side_Bar .sspecific_icon {
     position: relative;

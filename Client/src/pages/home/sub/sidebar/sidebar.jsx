@@ -5,14 +5,18 @@ import Ball from "./sub/ball/ball";
 export default function SideBar() {
   const [show, setShow] = useState("hide");
   const updateShow = () => {
-    setShow(show==="hide"?"show":"hide");
+    setShow(show === "hide" ? "show" : "hide");
   };
   return (
     <>
       <div className="sideBar-container">
-        <div className={`Side_Bar `} onClick={updateShow}>
-          <img src={`/assets/Options.svg`} className="sspecific_icon" />
-          <div className="sball_name">Options</div>
+        <div
+          style={{ zIndex: "201" }}
+          className={`ball-container `}
+          onClick={updateShow}
+        >
+          <img src={`/assets/Options.svg`} className="specific_icon" />
+          <div className="ball_name">Options</div>
         </div>
         <Ball specific="Home" speed={1} display={show} />
         <Ball specific="Projects" speed={2} display={show} />

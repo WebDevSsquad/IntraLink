@@ -33,21 +33,21 @@
   width: 30rem;
   height: 2.5rem;
   border-radius: 10rem;
-  border: none !important;
+  border: none;
   background-color: #fffefb;
   padding: 0rem 3rem;
-  color:#1d1c1c;
+  color: #1d1c1c;
   cursor: auto;
 }
 .search_input::placeholder {
-  color:#9e9e9e;
+  color: #9e9e9e;
 }
-.search_icon{
+.search_icon {
   position: absolute;
   left: 1rem;
   color: var(--text-100);
 }
-.username_rank{
+.username_rank {
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
@@ -57,31 +57,30 @@
   height: 8rem;
   gap: 0.5rem;
 }
-.homeBar_rank{
+.homeBar_rank {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   color: var(--primary-300);
   width: 5rem;
- 
 }
 
-.rankname{
+.rankname {
   font-size: small;
   font-weight: 900;
   color: var(--accent-200);
 }
-.projectmanager{
+.projectmanager {
   color: var(--accent-200);
 }
-.taskmanager{
+.taskmanager {
   color: var(--accent-100);
 }
-.homebar_user_rank{
+.homebar_user_rank {
   font-weight: 900;
 }
-.homeBar_username{
+.homeBar_username {
   font-size: large;
   font-weight: 900;
 }
