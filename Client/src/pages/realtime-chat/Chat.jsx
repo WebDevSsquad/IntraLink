@@ -1,51 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Conversation from "./Conversation";
 import Message from "./Message";
 import "./Chat.css";
-
-const messagesList = [
-  {
-    isCurrUser: true,
-    msgText: `This is a message. Lorem ipsum dolor sit amet consectetur
-    adipisicing elit. Omnis est magni tempore recusandae vero. Nulla
-    enim aut dolores alias iure quis cum, maiores sequi at illo,
-    aliquid cumque sunt impedit!Lorem ipsum dolor sit amet
-    consectetur adipisicing elit. Omnis est magni tempore recusandae
-    vero. Nulla enim aut dolores alias iure quis cum, maiores sequi
-    at illo, aliquid cumque sunt impedit!`,
-    imageSrc:
-      "https://w0.peakpx.com/wallpaper/10/338/HD-wallpaper-naruto-uzumaki-naruto-anime.jpg",
-  },
-  {
-    isCurrUser: false,
-    msgText: `This is a message. Lorem ipsum dolor sit amet consectetur
-    adipisicing elit. Omnis est magni tempore recusandae vero. Nulla
-    enim aut dolores alias iure quis cum, maiores sequi at illo,
-    aliquid cumque sunt impedit!Lorem ipsum dolor sit amet
-    consectetur adipisicing elit. Omnis est magni tempore recusandae
-    vero. Nulla enim aut dolores alias iure quis cum, maiores sequi
-    at illo, aliquid cumque sunt impedit!`,
-    imageSrc:
-      "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bW9kZWx8ZW58MHx8MHx8fDA%3D",
-  },
-  {
-    isCurrUser: true,
-    msgText: `This is a message. Lorem ipsum dolor sit amet consectetur
-    adipisicing elit. Omnis est magni tempore recusandae vero. Nulla
-    enim aut dolores alias iure quis cum, maiores sequi at illo,
-    aliquid cumque sunt impedit!Lorem ipsum dolor sit amet
-    consectetur adipisicing elit. Omnis est magni tempore recusandae
-    vero. Nulla enim aut dolores alias iure quis cum, maiores sequi
-    at illo, aliquid cumque sunt impedit!`,
-    imageSrc:
-      "https://w0.peakpx.com/wallpaper/10/338/HD-wallpaper-naruto-uzumaki-naruto-anime.jpg",
-  },
-];
 
 export default function Chat() {
   let id_key = 0;
   const currentUser = { user_id: 19 };
   const [conversations, setConversations] = useState([]);
+  const [messages, setMessages] = useState([]);
+  const [inputMessage, setInputMessage] = useState("");
+  const [otherUserID, setOtherUserID] = useState(0);
+  const msgRef = useRef(null);
   useEffect(() => {
     fetch(`http://localhost:8080/chat/last_messages/${currentUser.user_id}`)
       .then((res) => {
@@ -55,7 +20,44 @@ export default function Chat() {
         console.log(data.lastMessages);
         setConversations(data.lastMessages);
       });
-  }, [currentUser.user_id]);
+  }, [currentUser.user_id, messages]);
+
+  useEffect(() => {
+    fetch(
+      `http://localhost:8080/chat/last_messages/${currentUser.user_id}/${otherUserID}`
+    )
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data.messages);
+        setMessages(data.messages);
+      });
+  }, [otherUserID, messages]);
+
+  const handleClickConversation = (el) => {
+    setOtherUserID(el.other_id);
+  };
+
+  const handleCLickSend = async () => {
+    if (inputMessage !== "") {
+      await fetch(`http://localhost:8080/chat/send`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          senderID: currentUser.user_id,
+          receiverID: otherUserID,
+          text: inputMessage,
+        }),
+      }).then(() => {
+        setMessages([...messages, inputMessage]);
+        setInputMessage("");
+
+        console.log("msg is sent successfully.");
+      });
+    }
+  };
+
   return (
     <div className="chat">
       <div className="chatMenu">
@@ -64,15 +66,22 @@ export default function Chat() {
           <input placeholder="Enter receiver name" className="chatMenuInput" />
           {conversations.map((c) => {
             return (
-              <Conversation
-                key={id_key++}
-                imgSrc={c.picture}
-                name={c.name}
-                content={c.text}
-                date={c.timestamp}
-                isOnline={c.is_online}
-                isCurrentUserSender={c.is_curr_user_sender}
-              />
+              <div
+                onClick={() => {
+                  handleClickConversation(c);
+                }}
+                key={id_key}
+              >
+                <Conversation
+                  key={id_key++}
+                  imgSrc={c.picture}
+                  name={c.name}
+                  content={c.text}
+                  date={c.date}
+                  isOnline={c.is_online}
+                  isCurrentUserSender={c.is_curr_user_sender}
+                />
+              </div>
             );
           })}
         </div>
@@ -80,29 +89,46 @@ export default function Chat() {
       <div className="chatBox">
         <div className="chatBoxWrapper">
           <div className="chatBoxTop">
-            {messagesList.map((msg) => {
+            {messages.map((msg, idx) => {
+              let prevDate = idx ? messages[idx - 1].date : "";
               return (
                 <Message
                   key={id_key++}
-                  isCurrentUser={msg.isCurrUser}
-                  text={msg.msgText}
-                  imgSrc={msg.imageSrc}
+                  isCurrentUser={msg.is_own_message}
+                  text={msg.text}
+                  imgSrc={msg.sender_picture}
+                  date={msg.date === prevDate ? "" : msg.date}
+                  hour={msg.hour}
                 />
               );
             })}
           </div>
           <div className="chatBoxBottom">
-            <textarea
-              placeholder="Write a message"
-              className="chatBoxInput"
-            ></textarea>
-            <button className="btnSend">Send</button>
+            {otherUserID !== 0 && (
+              <>
+                <textarea
+                  ref={msgRef}
+                  placeholder="Write a message"
+                  className="chatBoxInput"
+                  onChange={(e) => {
+                    setInputMessage(e.target.value);
+                  }}
+                ></textarea>
+                <button
+                  className="btnSend"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleCLickSend();
+                    msgRef.current.value = "";
+                  }}
+                >
+                  Send
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
-      {/* <div className="chatOnline">
-        <div className="chatOnlineWrapper">chatOnline</div>
-      </div> */}
     </div>
   );
 }

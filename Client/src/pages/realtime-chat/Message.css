@@ -36,7 +36,7 @@
 .contentMessage {
   padding: 20px;
   border-radius: 10px;
-  color: white;
+  color: var(--text-100);
   text-align: center;
   max-width: 600px;
   line-height: 1.8;
@@ -46,7 +46,7 @@
   background-color: var(--accent-100);
 }
 .content-receiver {
-  background-color: var(--accent-200);
+  background-color: var(--bg-200);
 }
 
 .wholeMessage {
@@ -69,15 +69,33 @@
 
 .receiver-triangle {
   right: -25px;
-  border-color: transparent transparent transparent var(--accent-200);
+  border-color: transparent transparent transparent var(--bg-200);
 }
 
 .hourMessage,
 .dateMessage {
   text-align: center;
+  color: var(--text-100);
+}
+
+.hourMessage {
+  margin: 5px 0;
+}
+
+.dateMessage {
   width: 100%;
+}
+.hourMessageSender {
+  align-self: flex-end;
 }
 
 .dateMessage {
   margin-bottom: 10px;
+}
+
+.messageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: fit-content;
 }

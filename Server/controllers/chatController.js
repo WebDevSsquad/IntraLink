@@ -53,6 +53,13 @@ const chatController = {
       lastMessages.map((el) => {
         el.is_curr_user_sender = el.sender_id === currentUserID;
         el.other_id = el.is_curr_user_sender ? el.receiver_id : el.sender_id;
+        el.hour = el.timestamp.getHours() + ":" + el.timestamp.getMinutes();
+        el.date =
+          el.timestamp.getFullYear() +
+          "/" +
+          el.timestamp.getMonth() +
+          "/" +
+          el.timestamp.getDate();
         if (el.is_curr_user_sender) {
           el.name = el.receiver_firstname + " " + el.receiver_lastname;
           el.picture = el.receiver_picture;
@@ -80,6 +87,56 @@ const chatController = {
       res
         .status(201)
         .json({ message: "Have Got the messages successfully.", lastMessages });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        error:
+          "An error occurred while getting your last messages. Please try again.",
+      });
+    }
+  },
+
+  getMessages: async (req, res) => {
+    try {
+      let currentUserID = req?.params?.currUserID;
+      let otherUserID = req?.params?.otherUserID;
+      let messages = await pool.query(`WITH CHAT_CONVERSATION AS (
+          (SELECT * FROM PUBLIC."Message" 
+           WHERE sender_id = ${currentUserID} AND receiver_id = ${otherUserID})
+      UNION
+          (SELECT * FROM PUBLIC."Message"
+           WHERE sender_id = ${otherUserID} AND receiver_id = ${currentUserID})
+      ORDER BY timestamp ASC)
+      SELECT 
+      sender.picture AS sender_picture ,
+      sender_id,receiver_id,text,timestamp
+      FROM 
+      CHAT_CONVERSATION CC 
+      JOIN PUBLIC."User" sender on CC.sender_id = sender.user_id
+      JOIN PUBLIC."User" receiver on CC.receiver_id = receiver.user_id;
+      `);
+      messages = messages.rows;
+
+      messages.map((el) => {
+        el.is_own_message = el.sender_id === currentUserID;
+        el.hour =
+          el.timestamp.getHours() +
+          ":" +
+          (el.timestamp.getMinutes() < 10 ? "0" : "") +
+          el.timestamp.getMinutes();
+        // console.log(el.hour);
+        el.date =
+          el.timestamp.getFullYear() +
+          "/" +
+          el.timestamp.getMonth() +
+          "/" +
+          el.timestamp.getDate();
+        delete el.sender_id;
+        delete el.receiver_id;
+      });
+      res
+        .status(201)
+        .json({ message: "Have Got the messages successfully.", messages });
     } catch (error) {
       console.log(error);
       res.status(500).json({
