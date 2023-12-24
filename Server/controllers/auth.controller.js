@@ -18,8 +18,6 @@ const authController = {
                                           FROM public."User"
                                           WHERE username = '${username}'
                                         );`);
-      console.log(username);
-      console.log(checkusername);
 
       if (checkusername.rows[0].exists) {
         console.log("Username is already taken");
@@ -41,12 +39,12 @@ const authController = {
       const hashedPassword = await bcrypt.hash(password, 10);
 
       let user =
-        await pool.query(`INSERT INTO public."User" (username,email,password,firstname,lastname) 
+        await pool.query(`INSERT INTO public."User" (username,email,password,firstname,lastname,picture) 
                                   VALUES ('${req.body.username}',
                                   '${req.body.email}',
                                   '${hashedPassword}',
                                   '${req.body.firstname}'
-                                  ,'${req.body.lastname}');`);
+                                  ,'${req.body.lastname}','${req.body.image}');`);
 
       let user_id = await pool.query(
         `SELECT user_id FROM public."User" WHERE username = '${username}'`
@@ -68,6 +66,7 @@ const authController = {
   },
   login: async (req, res) => {
     // Validate the request body against the log in schema
+    console.log(req.body);
     const { error } = logInSchema.validate(req.body, { abortEarly: false });
     if (error) {
       return res.status(422).json(error.details);
@@ -92,6 +91,7 @@ const authController = {
       let userData = await pool.query(
         `SELECT * FROM public."User" WHERE username = '${username}'`
       );
+
       // Check if the password is correct
       const isValidPassword = await bcrypt.compare(
         password,
@@ -103,7 +103,9 @@ const authController = {
           error: "Invalid password",
         });
       }
-
+      await pool.query(
+        `update public."User" set isonline = true where user_id = '${userData.rows[0].user_id}'`
+      );
       // Generate a JWT token containing the user's id
       const token = jwt.sign(
         { id: userData.rows[0].user_id },
@@ -115,9 +117,9 @@ const authController = {
 
       console.log(userData.rows[0]);
 
-      const image = userData.rows[0].image;
+      const user = userData.rows[0];
 
-      res.status(200).json({ message: "Logged in successfully", token, image });
+      res.status(200).json({ message: "Logged in successfully", token, user });
     } catch (error) {
       console.log(error);
       res.status(500).json({

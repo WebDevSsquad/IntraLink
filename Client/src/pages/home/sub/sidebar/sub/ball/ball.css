@@ -5,7 +5,7 @@
   width: 3rem;
   height: 3rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: row;
   cursor: pointer;
@@ -19,7 +19,7 @@
   transition: all 1s;
 }
 .ball-container:hover {
-  width: 12rem;
+  width: auto;
   border-radius: 80px;
   padding-left: 0.95rem;
 }
@@ -34,10 +34,11 @@
   font-weight: 700;
   opacity: 0;
   transition: all 0.5s;
+  padding-right: 1rem;
 }
 .ball-container:hover .ball_name {
   display: inline;
   position: relative;
   opacity: 1;
-  left: -1rem;
+  left: .7rem;
 }
