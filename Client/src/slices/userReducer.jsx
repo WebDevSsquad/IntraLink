@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   loggedIn: false,
   fetch: false,
-  expires: false,
-  theme: "dark",
+  expires: true,
+  theme: "light",
   picture: "/lightUser.png",
   firstName: "",
   lastName: "",

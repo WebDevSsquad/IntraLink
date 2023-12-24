@@ -1,10 +1,21 @@
 import { useEffect } from "react";
 import { Provider, useDispatch, useSelector } from "react-redux";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import {
+  Route,
+  BrowserRouter as Router,
+  Routes,
+} from "react-router-dom";
+import "./App.css";
+import { ResetData } from "./components/resetdata/resetdata";
+import Home from "./pages/home/home";
+import LandingPage from "./pages/landing_page/landing_page";
+import Register from "./pages/register/register";
+import store from "./slices/store";
 import {
   updateAbout,
   updateEmail,
   updateExpires,
+  updateFetch,
   updateFirstName,
   updateIsAvailable_Con,
   updateIsAvailable_Tm,
@@ -14,19 +25,10 @@ import {
   updatePhone,
   updatePicture,
   updateSkills,
+  updateTheme,
   updateUserID,
   updateUserName,
-  updateFetch,
-  updateTheme,
 } from "./slices/userReducer";
-import "./App.css";
-import { ResetData } from "./components/resetdata/resetdata";
-import Home from "./pages/home/home";
-import LandingPage from "./pages/landing_page/landing_page";
-import Register from "./pages/register/register";
-import store from "./slices/store";
-
-
 
 function InnerApp() {
   const dispatch = useDispatch();
@@ -92,6 +94,13 @@ function InnerApp() {
         console.log(err);
       });
   };
+  const logOut = () => {
+    console.log("Still Logged In");
+    ResetData(dispatch);
+    dispatch(updateLoggedIn(false));
+    dispatch(updateExpires(true));
+    localStorage.setItem("token", "");
+  };
 
   if (
     !loggedIn &&
@@ -99,14 +108,10 @@ function InnerApp() {
     localStorage.getItem("token") !== null &&
     localStorage.getItem("token") !== undefined
   ) {
+    console.log("Still Logged Injhggjkhgjkjh");
     stillLoggedIn();
   }
-  // const logOut = () => {
-  //   ResetData(dispatch);
-  //   dispatch(updateLoggedIn(false));
-  //   dispatch(updateExpires(true));
-  //   localStorage.setItem("token", "");
-  // };
+
   return (
     <Router>
       <div data-theme={theme} className="theme-container">

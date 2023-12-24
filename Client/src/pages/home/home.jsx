@@ -12,6 +12,7 @@ export default function Home() {
   const navigate = useNavigate();
   useEffect(() => {
     if ((!loggedIn && fetch) || expires) {
+      console.log("Fetched");
       navigate("/");
     }
   }, [loggedIn, navigate, fetch, expires]);

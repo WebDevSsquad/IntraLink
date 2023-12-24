@@ -55,21 +55,7 @@
   color: var(--bg-100);
   width: 9rem;
   font-size: 1.3rem;
-  background-image: linear-gradient(
-    to right,
-    #1b7dd8,
-    #0b89dd,
-    #0794e2,
-    #169fe5,
-    #29aae8,
-    #3bb1eb,
-    #4ab9ed,
-    #58c0f0,
-    #67c6f4,
-    #74cbf7,
-    #80d1fb,
-    #8cd7ff
-  );
+  background-color: var(--accent-400);
   box-shadow: 10px 10px 14px 1px rgba(00, 00, 00, 0.2);
   border-radius: 30px;
   padding: 0.5rem;

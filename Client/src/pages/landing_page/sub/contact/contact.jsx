@@ -98,7 +98,6 @@ export default function Contact() {
   );
   const elements = [firstName, lastName, email, phoneNumber];
 
-  console.log(state);
   const form = (
     <>
       <div className="contact" id="contact">

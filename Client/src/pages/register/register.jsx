@@ -5,6 +5,7 @@ import {
   updateAbout,
   updateEmail,
   updateExpires,
+  updateFetch,
   updateFirstName,
   updateIsAvailable_Con,
   updateIsAvailable_Tm,
@@ -85,7 +86,11 @@ export default function Register() {
     fetch(url, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify((location.pathname === "/login" ||location.pathname === "/logIn") ? login : signup),
+      body: JSON.stringify(
+        location.pathname === "/login" || location.pathname === "/logIn"
+          ? login
+          : signup
+      ),
     })
       .then((res) => {
         ok = res.ok;
@@ -125,9 +130,11 @@ export default function Register() {
 
           setTimeout(() => {
             dispatch(updateExpires(true));
-          }, 5000);
+          }, 60 * 60 * 1000 * 5);
 
           dispatch(updateLoggedIn(true));
+          dispatch(updateExpires(false));
+          dispatch(updateFetch(true));
 
           navigate("/home");
 
