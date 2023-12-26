@@ -4,6 +4,8 @@ import express from "express";
 import pool from './db.js'; // Import the pool
 import authMiddleware from "./middlewares/auth.middleware.js";
 import authRouter from "./routers/auth.route.js";
+import avaRouter from "./routers/available.route.js";
+import partRouter from "./routers/part.route.js";
 
 dotenv.config();
 
@@ -31,6 +33,10 @@ pool.connect((err, client, release) => {
 });
 
 app.use("/auth", authRouter);
+
+app.use("/availability",avaRouter);
+
+app.use("/partwithpmid",partRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

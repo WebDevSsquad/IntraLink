@@ -1,0 +1,105 @@
+
+.availability_main {
+    width:100%;
+    height: fit-content;
+    min-height: 100vh;
+    background-color: var(--bg-100);
+}
+
+.centered-ava-container {
+    width: 60%;
+    display: flex;
+    margin: auto;
+    margin-top: 90px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .ava-content {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .ava-content .ava-users{
+        position: relative;
+        display: flex;
+        width: 50vw;
+        padding:10px 30px 10px 30px;
+        margin: 110px 200px 0px 90px;
+        background-color: var(--bg-100);
+        border-radius: 20px;
+        border-bottom: 1px solid var(--accent-100);
+        transition: 0.4s ease;
+  }
+
+  .ava-content .ava-users:hover {
+    background-color: var(--primary-200);
+    box-shadow: 1px 3px 5px var(--text-300);
+    transform: scale(1.007);
+  }
+
+  .ava-content .ava-users .username{
+    width: 36%;
+    text-align: left;
+    color: var(--text-100);
+  } 
+
+  .ava-content .ava-users .useremail{
+    color: var(--text-100);
+  }
+
+  .ava-content .ava-users .userrank{
+    color: var(--text-100);
+  } 
+
+
+  .buttons-ava-container {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .buttons-ava-container button {
+    padding: 10px;
+    background-color: var(--accent-100);
+    color: #fff;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: 0.5s ease;
+    &:focus{
+    outline: none;
+    }
+    &:hover{
+        background-color: var(--accent-200);
+        transform: scale(1.03);
+    }
+  }
+
+  .buttons-ava-container .b1{
+    background-color: var(--accent-200);
+  }
+
+  .ava-content .ava-users .buttontoreq{
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+    padding-left: 3px;
+    margin-bottom: 3px;
+    width: 85px;
+    height: 20px;
+    bottom: 0px;
+    right: 6px;
+    border-radius: 20px;
+    border: none;
+    background-color: var(--accent-100);
+    color: var(--text-100);
+    cursor: pointer;
+    transition: 0.5s ease;
+    &:focus{
+        outline: none;
+    }
+    &:hover{
+      background-color: var(--accent-200);
+      transform: scale(1.03);
+    }
+  }
