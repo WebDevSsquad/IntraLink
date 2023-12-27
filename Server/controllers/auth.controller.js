@@ -162,5 +162,19 @@ const authController = {
       });
     }
   },
+  GetProject: async (req, res) => {
+    try {
+      let projects = await pool.query(
+        `select pro.projectname,pro.project_id from  public."Project" pro
+        where pro.manager_id = ${req.user.user_id};`
+      );
+      res.status(201).json({ message: "Projects Got successfully", projects });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        error: "An error occurred while getting your Posts.Please try again.",
+      });
+    }
+  },
 };
 export default authController;

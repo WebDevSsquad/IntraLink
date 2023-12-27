@@ -7,7 +7,7 @@
   margin-top: 1rem;
   margin-bottom: 1rem;
   position: relative;
-  left: 33%;
+  left: 34%;
   top: 0rem;
   color: var(--text-100);
 }
@@ -41,4 +41,67 @@
   transform: translateZ(-2px);
   box-shadow: none;
   cursor: pointer;
+}
+
+.add_post-bottom{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: space-between;
+}
+/* *********************************************************************** */
+.add_post-bottom-left {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.add_post-bottom-left .img-file-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  width: 15rem;
+}
+.add_post-bottom-left .img-file-container .text {
+  margin-left: 10px;
+  font-size: 1rem;
+  align-self: center;
+}
+.add_post-bottom-left .img-file-container:hover .text {
+  color: var(--accent-100);
+}
+.add_post-bottom-left .img-file-container .img-container .img {
+  width: 5rem;
+  height: auto;
+  object-fit:cover;
+  overflow: hidden;
+  
+}
+.img-container {
+  transition: all 0.8s ease-in-out;
+}
+.add_post-bottom-left .img-file-container:hover .img-container {
+  overflow: hidden;
+  transform: scale(1.1);
+}
+.add_post-bottom-left .img-file-container .file {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  width: 15rem;
+  height: 3rem;
+}
+.add_post-bottom-left .img-file-container .file::-webkit-file-upload-button {
+  visibility: hidden;
+} 
+
+.LoadingMessage{
+  padding: 20px;
+  font-size: large;
+  color: var(--accent-300);
 }

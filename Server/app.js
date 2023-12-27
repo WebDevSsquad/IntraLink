@@ -4,7 +4,7 @@ import express from "express";
 import pool from './db.js'; // Import the pool
 import authMiddleware from "./middlewares/auth.middleware.js";
 import authRouter from "./routers/auth.route.js";
-
+import postRouter from "./routers/post.route.js";
 dotenv.config();
 
 const app = express();
@@ -31,6 +31,7 @@ pool.connect((err, client, release) => {
 });
 
 app.use("/auth", authRouter);
+app.use("/post",authMiddleware,postRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

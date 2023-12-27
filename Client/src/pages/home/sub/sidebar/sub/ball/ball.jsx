@@ -26,9 +26,11 @@ export default function Ball({ specific, speed, display }) {
       }s`;
       ballContainerRef.current.style.top = "0rem";
       setTimeout(() => {
-        ballContainerRef.current.style.display = "none";
-        ballContainerRef.current.style.pointerEvents = "auto";
-        ballContainerRef.current.style.transition = `all 1s`;
+        if (ballContainerRef.current) {
+          ballContainerRef.current.style.display = "none";
+          ballContainerRef.current.style.pointerEvents = "auto";
+          ballContainerRef.current.style.transition = `all 1s`;
+        }
       }, 1000 + (speed - 1) * 200);
     }
   }

@@ -33,7 +33,7 @@ export default function Register() {
 
   const [dontMatch, setDontMatch] = useState(false);
   const [wrongPassword, setWrongPassword] = useState(false);
-  const [wrongEmail, setWrongEmail] = useState(false);
+  const [wrongUsername, setWrongUsername] = useState(false);
   const [EmailTaken, setEmailTaken] = useState(false);
   const [UserNameTaken, setUserNameTaken] = useState(false);
 
@@ -104,8 +104,8 @@ export default function Register() {
             dispatch(updatePicture(data.user.picture));
           if (data.user.firstname !== undefined)
             dispatch(updateFirstName(data.user.firstname));
-          if (data.user.secondname !== undefined)
-            dispatch(updateLastName(data.user.secondname));
+          if (data.user.lastname !== undefined)
+            dispatch(updateLastName(data.user.lastname));
           if (data.user.user_id !== undefined)
             dispatch(updateUserID(data.user.user_id));
           if (data.user.username !== undefined)
@@ -138,7 +138,7 @@ export default function Register() {
 
           navigate("/home");
 
-          setWrongEmail(false);
+          setWrongUsername(false);
 
           setWrongPassword(false);
 
@@ -155,12 +155,12 @@ export default function Register() {
         } else if (status === 422) {
           alert(data[0].message);
         } else {
-          if (data.error === "Invalid email") {
+          if (data.error === "Invalid username") {
             if (UserNameRef.current) {
               UserNameRef.current.value = "";
               UserNameRef.current.style.borderBottomColor = "red";
             }
-            setWrongEmail(true);
+            setWrongUsername(true);
           }
           if (data.error === "Invalid password") {
             if (PasswordRef.current) {
@@ -168,7 +168,7 @@ export default function Register() {
               PasswordRef.current.style.borderBottomColor = "red";
             }
             setWrongPassword(true);
-            setWrongEmail(false);
+            setWrongUsername(false);
             if (EmailRef.current)
               EmailRef.current.style.borderBottomColor = "white";
           }
@@ -210,7 +210,13 @@ export default function Register() {
         required
         onChange={(e) => setUserName(e.target.value)}
       />
-      {UserNameTaken && <div className="wrong">UserName is already taken</div>}
+      {(UserNameTaken && (
+        <div className="wrong">UserName is already taken</div>
+      )) ||
+        (wrongUsername && (
+          // eslint-disable-next-line react/no-unescaped-entities
+          <div className="wrong">Invalid Username</div>
+        ))}
       <label htmlFor="name" className="label-control">
         Username
       </label>
@@ -239,11 +245,7 @@ export default function Register() {
         ref={EmailRef}
         onChange={(e) => setEmail(e.target.value)}
       />
-      {(wrongEmail && (
-        // eslint-disable-next-line react/no-unescaped-entities
-        <div className="wrong">Email doesn't exist please try again</div>
-      )) ||
-        (EmailTaken && <div className="wrong">Email is already taken</div>)}
+      {EmailTaken && <div className="wrong">Email is already taken</div>}
       <label htmlFor="email" className="label-control">
         Email
       </label>

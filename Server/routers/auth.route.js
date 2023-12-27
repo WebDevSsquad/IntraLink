@@ -7,4 +7,5 @@ authRouter.post("/signup", authController.signup);
 authRouter.post("/logIn", authController.login);
 authRouter.post("/image", authController.updateImage);
 authRouter.get("/me", authMiddleware, authController.me);
+authRouter.get("/project", authMiddleware, authController.GetProject);
 export default authRouter;

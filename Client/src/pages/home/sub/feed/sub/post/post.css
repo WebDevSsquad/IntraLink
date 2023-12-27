@@ -5,6 +5,7 @@
   height: auto;
   padding: 1rem;
   margin: 5rem;
+  margin-bottom: 2rem;
   border-radius: 30px;
   display: flex;
   justify-content: flex-start;
@@ -74,6 +75,7 @@
   padding: 0.5rem;
   justify-content: center;
   align-items: flex-start;
+  width: 100%;
 }
 .post-text {
   color: var(--text-100);
@@ -81,7 +83,9 @@
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: 0.5px;
-  text-align: center;
+  text-align: left;
+  width: 100%;
+  word-wrap: break-word;
 }
 .post-profile-img_container {
   width: 3rem;
@@ -91,7 +95,6 @@
   box-shadow: 10px 10px 14px 1px rgba(00, 00, 00, 0.2);
 }
 .post-profile-img {
-  
   width: 100%;
   height: auto;
 }
