@@ -4,6 +4,7 @@ import {
   ref,
   uploadBytes,
 } from "firebase/storage";
+import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,9 +12,9 @@ import { v4 } from "uuid";
 import { storage } from "../../../../firebase";
 import { updatePosts } from "../../../../slices/feedReducer";
 import "./feed.css";
+import ComboBox from "./sub/combobox/combobox";
 import Post from "./sub/post/post";
 import rankicon from "/assets/rankPM.svg";
-import ComboBox from "./sub/combobox/combobox";
 
 export default function Feed() {
   const dispatch = useDispatch();
@@ -24,9 +25,11 @@ export default function Feed() {
   const [uploaded, setUploaded] = useState({ message: "null" }); //! to know if upload operation of image is completed
   const [imgurl, setImageUrl] = useState(""); //! the uploaded image url
   const descriptionRef = useRef(null); //! the description of the post
+  const addPostRef = useRef(null); //!
   const posts = useSelector((state) => state.feed.posts);
   const selectedProject = useSelector((state) => state.feed.selectedProject);
   const [items, setItems] = useState(Array.from({ length: 20 }));
+  const [toggled, setToggled] = useState(true);
 
   useEffect(() => {
     fetchMoreData();
@@ -108,7 +111,7 @@ export default function Feed() {
   };
 
   const addPost = (url) => {
-   console.log(selectedProject);
+    console.log(selectedProject);
     const add = {
       projectID: selectedProject,
       description: descriptionRef.current?.value,
@@ -170,10 +173,18 @@ export default function Feed() {
       </div>
     </div>
   );
-
+  const handelOpenAddPost = () => {
+    if (addPostRef.current) {
+        addPostRef.current.style.transform = `scale(${toggled&1})`;
+        setToggled(!toggled);
+    }
+  };
   const addPosts = (
-    <div style={{ marginBottom: "0rem" }} className="post-container">
-    
+    <div
+      style={{ marginBottom: "0rem" }}
+      ref={addPostRef}
+      className="add-post-container"
+    >
       <div className="post-top">
         <div className="post-top-left">
           <div className="post-profile-img_container">
@@ -182,7 +193,7 @@ export default function Feed() {
           <div className="post_user_info">
             <span className="post-username">{userName}</span>
           </div>
-        </div>  
+        </div>
         <ComboBox></ComboBox>
         <div className="post-top-right">
           <div className="post_project_manager_rank">
@@ -201,9 +212,17 @@ export default function Feed() {
       <div className="add_post-bottom">
         <div className="add_post-bottom-left">{uploadPhoto}</div>
         <div onClick={handelAddPost} className="add_post-bottom-right">
-          <div className="add_button">Add</div>
+          <div className="add_button" onClick={handelOpenAddPost}>Add</div>
         </div>
       </div>
+    </div>
+  );
+
+
+
+  const addPostButton = (
+    <div onClick={handelOpenAddPost} className={`addPostButton`}>
+      <img src={`/assets/plus.svg`} className="add_post_icon" />
     </div>
   );
 
@@ -211,12 +230,13 @@ export default function Feed() {
     <>
       <div className="feed_container" id="feed_container">
         {addPosts}
+        {addPostButton}
         <InfiniteScroll
           dataLength={items.length}
           next={fetchMoreData}
           hasMore={true}
           // loader={<h4 className="LoadingMessage">Loading...</h4>}
-          height={"30rem"}
+          height={"50rem"}
         >
           {posts.map((post, index) => (
             <Post
@@ -232,3 +252,9 @@ export default function Feed() {
     </>
   );
 }
+
+Feed.propTypes = {
+  homeRef: PropTypes.shape({
+    current: PropTypes.instanceOf(Element),
+  }).isRequired,
+};

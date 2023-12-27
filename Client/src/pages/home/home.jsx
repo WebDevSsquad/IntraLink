@@ -10,6 +10,7 @@ export default function Home() {
   const fetch = useSelector((state) => state.user.fetch);
   const expires = useSelector((state) => state.user.expires);
   const navigate = useNavigate();
+
   useEffect(() => {
     if ((!loggedIn && fetch) || expires) {
       console.log("Fetched");
@@ -18,7 +19,7 @@ export default function Home() {
   }, [loggedIn, navigate, fetch, expires]);
   return (
     <>
-      <div className="homepage">
+      <div className="homepage" id="homepage" >
         <HomeBar />
         <SideBar />
         <Feed />
