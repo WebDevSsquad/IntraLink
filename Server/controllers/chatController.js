@@ -50,6 +50,7 @@ const chatController = {
     ORDER BY timestamp DESC;`);
 
       lastMessages = lastMessages.rows;
+      // console.log(lastMessages);
       lastMessages.map((el) => {
         el.is_curr_user_sender = el.sender_id === currentUserID;
         el.other_id = el.is_curr_user_sender ? el.receiver_id : el.sender_id;
@@ -57,9 +58,10 @@ const chatController = {
         el.date =
           el.timestamp.getFullYear() +
           "/" +
-          el.timestamp.getMonth() +
+          (el.timestamp.getMonth() + 1) +
           "/" +
           el.timestamp.getDate();
+        // console.log(el.date);
         if (el.is_curr_user_sender) {
           el.name = el.receiver_firstname + " " + el.receiver_lastname;
           el.picture = el.receiver_picture;
@@ -69,7 +71,7 @@ const chatController = {
           el.picture = el.sender_picture;
           el.is_online = el.sender_isonline;
         }
-
+        console.log(el);
         delete el.sender_firstname;
         delete el.sender_lastname;
         delete el.sender_picture;
@@ -101,19 +103,20 @@ const chatController = {
       let currentUserID = req?.params?.currUserID;
       let otherUserID = req?.params?.otherUserID;
       let messages = await pool.query(`WITH CHAT_CONVERSATION AS (
-          (SELECT * FROM PUBLIC."Message" 
-           WHERE sender_id = ${currentUserID} AND receiver_id = ${otherUserID})
-      UNION
-          (SELECT * FROM PUBLIC."Message"
-           WHERE sender_id = ${otherUserID} AND receiver_id = ${currentUserID})
-      ORDER BY timestamp ASC)
-      SELECT 
-      sender.picture AS sender_picture ,
-      sender_id,receiver_id,text,timestamp
-      FROM 
-      CHAT_CONVERSATION CC 
-      JOIN PUBLIC."User" sender on CC.sender_id = sender.user_id
-      JOIN PUBLIC."User" receiver on CC.receiver_id = receiver.user_id;
+        (SELECT * FROM PUBLIC."Message" 
+         WHERE sender_id = ${currentUserID} AND receiver_id = ${otherUserID}
+    UNION
+        (SELECT * FROM PUBLIC."Message"
+         WHERE sender_id = ${otherUserID} AND receiver_id = ${currentUserID})
+    ORDER BY timestamp ASC))
+    SELECT 
+    sender.picture AS sender_picture ,
+    sender_id,receiver_id,text,timestamp
+    FROM 
+    CHAT_CONVERSATION CC 
+    JOIN PUBLIC."User" sender on CC.sender_id = sender.user_id
+    JOIN PUBLIC."User" receiver on CC.receiver_id = receiver.user_id
+  ORDER BY timestamp ASC;
       `);
       messages = messages.rows;
 
@@ -128,9 +131,10 @@ const chatController = {
         el.date =
           el.timestamp.getFullYear() +
           "/" +
-          el.timestamp.getMonth() +
+          (el.timestamp.getMonth() + 1) +
           "/" +
           el.timestamp.getDate();
+        // console.log(el);
         delete el.sender_id;
         delete el.receiver_id;
       });

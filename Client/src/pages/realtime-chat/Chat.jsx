@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import Conversation from "./Conversation";
 import Message from "./Message";
 import "./Chat.css";
@@ -6,6 +7,7 @@ import "./Chat.css";
 export default function Chat() {
   let id_key = 0;
   const currentUser = { user_id: 19 };
+  currentUser.user_id = useSelector((state) => state.user.userID);
   const [conversations, setConversations] = useState([]);
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
@@ -17,7 +19,7 @@ export default function Chat() {
         return res.json();
       })
       .then((data) => {
-        console.log(data.lastMessages);
+        // console.log(data.lastMessages);
         setConversations(data.lastMessages);
       });
   }, [currentUser.user_id, messages]);
@@ -30,7 +32,7 @@ export default function Chat() {
         return res.json();
       })
       .then((data) => {
-        console.log(data.messages);
+        // console.log(data.messages);
         setMessages(data.messages);
       });
   }, [otherUserID, messages]);
