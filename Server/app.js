@@ -6,6 +6,7 @@ import authMiddleware from "./middlewares/auth.middleware.js";
 import authRouter from "./routers/auth.route.js";
 import avaRouter from "./routers/available.route.js";
 import partRouter from "./routers/part.route.js";
+import taskRouter from "./routers/task.routter.js";
 
 dotenv.config();
 
@@ -36,7 +37,9 @@ app.use("/auth", authRouter);
 
 app.use("/availability",avaRouter);
 
-app.use("/partwithpmid",partRouter);
+app.use("/partsinfo",partRouter);
+
+app.use("/tasksinfo",taskRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

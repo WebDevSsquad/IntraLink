@@ -44,6 +44,7 @@ const partController = {
             // let ans = await pool.query(`select part_id,partname,username,email from public."User",public."Part" where project_id=${pmid} and taskmanager_id=user_id ;`);
             let ans = await pool.query(`
                         SELECT
+                        project_id,
                         projectname,
                         description,
                         startdate,

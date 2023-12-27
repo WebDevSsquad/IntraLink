@@ -24,7 +24,7 @@ const Part = () => {
 
  useEffect(() => {
   const fetchData1 = async () =>{
-  fetch(`http://localhost:8080/partwithpmid/pmid/${id}`)
+  fetch(`http://localhost:8080/partsinfo/pmid/${id}`)
     .then((res) => {
       return res.json();
     })
@@ -36,7 +36,7 @@ const Part = () => {
 
 
     const fetchData2 = async () =>{
-      fetch(`http://localhost:8080/partwithpmid/pminfo/${id}`)
+      fetch(`http://localhost:8080/partsinfo/pminfo/${id}`)
         .then((res) => {
           return res.json();
         })

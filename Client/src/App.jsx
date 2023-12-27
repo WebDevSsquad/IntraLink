@@ -5,7 +5,7 @@ import "./App.css";
 import Register from "./pages/register/register";
 import store from "./slices/store";
 import Part from "./pages/Part/part";
-import Task from "./pages/task/task";
+import Task from "./pages/Task/task";
 import AvailabilityBoard from "./pages/Availabilityboard/availabilityboard";
 
 function App() {
