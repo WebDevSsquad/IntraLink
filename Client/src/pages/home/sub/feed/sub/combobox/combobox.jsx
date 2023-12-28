@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./ComboBox.css"; // Import the CSS file for styling
+import "./combobox.css"; // Import the CSS file for styling
 
 import { useDispatch, useSelector } from "react-redux";
 
