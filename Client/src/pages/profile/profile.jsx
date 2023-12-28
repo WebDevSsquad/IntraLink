@@ -11,6 +11,7 @@ import {
   faEnvelope,
   faArrowTrendUp,
   faArrowTrendDown,
+  faPen,
 } from "@fortawesome/free-solid-svg-icons";
 import AddSkillButton from "./sub/add-skill";
 import EditForm from "./sub/edit-form-popup";
@@ -19,40 +20,169 @@ import "./profile.css";
 
 export default function Profile() {
   const dispatch = useDispatch();
-  const profilePicture =
-    "https://shiftart.com/wp-content/uploads/2017/04/RC-Profile-Square.jpg";
+
   const divider = <div className="divider" />;
-  const initialPhone = useSelector((state) => state.user.phone);
-  const initialLocation = useSelector((state) => state.user.location);
-  const initialEmail = useSelector((state) => state.user.email);
-  const firstName = useSelector((state) => state.user.firstName);
-  const lastName = useSelector((state) => state.user.lastName);
-  const fullName = firstName + " " + lastName;
-  const about =
-    "Project manager that strives to be the best amongst others. I have every single required skill to be easily the best.";
-  const availableTM = useSelector((state) => state.user.isAvailableTM);
-  const availableCon = useSelector((state) => state.user.isAvailableCon);
-  const initialSkills = useSelector((state) => state.user.skills);
-  const sections = ["About", "Skills"];
+  const id = useSelector((state) => state.user.userID);
+  const inputRef = useRef("");
   const [isProfileImageHovered, setIsProfileImageHovered] = useState(false);
-  const [skills, setSkills] = useState(initialSkills);
-  const [phone, setPhone] = useState(initialPhone);
-  const [location, setLocation] = useState(initialLocation);
-  const [email, setEmail] = useState(initialEmail);
+  const [profilePicture, setProfilePicture] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [skills, setSkills] = useState([]);
+  const [phone, setPhone] = useState("");
+  const [about, setAbout] = useState("");
+  const [location, setLocation] = useState("");
+  const [email, setEmail] = useState("");
   const [activeSection, setActiveSection] = useState("About");
   const [isEditFormOpen, setIsEditFormOpen] = useState(false);
-  const [isAvailableTM, setIsAvailableTM] = useState(availableTM);
-  const [isAvailableCon, setIsAvailableCon] = useState(availableCon);
+  const [isAvailableTM, setIsAvailableTM] = useState(false);
+  const [isAvailableCon, setIsAvailableCon] = useState(false);
+  const [isEditingAbout, setIsEditingAbout] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/profile/get_user_info/${id}`
+        );
+        const data = await response.json();
+        const info = data.userInfo.rows[0];
+        //console.log(info);
+        setFullName(info.firstname + " " + info.lastname);
+        setEmail(info.email);
+        setProfilePicture(info.picture);
+        setSkills(info.skills);
+        setIsAvailableTM(info.available_tm);
+        setIsAvailableCon(info.available_con);
+        setLocation(info.location);
+        setPhone(info.phone);
+        setAbout(info.about);
+      } catch (error) {
+        console.error("Error fetching Data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleRemoveSkill = (index) => {
     const updatedSkills = [...skills];
     updatedSkills.splice(index, 1);
     setSkills(updatedSkills);
+    removeSkillData(index + 1);
   };
 
   const handleAddSkill = (newSkill) => {
     setSkills([...skills, newSkill]);
+    updateSkillData(newSkill);
   };
+  const handleSetAbout = () => {
+    setAbout(inputRef.current.value);
+    updateAbout(inputRef.current.value);
+  };
+  const handleEditedInfo = (editedData) => {
+    const {
+      isAvailableCon = false,
+      isAvailableTM = false,
+      email = "",
+      location = "",
+      phone = "",
+    } = editedData;
+
+    setEmail(email);
+    setPhone(phone);
+    setLocation(location);
+    setIsAvailableTM(isAvailableTM);
+    setIsAvailableCon(isAvailableCon);
+
+    const newData = {
+      available_con: isAvailableCon,
+      available_tm: isAvailableTM,
+      email: email,
+      location: location,
+      phone: phone,
+    };
+
+    updateUserData(newData);
+  };
+
+  const updateUserData = async (newData) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/profile/update_user_info/${id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newData),
+        }
+      );
+
+      const updatedData = await response.json();
+      console.log(updatedData);
+    } catch (error) {
+      console.error("Error updating user data:", error);
+    }
+  };
+  const updateAbout = async (newAbout) => {
+    console.log(newAbout);
+    try {
+      const response = await fetch(
+        `http://localhost:8080/profile/update_about/${id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ about: newAbout }),
+        }
+      );
+
+      const updatedAbout = await response.json();
+      console.log(updatedAbout);
+    } catch (error) {
+      console.error("Error updating user data:", error);
+    }
+  };
+  const updateSkillData = async (newSkill) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/profile/update_skills/${id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ skill: newSkill }),
+        }
+      );
+
+      const updatedskill = await response.json();
+      console.log(updatedskill);
+    } catch (error) {
+      console.error("Error updating user data:", error);
+    }
+  };
+  const removeSkillData = async (index) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/profile/remove_skill/${id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ index: index }),
+        }
+      );
+
+      const updatedskills = await response.json();
+      console.log(updatedskills);
+    } catch (error) {
+      console.error("Error updating user data:", error);
+    }
+  };
+
+  const sections = ["About", "Skills"];
 
   return (
     <div
@@ -93,11 +223,7 @@ export default function Profile() {
                 isAvailableTM={isAvailableTM}
                 isAvailableCon={isAvailableCon}
                 onSave={(editedData) => {
-                  setEmail(editedData.email);
-                  setPhone(editedData.phone);
-                  setLocation(editedData.location);
-                  setIsAvailableTM(editedData.isAvailableTM);
-                  setIsAvailableCon(editedData.isAvailableCon);
+                  handleEditedInfo(editedData);
                   close();
                 }}
               />
@@ -108,7 +234,9 @@ export default function Profile() {
           <h1>{fullName}</h1>
           <p className="job-title">Project Manager</p>
         </div>
-        <button className="message-button">Message</button>
+        <button className="message-button">
+          Message
+        </button>
         <div className="user-info">
           <div className="icon-container">
             <FontAwesomeIcon icon={faPhone} className="font-icon" />
@@ -155,7 +283,46 @@ export default function Profile() {
           {activeSection === "About" && (
             <>
               <div className="about">
-                <p>{about}</p>
+                {isEditingAbout ? (
+                  <>
+                    <div className="edit-about-container">
+                      <textarea
+                        value={about}
+                        onChange={(e) => setAbout(e.target.value)}
+                        className="edit-textarea"
+                        autoFocus
+                        onFocus={(e) => {
+                          let tempValue = e.target.value;
+                          e.target.value = "";
+                          e.target.value = tempValue;
+                        }}
+                        ref={inputRef}
+                      />
+                      <div className="button-container">
+                        <button
+                          onClick={() => {
+                            setIsEditingAbout(false);
+                            handleSetAbout();
+                          }}
+                        >
+                          Done
+                        </button>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="about-text">
+                      <p>{about}</p>
+                    </div>
+                    <div
+                      className="edit-circle-container"
+                      onClick={() => setIsEditingAbout(true)}
+                    >
+                      <FontAwesomeIcon icon={faPen} className="arrow-icon" />
+                    </div>
+                  </>
+                )}
               </div>
             </>
           )}

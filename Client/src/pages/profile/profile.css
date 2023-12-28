@@ -109,10 +109,64 @@
 }
 
 .about {
-  color: var(--text-100);
-  text-align: left;
-  word-break: wrap;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
+
+.edit-about-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.edit-textarea {
+  padding: 10px;
+  height: 100px;
+  resize: none;
+  margin-bottom: 10px;
+  background-color: var(--bg-100);
+  color: var(--text-100);
+  font-size: 16px;
+}
+
+.about-text {
+  text-align: left;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.edit-circle-container {
+  background-color: var(--bg-100);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  padding: 4px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button-container button {
+  background-color: var(--accent-100);
+  color: var(--text-100);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: var(--accent-200);
+    color: var(--text-200);
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
 .middle-section {
   display: flex;
   flex-direction: column;
@@ -122,6 +176,8 @@
 }
 
 .profile-sections {
+  position: relative;
+  word-break: break-all;
   width: 100%;
   align-self: flex-start;
   background-color: var(--bg-200);

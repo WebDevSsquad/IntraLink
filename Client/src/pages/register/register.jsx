@@ -85,7 +85,11 @@ export default function Register() {
     fetch(url, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify((location.pathname === "/login" ||location.pathname === "/logIn") ? login : signup),
+      body: JSON.stringify(
+        location.pathname === "/login" || location.pathname === "/logIn"
+          ? login
+          : signup
+      ),
     })
       .then((res) => {
         ok = res.ok;
@@ -99,8 +103,8 @@ export default function Register() {
             dispatch(updatePicture(data.user.picture));
           if (data.user.firstname !== undefined)
             dispatch(updateFirstName(data.user.firstname));
-          if (data.user.secondname !== undefined)
-            dispatch(updateLastName(data.user.secondname));
+          if (data.user.lastname !== undefined)
+            dispatch(updateLastName(data.user.lastname));
           if (data.user.user_id !== undefined)
             dispatch(updateUserID(data.user.user_id));
           if (data.user.username !== undefined)
@@ -117,7 +121,7 @@ export default function Register() {
             dispatch(updatePhone(data.user.phone));
           if (data.user.about !== undefined)
             dispatch(updateAbout(data.user.about));
-          if (data.user.skills !== undefined)
+          if (data.user.skills !== undefined && data.user.skills !== null)
             dispatch(updateSkills(data.user.skills));
           console.log(data.user);
           // ---------------------------------------------------------------------------
@@ -129,7 +133,7 @@ export default function Register() {
 
           dispatch(updateLoggedIn(true));
 
-          navigate("/home");
+          navigate("/profile");
 
           setWrongEmail(false);
 

@@ -50,7 +50,7 @@
   top: -18px;
 }
 
-.edit-form button {
+.save {
   align-self: center;
   background-color: var(--primary-100);
   color: var(--text-100);
@@ -58,6 +58,11 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+.invalid {
+  color: red;
+  font-size: 12px;
+  margin-top: -15px;
 }
 .add-modal-overlay {
   position: fixed;
@@ -84,6 +89,6 @@
   color: var(--text-100);
 }
 
-.edit-form button:hover {
+.save:hover {
   background-color: var(--primary-200);
 }

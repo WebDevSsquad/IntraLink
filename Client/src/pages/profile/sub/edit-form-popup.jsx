@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Switch from "react-switch";
 import "./edit-form-popup.css";
 
@@ -15,6 +15,7 @@ const EditForm = ({
   const [editedLocation, setEditedLocation] = useState(location);
   const [editedavailableTM, setIsAvailableTM] = useState(isAvailableTM);
   const [editedavailableCon, setIsAvailableCon] = useState(isAvailableCon);
+  const [validPhone, setValidPhone] = useState(true);
 
   const handleSave = () => {
     onSave({
@@ -25,20 +26,33 @@ const EditForm = ({
       isAvailableCon: editedavailableCon,
     });
   };
+  const validatePhoneNumber = (phoneNumber) => {
+    const regex = /^[+\d]+$/;
+    if (!regex.test(phoneNumber)) {
+      setValidPhone(false);
+    } else {
+      setValidPhone(true);
+    }
+  };
 
   return (
-    <div className="edit-form">
+    <form className="edit-form" onSubmit={handleSave}>
       <h1>Edit Profile</h1>
       <div className="line"></div>
 
       <div className="input-wrapper">
         <label>Phone</label>
         <input
-          type="text"
+          type="tel"
           value={editedPhone}
-          onChange={(e) => setEditedPhone(e.target.value)}
+          onChange={(e) => {
+            setEditedPhone(e.target.value);
+            validatePhoneNumber(e.target.value);
+          }}
         />
       </div>
+
+      {!validPhone && <label className="invalid">enter a valid phone</label>}
 
       <div className="input-wrapper">
         <label>Location</label>
@@ -52,7 +66,7 @@ const EditForm = ({
       <div className="input-wrapper">
         <label>Email</label>
         <input
-          type="text"
+          type="email"
           value={editedEmail}
           onChange={(e) => setEditedEmail(e.target.value)}
         />
@@ -76,8 +90,12 @@ const EditForm = ({
         />
       </div>
 
-      <button onClick={handleSave}>Save</button>
-    </div>
+      {validPhone ? (
+        <input className="save" type="submit" value="Save" />
+      ) : (
+        <input className="save" disabled type="submit" value="Save" />
+      )}
+    </form>
   );
 };
 
