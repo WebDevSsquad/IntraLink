@@ -1,0 +1,46 @@
+/* ---------------------------------Side Bar Ball Special Case------------------------------------------ */
+.Side_Bar {
+    position: absolute;
+    background-color: var(--bg-100);
+    border-radius: 100%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    cursor: pointer;
+    transition: all 1s;
+    z-index: 201;
+  }
+  .Side_Bar .sspecific_icon {
+    position: relative;
+    left: 1.3rem;
+    transition: all 1s;
+  }
+  .Side_Bar:hover {
+    width: 12rem;
+    border-radius: 80px;
+    padding-left: 1.3rem;
+  }
+  .Side_Bar:hover .sspecific_icon {
+    position: relative;
+    left: 0rem;
+  }
+  .Side_Bar .sball_name {
+    visibility: hidden;
+    cursor: pointer;
+    color: var(--primary-300);
+    font-weight: 700;
+    font-size: 1.3rem;
+    opacity: 0;
+    transition: all 6s both;
+  }
+  .Side_Bar:hover .sball_name {
+    visibility: visible;
+    opacity: 1;
+    position: relative;
+    right: 1.5rem;
+  }
+  /* --------------------------------------------------------------------------------------- */
+  

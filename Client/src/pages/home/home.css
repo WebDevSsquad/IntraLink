@@ -1,0 +1,14 @@
+.homepage {
+  width: 100vw;
+  height: 100%;
+  background-color: var(--bg-200);
+  display: grid; 
+  grid-template-columns: 0.2fr 1.8fr; 
+  grid-template-rows: 0.2fr 1.7fr; 
+  gap: 3px 3px; 
+  grid-template-areas: 
+    ". ."
+    ". ."; 
+  
+  /* overflow: hidden; */
+}

@@ -1,6 +1,6 @@
-import connection from "../../../../assets/connection.svg";
-import money from "../../../../assets/money_2.svg";
-import organizing from "../../../../assets/organizing.svg";
+import connection from "/assets/connection.svg";
+import money from "/assets/money_2.svg";
+import organizing from "/assets/organizing.svg";
 import "./services.css";
 export default function Services() {
   const curve = (

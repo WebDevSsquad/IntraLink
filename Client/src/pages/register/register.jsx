@@ -2,9 +2,21 @@ import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
+  updateAbout,
+  updateEmail,
   updateExpires,
+  updateFetch,
+  updateFirstName,
+  updateIsAvailable_Con,
+  updateIsAvailable_Tm,
+  updateLastName,
+  updateLocation,
   updateLoggedIn,
+  updatePhone,
   updatePicture,
+  updateSkills,
+  updateUserID,
+  updateUserName,
 } from "../../slices/userReducer";
 import "./register.css";
 
@@ -21,7 +33,7 @@ export default function Register() {
 
   const [dontMatch, setDontMatch] = useState(false);
   const [wrongPassword, setWrongPassword] = useState(false);
-  const [wrongEmail, setWrongEmail] = useState(false);
+  const [wrongUsername, setWrongUsername] = useState(false);
   const [EmailTaken, setEmailTaken] = useState(false);
   const [UserNameTaken, setUserNameTaken] = useState(false);
 
@@ -45,7 +57,7 @@ export default function Register() {
       return;
     }
     setDontMatch(false);
-    dispatch(updatePicture(`/${theme}User.png`));
+    dispatch(updatePicture(`/assets/${theme}User.svg`));
 
     let ok = false;
     let status = 200;
@@ -58,18 +70,27 @@ export default function Register() {
     };
 
     const signup = {
-      image: `/${theme}User.png`,
+      image: `/assets/${theme}User.svg`,
       username: UserName,
       firstname: FirstName,
       lastname: LastName,
       email: Email,
       password: Password,
     };
-    console.log("signup");
+    if (location.pathname === "/signup") {
+      dispatch(updateUserName(UserName));
+      dispatch(updateFirstName(FirstName));
+      dispatch(updateLastName(LastName));
+      dispatch(updateEmail(Email));
+    }
     fetch(url, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify(location.pathname === "/login" ? login : signup),
+      body: JSON.stringify(
+        location.pathname === "/login" || location.pathname === "/logIn"
+          ? login
+          : signup
+      ),
     })
       .then((res) => {
         ok = res.ok;
@@ -77,21 +98,44 @@ export default function Register() {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         if (ok) {
-          if (data.image !== undefined) dispatch(updatePicture(data.image));
-
+          // ----------------------------Get userData----------------------------------
+          if (data.user.picture !== undefined)
+            dispatch(updatePicture(data.user.picture));
+          if (data.user.firstname !== undefined)
+            dispatch(updateFirstName(data.user.firstname));
+          if (data.user.lastname !== undefined)
+            dispatch(updateLastName(data.user.lastname));
+          if (data.user.user_id !== undefined)
+            dispatch(updateUserID(data.user.user_id));
+          if (data.user.username !== undefined)
+            dispatch(updateUserName(data.user.username));
+          if (data.user.email !== undefined)
+            dispatch(updateEmail(data.user.email));
+          if (data.user.available_con !== undefined)
+            dispatch(updateIsAvailable_Con(data.user.available_con));
+          if (data.user.available_tm !== undefined)
+            dispatch(updateIsAvailable_Tm(data.user.available_tm));
+          if (data.user.location !== undefined)
+            dispatch(updateLocation(data.user.location));
+          if (data.user.phone !== undefined)
+            dispatch(updatePhone(data.user.phone));
+          if (data.user.about !== undefined)
+            dispatch(updateAbout(data.user.about));
+          if (data.user.skills !== undefined)
+            dispatch(updateSkills(data.user.skills));
+          console.log(data.user);
+          // ---------------------------------------------------------------------------
           localStorage.setItem("token", data.token);
 
-          setTimeout(() => {
-            dispatch(updateExpires(true));
-          }, 60 * 60 * 1000 * 2);
 
           dispatch(updateLoggedIn(true));
+          dispatch(updateExpires(false));
+          dispatch(updateFetch(true));
 
-          navigate("/");
+          navigate("/home");
 
-          setWrongEmail(false);
+          setWrongUsername(false);
 
           setWrongPassword(false);
 
@@ -108,12 +152,12 @@ export default function Register() {
         } else if (status === 422) {
           alert(data[0].message);
         } else {
-          if (data.error === "Invalid email") {
+          if (data.error === "Invalid username") {
             if (UserNameRef.current) {
               UserNameRef.current.value = "";
               UserNameRef.current.style.borderBottomColor = "red";
             }
-            setWrongEmail(true);
+            setWrongUsername(true);
           }
           if (data.error === "Invalid password") {
             if (PasswordRef.current) {
@@ -121,7 +165,7 @@ export default function Register() {
               PasswordRef.current.style.borderBottomColor = "red";
             }
             setWrongPassword(true);
-            setWrongEmail(false);
+            setWrongUsername(false);
             if (EmailRef.current)
               EmailRef.current.style.borderBottomColor = "white";
           }
@@ -163,7 +207,13 @@ export default function Register() {
         required
         onChange={(e) => setUserName(e.target.value)}
       />
-      {UserNameTaken && <div className="wrong">UserName is already taken</div>}
+      {(UserNameTaken && (
+        <div className="wrong">UserName is already taken</div>
+      )) ||
+        (wrongUsername && (
+          // eslint-disable-next-line react/no-unescaped-entities
+          <div className="wrong">Invalid Username</div>
+        ))}
       <label htmlFor="name" className="label-control">
         Username
       </label>
@@ -192,11 +242,7 @@ export default function Register() {
         ref={EmailRef}
         onChange={(e) => setEmail(e.target.value)}
       />
-      {(wrongEmail && (
-        // eslint-disable-next-line react/no-unescaped-entities
-        <div className="wrong">Email doesn't exist please try again</div>
-      )) ||
-        (EmailTaken && <div className="wrong">Email is already taken</div>)}
+      {EmailTaken && <div className="wrong">Email is already taken</div>}
       <label htmlFor="email" className="label-control">
         Email
       </label>

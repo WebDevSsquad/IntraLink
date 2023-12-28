@@ -24,11 +24,6 @@
   overflow: hidden;
   position: relative;
 }
-.home_contact {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-}
 .send {
   color: var(--bg-100);
   width: 9rem;

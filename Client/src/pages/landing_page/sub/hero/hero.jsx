@@ -1,7 +1,7 @@
 import Typewriter from "typewriter-effect";
-import home_img from "../../../../assets/home_img2.png";
-import "./home.css";
-export default function Home() {
+import home_img from "/assets/home_img2.png";
+import "./hero.css";
+export default function Hero() {
   const curve = (
     <div className="custom-shape-divider-bottom-1703186849">
       <svg
@@ -47,9 +47,6 @@ export default function Home() {
                 typewriter
                   .pauseFor(2500)
                   .deleteAll()
-                  .callFunction(() => {
-                    console.log("All strings were deleted");
-                  })
                   .start();
               }}
             />

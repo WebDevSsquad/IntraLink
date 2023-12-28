@@ -1,6 +1,6 @@
 import { useForm } from "@formspree/react";
 import { useState } from "react";
-import greencheck from "../../../../assets/check_submit.svg";
+import greencheck from "/assets/check_submit.svg";
 import "./contact.css";
 export default function Contact() {
   const [state, handleSubmit] = useForm("xqkrzglb");
@@ -98,13 +98,12 @@ export default function Contact() {
   );
   const elements = [firstName, lastName, email, phoneNumber];
 
-  console.log(state);
   const form = (
     <>
       <div className="contact" id="contact">
         {curve}
         <div className="contact-form-container">
-          <div className="contact-form home_contact">
+            <div className="contact-form home_contact" style={{ background: "transparent" ,border:"none",boxShadow:"none"}}>
             <form
               autoComplete="on"
               onSubmit={(e) => {

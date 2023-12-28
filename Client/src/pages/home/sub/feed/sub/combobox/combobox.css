@@ -1,0 +1,7 @@
+.combo{
+   background-color: var(--primary-200);
+   color: var(--text-100);
+   border-radius: 50px;
+   border-color: var(--accent-300);
+   padding: 10px;
+}

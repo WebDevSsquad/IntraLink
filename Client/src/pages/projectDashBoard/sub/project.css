@@ -1,0 +1,129 @@
+.project-container {
+  background-color: var(--bg-100);
+  color: var(--text-100);
+  break-inside: avoid;
+  width: 20rem;
+  min-height: 25rem;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 30px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  transition: all 0.5s;
+}
+.manager {
+  background-image: linear-gradient(
+    to right top,
+    #896d2f,
+    #9d7f3b,
+    #b19147,
+    #c5a453,
+    #dab760,
+    #dab760,
+    #e0c481,
+    #dbb760,
+    #c7a453,
+    #b39245,
+    #9f8039,
+    #8c6f2c
+  );
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.con {
+  background-color: #cceeff;
+}
+.task {
+  background-image: linear-gradient(
+    to right top,
+    #a4a4a4,
+    #aeaeae,
+    #b9b9b9,
+    #c3c3c3,
+    #cecece,
+    #e7e7e7,
+    #cfcfcf,
+    #cfcfcf,
+    #c5c5c5,
+    #bbbbbb,
+    #b2b2b2,
+    #a8a8a8
+  );
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+.project-container:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.project-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+}
+.project_rank_icon {
+  margin-right: 10px;
+}
+.project_manager_rank {
+  font-size: large;
+  font-weight: 800;
+  color: var(--text-300);
+}
+.project-top-left {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
+}
+.project_info {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.projectname {
+  color: var(--text-300);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.project-date {
+  color: var(--primary-300);
+  font-size: 0.6rem;
+}
+.project-center {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0.5rem;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+.project-text {
+  color: var(--text-100);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+  text-align: left;
+  width: 100%;
+  word-wrap: break-word;
+}
