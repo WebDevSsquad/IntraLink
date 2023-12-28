@@ -120,6 +120,7 @@ function InnerApp() {
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/login" element={<Register />} />
           <Route exact path="/signup" element={<Register />} />
+          <Route exact path="/dashboard" element={<Home />} />       
         </Routes>
       </div>
     </Router>

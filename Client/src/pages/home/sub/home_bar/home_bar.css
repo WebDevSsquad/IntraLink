@@ -85,6 +85,6 @@
   color: var(--accent-200);
 }
 .homeBar_username {
-  font-size: large;
+  font-size: 1.5rem;
   font-weight: 900;
 }

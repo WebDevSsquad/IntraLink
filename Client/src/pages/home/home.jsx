@@ -1,10 +1,11 @@
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Dashboard from "../projectDashBoard/dashboard";
 import "./home.css";
 import Feed from "./sub/feed/feed";
 import HomeBar from "./sub/home_bar/home_bar";
 import SideBar from "./sub/sidebar/sidebar";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 export default function Home() {
   const loggedIn = useSelector((state) => state.user.loggedIn);
   const fetch = useSelector((state) => state.user.fetch);
@@ -19,10 +20,10 @@ export default function Home() {
   }, [loggedIn, navigate, fetch, expires]);
   return (
     <>
-      <div className="homepage" id="homepage" >
+      <div className="homepage" id="homepage">
         <HomeBar />
         <SideBar />
-        <Feed />
+        {location.pathname === "/home" ? <Feed /> : <Dashboard />}
       </div>
     </>
   );

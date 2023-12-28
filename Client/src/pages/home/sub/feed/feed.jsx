@@ -36,7 +36,6 @@ export default function Feed() {
   }, []);
 
   const fetchMoreData = () => {
-    console.log(posts.length);
     console.log("fetching");
     try {
       fetch("http://localhost:8080/post", {
@@ -60,8 +59,8 @@ export default function Feed() {
       console.log(err);
     }
     setTimeout(() => {
-      setItems(items.concat(Array.from({ length: 20 })));
-    }, 500);
+      setItems(Array.from({ length: 20 }));
+    }, 1000);
   };
 
   const deleteImage = (Image, ImageName) => {
@@ -175,8 +174,8 @@ export default function Feed() {
   );
   const handelOpenAddPost = () => {
     if (addPostRef.current) {
-        addPostRef.current.style.transform = `scale(${toggled&1})`;
-        setToggled(!toggled);
+      addPostRef.current.style.transform = `scale(${toggled & 1})`;
+      setToggled(!toggled);
     }
   };
   const addPosts = (
@@ -212,13 +211,13 @@ export default function Feed() {
       <div className="add_post-bottom">
         <div className="add_post-bottom-left">{uploadPhoto}</div>
         <div onClick={handelAddPost} className="add_post-bottom-right">
-          <div className="add_button" onClick={handelOpenAddPost}>Add</div>
+          <div className="add_button" onClick={handelOpenAddPost}>
+            Add
+          </div>
         </div>
       </div>
     </div>
   );
-
-
 
   const addPostButton = (
     <div onClick={handelOpenAddPost} className={`addPostButton`}>

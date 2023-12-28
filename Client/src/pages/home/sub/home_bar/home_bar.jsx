@@ -6,8 +6,7 @@ import searchicon from "/assets/search.svg";
 export default function HomeBar() {
   const userName = useSelector((state) => state.user.userName);
   const userPhoto = useSelector((state) => state.user.picture);
-  const id = useSelector((state) => state.user.userID);
-  console.log(id);
+
   return (
     <>
       <div className="homeBar">

@@ -128,9 +128,6 @@ export default function Register() {
           // ---------------------------------------------------------------------------
           localStorage.setItem("token", data.token);
 
-          setTimeout(() => {
-            dispatch(updateExpires(true));
-          }, 60 * 60 * 1000 * 5);
 
           dispatch(updateLoggedIn(true));
           dispatch(updateExpires(false));

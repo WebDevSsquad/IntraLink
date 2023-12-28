@@ -3,9 +3,17 @@ import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTheme } from "../../../../../../slices/userReducer";
 import "./ball.css";
+import {useNavigate } from "react-router-dom";
+
+
+
+
 export default function Ball({ specific, speed, display }) {
   const dispatch = useDispatch();
   const ballContainerRef = useRef(null);
+  let theme = useSelector((state) => state.user.theme);
+  const navigate = useNavigate();
+
   if (ballContainerRef.current != null) {
     ballContainerRef.current.style.pointerEvents = "none";
     if (display === "show") {
@@ -34,23 +42,31 @@ export default function Ball({ specific, speed, display }) {
       }, 1000 + (speed - 1) * 200);
     }
   }
-  let theme = useSelector((state) => state.user.theme);
+
+ 
   if (specific == "Dark") {
     theme = theme.charAt(0).toUpperCase() + theme.slice(1);
     theme = theme === "Dark" ? "Light" : "Dark";
   } else {
     theme = specific;
   }
-  const handleDarkMode = () => {
+
+  const handleOptions = () => {
     if (theme === "Dark" || theme === "Light") {
       dispatch(updateTheme(theme.toLowerCase()));
     }
+    else if (theme==="Projects") {
+      navigate("/dashboard");
+    }
+    else if (theme==="Home") {
+      navigate("/home");
+    }  
   };
 
   return (
     <>
       <div
-        onClick={handleDarkMode}
+        onClick={handleOptions}
         ref={ballContainerRef}
         className={`ball-container ${theme}`}
       >
