@@ -11,7 +11,17 @@
 
   --text-100: #1d1c1c;
   --text-200: #313d44;
+  --text-100: #1d1c1c;
+  --text-200: #313d44;
 
+  --bg-100: #fffefb;
+  --bg-200: #f5f4f1;
+  --bg-300: #cccbc8;
+}
+[data-theme="dark"] {
+  --primary-100: #0085ff;
+  --primary-200: #69b4ff;
+  --primary-300: #e0ffff;
   --bg-100: #fffefb;
   --bg-200: #f5f4f1;
   --bg-300: #cccbc8;
@@ -55,10 +65,30 @@
     hsla(186, 100%, 69%, 1) 100%
   );
 
+  background: linear-gradient(
+    90deg,
+    hsla(217, 100%, 50%, 1) 0%,
+    hsla(186, 100%, 69%, 1) 100%
+  );
+
+  background: -moz-linear-gradient(
+    90deg,
+    hsla(217, 100%, 50%, 1) 0%,
+    hsla(186, 100%, 69%, 1) 100%
+  );
+
+  background: -webkit-linear-gradient(
+    90deg,
+    hsla(217, 100%, 50%, 1) 0%,
+    hsla(186, 100%, 69%, 1) 100%
+  );
+
   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#0061FF", endColorstr="#60EFFF", GradientType=1 );
 }
 
 :root {
+  font-family: "Anonymous Pro", monospace;
+  line-height: 1.5;
   font-family: "Anonymous Pro", monospace;
   line-height: 1.5;
   font-weight: 400;

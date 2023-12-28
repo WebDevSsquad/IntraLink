@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   updateAbout,
   updateEmail,
+  updateAbout,
+  updateEmail,
   updateExpires,
   updateFetch,
   updateFirstName,
@@ -13,7 +15,11 @@ import {
   updateLocation,
   updateLoggedIn,
   updatePhone,
+  updatePhone,
   updatePicture,
+  updateSkills,
+  updateUserID,
+  updateUserName,
   updateSkills,
   updateUserID,
   updateUserName,
@@ -58,6 +64,7 @@ export default function Register() {
     }
     setDontMatch(false);
     dispatch(updatePicture(`/assets/${theme}User.svg`));
+    dispatch(updatePicture(`/assets/${theme}User.svg`));
 
     let ok = false;
     let status = 200;
@@ -71,6 +78,7 @@ export default function Register() {
 
     const signup = {
       image: `/assets/${theme}User.svg`,
+      image: `/assets/${theme}User.svg`,
       username: UserName,
       firstname: FirstName,
       lastname: LastName,
@@ -83,9 +91,20 @@ export default function Register() {
       dispatch(updateLastName(LastName));
       dispatch(updateEmail(Email));
     }
+    if (location.pathname === "/signup") {
+      dispatch(updateUserName(UserName));
+      dispatch(updateFirstName(FirstName));
+      dispatch(updateLastName(LastName));
+      dispatch(updateEmail(Email));
+    }
     fetch(url, {
       method: "POST",
       headers: { "content-type": "application/json" },
+      body: JSON.stringify(
+        location.pathname === "/login" || location.pathname === "/logIn"
+          ? login
+          : signup
+      ),
       body: JSON.stringify(
         location.pathname === "/login" || location.pathname === "/logIn"
           ? login

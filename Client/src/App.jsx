@@ -9,6 +9,7 @@ import "./App.css";
 import { ResetData } from "./components/resetdata/resetdata";
 import Home from "./pages/home/home";
 import LandingPage from "./pages/landing_page/landing_page";
+import Profile from "./pages/profile/profile";
 import Register from "./pages/register/register";
 import store from "./slices/store";
 import {
@@ -118,6 +119,7 @@ function InnerApp() {
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
           <Route exact path="/home" element={<Home />} />
+          <Route exact path="/profile" element={<Profile />} /> 
           <Route exact path="/login" element={<Register />} />
           <Route exact path="/signup" element={<Register />} />
           <Route exact path="/dashboard" element={<Home />} />       

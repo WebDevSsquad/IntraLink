@@ -150,8 +150,6 @@ const authController = {
       });
     }
   },
-  // This is a protected route that requires the user to be logged in
-  // This controller is used to fetch the data of the logged in user
   me: (req, res) => {
     try {
       res.status(200).json({ user: req.user });
