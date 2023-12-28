@@ -1,0 +1,81 @@
+.navbar-container {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10vh;
+  width: 100vw;
+  background-color: var(--bg-100);
+  z-index: 100;
+  backdrop-filter: blur(3px);
+  border-radius: 10px;
+  top: 0;
+  left: 0;
+  padding: 0 2rem;
+  margin-bottom: 0;
+  font-size: 1.1rem;
+  background-color:transparent;
+}
+.navbar-container .logo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 23rem;
+  font-size: 1rem;
+}
+.navbar-container .logo h1 {
+  color: var(--accent-200);
+}
+.navbar-container a {
+  color: var(--text-100);
+  font-weight: 1000;
+}
+.navbar-container a:hover {
+  cursor: pointer;
+  color: var(--accent-100);
+}
+.register2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 17rem;
+  gap: 30px;
+  text-decoration: none;
+  font-size: 1.4rem;
+  margin-left: 20px;
+  cursor: default;
+}
+.navbar-container .login2 {
+  color: var(--accent-200);
+}
+.navbar-container .signup2 {
+  color: var(--bg-100);
+  width: 9rem;
+  background-image: linear-gradient(
+    to right,
+    #1b7dd8,
+    #0b89dd,
+    #0794e2,
+    #169fe5,
+    #29aae8,
+    #3bb1eb,
+    #4ab9ed,
+    #58c0f0,
+    #67c6f4,
+    #74cbf7,
+    #80d1fb,
+    #8cd7ff
+  );
+  box-shadow: 10px 10px 14px 1px rgba(00, 00, 00, 0.2);
+  border-radius: 30px;
+  padding: 0.5rem;
+  transition: all 0.5s;
+}
+.navbar-container .signup2:hover {
+  transform: translateZ(-2px);
+  box-shadow: none;
+}
+.navbar-container .login2:hover,
+.signup2:hover {
+  cursor: pointer;
+}

@@ -3,10 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   loggedIn: false,
   fetch: false,
-  expires: false,
-  theme: window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light",
+  expires: true,
+  theme: "light",
   picture: "/lightUser.png",
   firstName: "",
   lastName: "",
@@ -15,6 +13,10 @@ const initialState = {
   userID: "",
   isAvailable_Tm: false,
   isAvailable_Con: false,
+  location: "",
+  phone: "",
+  about: "",
+  skills: [],
 };
 
 export const userSlice = createSlice({
@@ -57,6 +59,18 @@ export const userSlice = createSlice({
     updateIsAvailable_Con: (state, action) => {
       state.isAvailable_Con = action.payload;
     },
+    updateLocation: (state, action) => {
+      state.location = action.payload;
+    },
+    updatePhone: (state, action) => {
+      state.phone = action.payload;
+    },
+    updateAbout: (state, action) => {
+      state.about = action.payload;
+    },
+    updateSkills: (state, action) => {
+      state.skills = action.payload;
+    },
   },
 });
 
@@ -73,5 +87,9 @@ export const {
   updateUserID,
   updateIsAvailable_Tm,
   updateIsAvailable_Con,
+  updateLocation,
+  updatePhone,
+  updateAbout,
+  updateSkills,
 } = userSlice.actions;
 export default userSlice.reducer;

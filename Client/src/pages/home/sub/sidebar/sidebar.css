@@ -1,0 +1,9 @@
+.sideBar-container {
+  grid-column: 1/2;
+  grid-row: 2/3;
+  position: absolute;
+  height: 30rem;
+  width: 3rem;
+  left: 3rem;
+  top: 20rem;
+}
