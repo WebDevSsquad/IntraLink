@@ -24,7 +24,7 @@ const userDutiesController = {
     try {
       let currentUserID = req?.params?.userID;
       let tasks = await pool.query(
-        `SELECT price,requirements FROM PUBLIC."Task" WHERE contributor_id = ${currentUserID};`
+        `SELECT taskname ,price,requirements FROM PUBLIC."Task" WHERE contributor_id = ${currentUserID};`
       );
       tasks = tasks.rows;
       res

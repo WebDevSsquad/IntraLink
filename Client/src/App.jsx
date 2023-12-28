@@ -5,6 +5,7 @@ import "./App.css";
 import Register from "./pages/register/register";
 import store from "./slices/store";
 import Chat from "./pages/realtime-chat/Chat";
+import UserDuties from "./pages/user-duties/UserDuties";
 
 function App() {
   // const defaultTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -21,6 +22,7 @@ function App() {
           <Route path="/login" element={<Register />} />
           <Route path="/signup" element={<Register />} />
           <Route path="/chat" element={<Chat />} />
+          <Route path="userduties/:user_id" element={<UserDuties />} />
         </Routes>
       </Router>
     </Provider>
