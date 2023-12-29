@@ -2,7 +2,10 @@ import { deleteObject, ref } from "firebase/storage";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { storage } from "../../../../../../firebase";
-import { updatePosts } from "../../../../../../slices/feedReducer";
+import {
+  updatePosts,
+  updateTPosts,
+} from "../../../../../../slices/feedReducer";
 import "./post.css";
 import rankicon from "/assets/rankPM.svg";
 export default function Post({
@@ -67,12 +70,13 @@ export default function Post({
           return res.json();
         })
         .then((data) => {
-          if (prevurl!="null"&&prevurl!=null&&prevurl!=undefined) {
+          if (prevurl != "null" && prevurl != null && prevurl != undefined) {
             console.log(prevurl);
             deleteImage(prevurl);
           }
           // console.log(data.posts.rows);
           dispatch(updatePosts(data.posts.rows));
+          dispatch(updateTPosts(data.posts.rows));
         });
     } catch (err) {
       console.log(err);

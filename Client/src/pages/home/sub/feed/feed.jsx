@@ -9,7 +9,11 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 } from "uuid";
 import { storage } from "../../../../firebase";
-import { updatePosts, updateRanks } from "../../../../slices/feedReducer";
+import {
+  updatePosts,
+  updateRanks,
+  updateTPosts,
+} from "../../../../slices/feedReducer";
 import "./feed.css";
 import ComboBox from "./sub/combobox/combobox";
 import Post from "./sub/post/post";
@@ -23,11 +27,12 @@ export default function Feed() {
   const [postImgUpload, setPostImgUpload] = useState(null); //!the uploaded image in base64 format
   const descriptionRef = useRef(null); //! the description of the post
   const addPostRef = useRef(null); //!
-  const posts = useSelector((state) => state.feed.posts);
+  // const posts = useSelector((state) => state.feed.posts);
   const selectedProject = useSelector((state) => state.feed.selectedProject);
   const [items, setItems] = useState(Array.from({ length: 20 }));
   const [toggled, setToggled] = useState(true);
   const managerRank = useSelector((state) => state.user.managerRank);
+  const filteredposts = useSelector((state) => state.feed.tempposts);
 
   useEffect(() => {
     fetchMoreData();
@@ -52,6 +57,7 @@ export default function Feed() {
         .then((data) => {
           console.log(data.posts.rows);
           dispatch(updatePosts(data.posts.rows));
+          dispatch(updateTPosts(data.posts.rows));
           dispatch(updateRanks(data.ranks.rows));
         });
     } catch (err) {
@@ -61,7 +67,6 @@ export default function Feed() {
       setItems(Array.from({ length: 20 }));
     }, 1000);
   };
-
 
   const handelUploadImage = () => {
     if (postImgUpload) {
@@ -119,7 +124,7 @@ export default function Feed() {
         .then((data) => {
           console.log(data.posts.rows);
           dispatch(updatePosts(data.posts.rows));
-          dispatch(updateRanks(data.ranks.rows));
+          dispatch(updateTPosts(data.posts.rows));
         });
     } catch (err) {
       console.log(err);
@@ -223,7 +228,7 @@ export default function Feed() {
           // loader={<h4 className="LoadingMessage">Loading...</h4>}
           height={"50rem"}
         >
-          {posts.map((post, index) => (
+          {filteredposts.map((post, index) => (
             <Post
               key={index}
               username={post.username}

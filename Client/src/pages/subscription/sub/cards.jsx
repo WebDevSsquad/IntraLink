@@ -2,9 +2,9 @@ import check from "/assets/check.svg";
 import greencheck from "/assets/check_green.svg";
 import redxmark from "/assets/xmark_red.svg";
 import { useState,useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import "./card.css";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 export default function Cards() {
 

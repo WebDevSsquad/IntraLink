@@ -23,7 +23,8 @@ export default function SideBar() {
         <Ball specific="Hire" speed={3} display={show} />
         <Ball specific="Market" speed={4} display={show} />
         <Ball specific="Chat" speed={5} display={show} />
-        <Ball specific="Dark" speed={6} display={show} />
+        <Ball specific="Subscription" speed={6} display={show} />
+        <Ball specific="Dark" speed={7} display={show} />
       </div>
     </>
   );

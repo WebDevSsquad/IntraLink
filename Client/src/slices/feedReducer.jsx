@@ -5,6 +5,7 @@ const initialState = {
   projects: [],
   selectedProject: -1,
   ranks: [],
+  tempposts: [],
 };
 
 export const feedSlice = createSlice({
@@ -23,6 +24,9 @@ export const feedSlice = createSlice({
     updateRanks: (state, action) => {
       state.ranks = action.payload;
     },
+    updateTPosts: (state, action) => {
+      state.tempposts = action.payload;
+    },
   },
 });
 
@@ -31,5 +35,6 @@ export const {
   updatePosts,
   updateProjects,
   updateRanks,
+  updateTPosts,
 } = feedSlice.actions;
 export default feedSlice.reducer;

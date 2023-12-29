@@ -1,12 +1,12 @@
-
-import { useState,useEffect } from "react";
+import HomeBar from "../home/sub/home_bar/home_bar";
 import Cards from "./sub/cards";
-
 const Subscription = () => {
+  return (
+    <>
+      <HomeBar />
+      <Cards />
+    </>
+  );
+};
 
-    return ( 
-        <Cards/>
-     );
-}
- 
 export default Subscription;
