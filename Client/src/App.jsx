@@ -119,8 +119,8 @@ function InnerApp() {
           <Route exact path="/login" element={<Register />} />
           <Route exact path="/signup" element={<Register />} />
           <Route exact path="/dashboard" element={<Home />} />
-          <Route path="/chat" element={<Chat />} />
-          <Route path="userduties/:user_id" element={<UserDuties />} />
+          <Route exact path="/chat" element={<Chat />} />
+          <Route exact path="userduties/:user_id" element={<UserDuties />} />
         </Routes>
       </div>
     </Router>

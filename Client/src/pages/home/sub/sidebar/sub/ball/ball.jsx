@@ -61,6 +61,9 @@ export default function Ball({ specific, speed, display }) {
     else if (theme==="Home") {
       navigate("/home");
     }  
+    else if(theme=="Chat"){
+      navigate("/chat");
+    }
   };
 
   return (
