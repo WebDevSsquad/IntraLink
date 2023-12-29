@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import "./notifications.css";
 
@@ -95,7 +95,7 @@ const Notifications = () => {
 
   return (
     <div className="notification-page-container">
-      <h2 className="page-title">Notifications</h2>
+      {/* <h2 className="page-title">Notifications</h2> */}
       {console.log(Notifications)}
       {Notifications !== null &&
         Notifications.map((notification, index) => (

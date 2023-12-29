@@ -13,3 +13,25 @@
   position: relative;
   color: var(--text-100);
 }
+.projectname-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.move-input-box {
+  position: absolute;
+  left: 3rem;
+  top: 8rem;
+}
+.projectdescription-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  justify-self:  flex-end;
+  align-self: flex-start;
+}
+.projectdescription-input{
+  height: 5rem;
+}

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { updateTPosts } from "../../../../slices/feedReducer";
 import {
   updateConRank,
   updateManagerRank,
@@ -12,13 +13,14 @@ import rankiconTM from "/assets/rankTM.svg";
 import searchicon from "/assets/search.svg";
 export default function HomeBar() {
   const userName = useSelector((state) => state.user.userName);
-  const id = useSelector((state) => state.user.userID);
   const userPhoto = useSelector((state) => state.user.picture);
   const managerRank = useSelector((state) => state.user.managerRank);
   const taskRank = useSelector((state) => state.user.taskRank);
   const conRank = useSelector((state) => state.user.conRank);
+  const posts = useSelector((state) => state.feed.posts);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const id = useSelector((state) => state.user.userID);
   useEffect(() => {
     try {
       fetch("http://localhost:8080/auth/rank", {
@@ -46,6 +48,13 @@ export default function HomeBar() {
       console.log(err);
     }
   }, []);
+  const filter = (Tasknametofind) => {
+    const newTasks = posts.filter((post) =>
+      post.description.toLowerCase().includes(Tasknametofind.toLowerCase())
+    );
+    dispatch(updateTPosts(newTasks));
+  };
+
   return (
     <>
       <div className="homeBar">
@@ -73,14 +82,20 @@ export default function HomeBar() {
             </div>
           </div>
         </div>
-        <div className="homebar_search">
-          <img src={searchicon} className="search_icon" />
-          <input className="search_input" type="text" placeholder="Search..." />
-        </div>
+        {location.pathname === "/home" && (
+          <div className="homebar_search">
+            <img src={searchicon} className="search_icon" />
+            <input
+              className="search_input"
+              type="text"
+              placeholder="Search..."
+              onChange={(e) => filter(e.target.value)}
+            />
+          </div>
+        )}
         <div
           className="userphoto"
           onClick={() => {
-            console.log(id);
             navigate(`/profile/${id}`);
           }}
         >

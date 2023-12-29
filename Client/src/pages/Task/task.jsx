@@ -5,7 +5,7 @@ import TaskList from "./tasklist";
 import "./Task.css";
 import { useParams } from "react-router-dom";
 import { useEffect } from 'react';
-
+import HomeBar from '../home/sub/home_bar/home_bar';
 const Task = () => {
 
   const { project_id , part_id } = useParams();
@@ -76,6 +76,7 @@ const Task = () => {
 
   return (
     <div className="tasks_main">
+          <HomeBar />
         <div className="search-container">
       <input onChange={(e) => {isdatapartgeted && isdatapmgeted && isdatageted && filter(e.target.value)} } type="text" placeholder="Search...." className="search-bar-tasks"/>
         <FontAwesomeIcon className="search-icon" icon={faSearch} />

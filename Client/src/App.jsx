@@ -2,11 +2,18 @@ import { useEffect } from "react";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
+import { ResetData } from "./components/resetdata/resetdata";
+import AvailabilityBoard from "./pages/Availabilityboard/availabilityboard";
+import Part from "./pages/Part/part";
+import Task from "./pages/Task/task";
 import Home from "./pages/home/home";
 import LandingPage from "./pages/landing_page/landing_page";
-import Profile from "./pages/profile/profile";
 import Notifications from "./pages/notifications/notifications";
+import Profile from "./pages/profile/profile";
+import Chat from "./pages/realtime-chat/Chat";
 import Register from "./pages/register/register";
+import Subscription from "./pages/subscription/subscription";
+import UserDuties from "./pages/user-duties/UserDuties";
 import store from "./slices/store";
 import {
   updateAbout,
@@ -26,7 +33,6 @@ import {
   updateUserID,
   updateUserName,
 } from "./slices/userReducer";
-
 function InnerApp() {
   const dispatch = useDispatch();
   let theme = useSelector((state) => state.user.theme);
@@ -91,8 +97,6 @@ function InnerApp() {
         console.log(err);
       });
   };
-
-
   if (
     !loggedIn &&
     localStorage.getItem("token") !== "" &&
@@ -112,6 +116,7 @@ function InnerApp() {
           <Route exact path="/login" element={<Register />} />
           <Route exact path="/signup" element={<Register />} />
           <Route exact path="/dashboard" element={<Home />} />
+          <Route exact path="/market" element={<Home />} />
           <Route exact path="/chat" element={<Chat />} />
           <Route exact path="userduties/:user_id" element={<UserDuties />} />
           <Route
@@ -121,17 +126,13 @@ function InnerApp() {
           />
           <Route exact path="/parts/:id" element={<Part />} />
           <Route exact path="/Tasks/:project_id/:part_id" element={<Task />} />
+          <Route exact path="/subscription" element={<Subscription />} />
           <Route exact path="/notifications" element={<Notifications />} />
         </Routes>
       </div>
     </Router>
   );
 }
-import Chat from "./pages/realtime-chat/Chat";
-import UserDuties from "./pages/user-duties/UserDuties";
-import Part from "./pages/Part/part";
-import Task from "./pages/Task/task";
-import AvailabilityBoard from "./pages/Availabilityboard/availabilityboard";
 
 function App() {
   return (

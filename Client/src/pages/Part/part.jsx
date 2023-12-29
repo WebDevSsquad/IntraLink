@@ -4,7 +4,7 @@ import { useState,useEffect } from "react";
 import PartList from "./partlist";
 import "./part.css";
 import { useParams } from "react-router-dom";
-
+import HomeBar from '../home/sub/home_bar/home_bar';
 const Part = () => {
   const { id } = useParams();
 
@@ -59,6 +59,7 @@ const Part = () => {
 
   return (
     <div className="Parts_main">
+          <HomeBar />
         <div className="search-container">
       <input onChange={(e) => {isdatageted && isdatapmgeted && filter(e.target.value)} } type="text" placeholder="Search...." className="search-bar-parts"/>
         <FontAwesomeIcon className="search-icon" icon={faSearch} />

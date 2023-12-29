@@ -92,7 +92,7 @@ const availabilityboard = () => {
 
   return (
     <div className={`fullDimensions ${isPopupOpen ? "popup-overlay" : ""}`}>
-      <div class="availability_main">
+      <div className="availability_main">
         <div className="centered-ava-container">
           <div className="ava-content">
             <div className="buttons-ava-container">

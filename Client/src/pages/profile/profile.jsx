@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Popup from "reactjs-popup";
 
@@ -15,20 +15,21 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import AddSkillButton from "./sub/add-skill";
 import EditForm from "./sub/edit-form-popup";
-import { Link, useNavigate } from "react-router-dom";
-import {
+
+import { ResetData } from "../../components/resetdata/resetdata";
+
+import { updateExpires,
+  updateLoggedIn,
   updateAbout,
   updateEmail,
-  updateExpires,
   updateIsAvailable_Con,
   updateIsAvailable_Tm,
   updateLocation,
-  updateLoggedIn,
   updatePhone,
   updateSkills,
 } from "../../slices/userReducer";
 import "./profile.css";
-import { ResetData } from "../../components/resetdata/resetdata";
+
 export default function Profile() {
   const dispatch = useDispatch();
 
@@ -50,7 +51,7 @@ export default function Profile() {
   const [isAvailableTM, setIsAvailableTM] = useState(false);
   const [isAvailableCon, setIsAvailableCon] = useState(false);
   const [isEditingAbout, setIsEditingAbout] = useState(false);
-  const navigate = useNavigate();
+  const navigate  = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -200,8 +201,9 @@ export default function Profile() {
     dispatch(updateLoggedIn(false));
     dispatch(updateExpires(true));
     localStorage.setItem("token", "");
-    navigate("/");
+    navigate("/home");
   };
+
   return (
     <div
       className={`profile-container ${
@@ -251,7 +253,7 @@ export default function Profile() {
         <div className="profile-description">
           <h1>{fullName}</h1>
           {/* (change) */}
-          <p className="job-title">Project Manager</p>
+          {/* <p className="job-title">Project Manager</p> */}
         </div>
         {!sameID && <button className="message-button">Message</button>}
         <div className="user-info">
@@ -280,7 +282,7 @@ export default function Profile() {
             </span>
           </div>
         </div>
-        {sameID && <button className="logout-button" onClick={logOut}>LogOut</button>}
+        {sameID && <button onClick={logOut} className="logout-button">LogOut</button>}
       </div>
 
       <div className="middle-section">

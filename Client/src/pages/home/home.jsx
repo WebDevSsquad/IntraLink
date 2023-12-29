@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Market from "../market/market";
 import Dashboard from "../projectDashBoard/dashboard";
 import "./home.css";
 import Feed from "./sub/feed/feed";
@@ -23,7 +24,13 @@ export default function Home() {
       <div className="homepage" id="homepage">
         <HomeBar />
         <SideBar />
-        {location.pathname === "/home" ? <Feed /> : <Dashboard />}
+        {location.pathname === "/home" ? (
+          <Feed />
+        ) : location.pathname === "/market" ? (
+          <Market />
+        ) : (
+          <Dashboard />
+        )}
       </div>
     </>
   );
