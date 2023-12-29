@@ -13,4 +13,8 @@
     position: relative;
     color: var(--text-100);
   }
-  
+  .addprice{
+    background-color: white;
+    margin: 1rem;
+    color: black;
+  }

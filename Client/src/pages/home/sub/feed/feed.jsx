@@ -30,6 +30,7 @@ export default function Feed() {
   const selectedProject = useSelector((state) => state.feed.selectedProject);
   const [items, setItems] = useState(Array.from({ length: 20 }));
   const [toggled, setToggled] = useState(true);
+  const managerRank = useSelector((state) => state.user.managerRank);
 
   useEffect(() => {
     fetchMoreData();
@@ -199,7 +200,7 @@ export default function Feed() {
         <div className="post-top-right">
           <div className="post_project_manager_rank">
             <img src={rankicon} className="post_rank_icon" />
-            50
+            {managerRank}
           </div>
         </div>
       </div>
