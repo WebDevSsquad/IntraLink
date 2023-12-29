@@ -8,6 +8,7 @@ import LandingPage from "./pages/landing_page/landing_page";
 import Profile from "./pages/profile/profile";
 import Register from "./pages/register/register";
 import store from "./slices/store";
+
 import {
   updateAbout,
   updateEmail,
@@ -120,8 +121,13 @@ function InnerApp() {
           <Route exact path="/signup" element={<Register />} />
           <Route exact path="/dashboard" element={<Home />} />
           <Route exact path="/chat" element={<Chat />} />
+          <Route exact path="/feedback" element={<Feedback />} />
           <Route exact path="userduties/:user_id" element={<UserDuties />} />
-          <Route exact path="/availabilityboard" element={<AvailabilityBoard />} />
+          <Route
+            exact
+            path="/availabilityboard"
+            element={<AvailabilityBoard />}
+          />
           <Route exact path="/parts/:id" element={<Part />} />
           <Route exact path="/Tasks/:project_id/:part_id" element={<Task />} />
         </Routes>
@@ -134,6 +140,7 @@ import UserDuties from "./pages/user-duties/UserDuties";
 import Part from "./pages/Part/part";
 import Task from "./pages/Task/task";
 import AvailabilityBoard from "./pages/Availabilityboard/availabilityboard";
+import Feedback from "./pages/feedback/feedback";
 
 function App() {
   return (
