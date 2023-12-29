@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   updateConProjects,
   updateManagerProjects,
@@ -31,7 +32,7 @@ export default function Dashboard() {
           return res.json();
         })
         .then((data) => {
-            console.log("income",data);
+          console.log("income", data);
           dispatch(updateManagerProjects(data.managerProjects.rows));
           dispatch(updateConProjects(data.conProjects.rows));
           dispatch(updateTaskProjects(data.taskProjects.rows));
@@ -57,31 +58,36 @@ export default function Dashboard() {
           height={"50rem"}
         >
           {managerProjects.map((project, index) => (
-            <Project
-              key={index}
-              projectname={project.projectname}
-              description={project.description}
-              startdate={project.startdate}
-              type="manager"
-            />
+            <Link key={index} to={`/parts/${project.project_id}`}>
+              <Project
+                projectname={project.projectname}
+                description={project.description}
+                startdate={project.startdate}
+                type="manager"
+              />
+            </Link>
           ))}
           {taskProjects.map((project, index) => (
-            <Project
-              key={index}
-              projectname={project.projectname}
-              description={project.description}
-              startdate={project.startdate}
-              type="task"
-            />
+            <Link key={index} to={`/parts/${project.project_id}`}>
+              <Project
+                key={index}
+                projectname={project.projectname}
+                description={project.description}
+                startdate={project.startdate}
+                type="task"
+              />
+            </Link>
           ))}
           {conProjects.map((project, index) => (
-            <Project
-              key={index}
-              projectname={project.projectname}
-              description={project.description}
-              startdate={project.startdate}
-              type="con"
-            />
+            <Link key={index} to={`/parts/${project.project_id}`}>
+              <Project
+                key={index}
+                projectname={project.projectname}
+                description={project.description}
+                startdate={project.startdate}
+                type="con"
+              />
+            </Link>
           ))}
         </InfiniteScroll>
       </div>

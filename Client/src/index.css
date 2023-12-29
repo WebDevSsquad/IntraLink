@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap");
-:root{
+:root {
   --primary-100: #d4eaf7;
   --primary-200: #b6ccd8;
   --primary-300: #3b3c3d;
@@ -15,8 +15,8 @@
   --bg-100: #fffefb;
   --bg-200: #f5f4f1;
   --bg-300: #cccbc8;
+  --online: #50c878;
 }
-
 [data-theme="dark"] {
   --primary-100: #0085ff;
   --primary-200: #69b4ff;
@@ -33,6 +33,7 @@
   --bg-100: #1e1e1e;
   --bg-200: #2d2d2d;
   --bg-300: #454545;
+  --online: #50c878;
 }
 
 .gradient {
@@ -89,7 +90,7 @@ a {
 body {
   margin: 0;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   overflow-x: hidden;
 }
 
