@@ -14,6 +14,8 @@ export default function HomeBar() {
   const userName = useSelector((state) => state.user.userName);
   const userPhoto = useSelector((state) => state.user.picture);
   const managerRank = useSelector((state) => state.user.managerRank);
+  const taskRank = useSelector((state) => state.user.taskRank);
+  const conRank = useSelector((state) => state.user.conRank);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -51,12 +53,23 @@ export default function HomeBar() {
           <div className="homeBar_rank">
             <div className="rankname taskmanager">TM</div>
             <img src={rankiconTM} className="rank_icon" />
-            <div className="homebar_user_rank">50</div>
+            <div className="homebar_user_rank">
+              {taskRank != undefined ? taskRank : 0}
+            </div>
           </div>
           <div className="homeBar_rank">
             <div className="rankname  projectmanager">PM</div>
             <img src={rankiconPM} className="rank_icon" />
-            <div className="homebar_user_rank">{managerRank}</div>
+            <div className="homebar_user_rank">
+              {managerRank != undefined ? managerRank : 0}
+            </div>
+          </div>
+          <div className="homeBar_rank">
+            <div className="rankname  projectmanager">CM</div>
+            <img src={rankiconPM} className="rank_icon" />
+            <div className="homebar_user_rank">
+              {conRank != undefined ? conRank : 0}
+            </div>
           </div>
         </div>
         <div className="homebar_search">
