@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
-import { ResetData } from "./components/resetdata/resetdata";
 import Home from "./pages/home/home";
 import LandingPage from "./pages/landing_page/landing_page";
 import Profile from "./pages/profile/profile";
@@ -92,13 +91,7 @@ function InnerApp() {
         console.log(err);
       });
   };
-  const logOut = () => {
-    console.log("Still Logged In");
-    ResetData(dispatch);
-    dispatch(updateLoggedIn(false));
-    dispatch(updateExpires(true));
-    localStorage.setItem("token", "");
-  };
+
 
   if (
     !loggedIn &&
@@ -106,7 +99,6 @@ function InnerApp() {
     localStorage.getItem("token") !== null &&
     localStorage.getItem("token") !== undefined
   ) {
-    console.log("Still Logged Injhggjkhgjkjh");
     stillLoggedIn();
   }
 

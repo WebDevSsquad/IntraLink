@@ -15,18 +15,20 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import AddSkillButton from "./sub/add-skill";
 import EditForm from "./sub/edit-form-popup";
-
+import { Link, useNavigate } from "react-router-dom";
 import {
   updateAbout,
   updateEmail,
+  updateExpires,
   updateIsAvailable_Con,
   updateIsAvailable_Tm,
   updateLocation,
+  updateLoggedIn,
   updatePhone,
   updateSkills,
 } from "../../slices/userReducer";
 import "./profile.css";
-
+import { ResetData } from "../../components/resetdata/resetdata";
 export default function Profile() {
   const dispatch = useDispatch();
 
@@ -48,7 +50,7 @@ export default function Profile() {
   const [isAvailableTM, setIsAvailableTM] = useState(false);
   const [isAvailableCon, setIsAvailableCon] = useState(false);
   const [isEditingAbout, setIsEditingAbout] = useState(false);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -193,7 +195,13 @@ export default function Profile() {
   };
 
   const sections = ["About", "Skills"];
-
+  const logOut = () => {
+    ResetData(dispatch);
+    dispatch(updateLoggedIn(false));
+    dispatch(updateExpires(true));
+    localStorage.setItem("token", "");
+    navigate("/");
+  };
   return (
     <div
       className={`profile-container ${
@@ -272,7 +280,7 @@ export default function Profile() {
             </span>
           </div>
         </div>
-        {sameID && <button className="logout-button">LogOut</button>}
+        {sameID && <button className="logout-button" onClick={logOut}>LogOut</button>}
       </div>
 
       <div className="middle-section">
