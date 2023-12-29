@@ -21,8 +21,6 @@ export default function Feed() {
   const userPhoto = useSelector((state) => state.user.picture);
   const [postImg, setPostImg] = useState("/assets/postimg.svg"); //! the uploaded image
   const [postImgUpload, setPostImgUpload] = useState(null); //!the uploaded image in base64 format
-  // const [uploaded, setUploaded] = useState({ message: "null" }); //! to know if upload operation of image is completed
-  // const [imgurl, setImageUrl] = useState(""); //! the uploaded image url
   const descriptionRef = useRef(null); //! the description of the post
   const addPostRef = useRef(null); //!
   const posts = useSelector((state) => state.feed.posts);
@@ -64,20 +62,6 @@ export default function Feed() {
     }, 1000);
   };
 
-  // const deleteImage = (Image, ImageName) => {
-  //   if (Image !== "/darkuser.png") {
-  //     const prevImageUrl = "Resume Personal Image/" + ImageName;
-  //     console.log("enter");
-  //     const prevImageRef = ref(storage, prevImageUrl); // get the reference from the url
-  //     deleteObject(prevImageRef) // delete the image
-  //       .then(() => {
-  //         console.log("Image deleted successfully");
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   }
-  // };
 
   const handelUploadImage = () => {
     if (postImgUpload) {
