@@ -4,8 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   updateAbout,
   updateEmail,
-  updateAbout,
-  updateEmail,
   updateExpires,
   updateFetch,
   updateFirstName,
@@ -15,11 +13,7 @@ import {
   updateLocation,
   updateLoggedIn,
   updatePhone,
-  updatePhone,
   updatePicture,
-  updateSkills,
-  updateUserID,
-  updateUserName,
   updateSkills,
   updateUserID,
   updateUserName,
@@ -64,7 +58,6 @@ export default function Register() {
     }
     setDontMatch(false);
     dispatch(updatePicture(`/assets/${theme}User.svg`));
-    dispatch(updatePicture(`/assets/${theme}User.svg`));
 
     let ok = false;
     let status = 200;
@@ -77,7 +70,6 @@ export default function Register() {
     };
 
     const signup = {
-      image: `/assets/${theme}User.svg`,
       image: `/assets/${theme}User.svg`,
       username: UserName,
       firstname: FirstName,
