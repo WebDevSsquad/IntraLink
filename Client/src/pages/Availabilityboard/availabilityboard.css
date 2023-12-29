@@ -33,7 +33,7 @@
   }
 
   .ava-content .ava-users:hover {
-    background-color: var(--primary-200);
+    background-color: var(--primary-100);
     box-shadow: 1px 3px 5px var(--text-300);
     transform: scale(1.007);
   }
@@ -60,8 +60,8 @@
   
   .buttons-ava-container button {
     padding: 10px;
-    background-color: var(--accent-100);
-    color: #fff;
+    background-color: var(--primary-200);
+    color: var(--text-100);
     border: none;
     border-radius: 40px;
     cursor: pointer;
@@ -70,13 +70,12 @@
     outline: none;
     }
     &:hover{
-        background-color: var(--accent-200);
         transform: scale(1.03);
     }
   }
 
   .buttons-ava-container .b1{
-    background-color: var(--accent-200);
+    background-color: var(--primary-100);
   }
 
   .ava-content .ava-users .buttontoreq{
@@ -91,7 +90,7 @@
     right: 6px;
     border-radius: 20px;
     border: none;
-    background-color: var(--accent-100);
+    background-color: var(--primary-100);
     color: var(--text-100);
     cursor: pointer;
     transition: 0.5s ease;
@@ -99,7 +98,7 @@
         outline: none;
     }
     &:hover{
-      background-color: var(--accent-200);
+      background-color: var(--bg-100);
       transform: scale(1.03);
     }
   }

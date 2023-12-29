@@ -116,7 +116,7 @@
         outline: none;
     }
     &:hover{
-        background-color: var(--accent-200);
+        background-color: var(--bg-100);
         color: antiquewhite;
         transform: scale(1.08);
     }
@@ -127,7 +127,7 @@
     width: 90%;
     height: 55vh;
     margin-left: 20px;
-    background-color: var(--primary-200);
+    background-color: var(--primary-100);
     border-radius: 20px;
     padding: 10px;
   }
@@ -191,7 +191,7 @@
     width: 90%;
     height: 20vh;
     margin-left: 35px;
-    background-color: var(--primary-200);
+    background-color: var(--primary-100);
     border-radius: 20px;
     padding: 10px;
   }

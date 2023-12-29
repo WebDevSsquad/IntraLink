@@ -36,14 +36,14 @@ const availabilityboard = () => {
 
     const  handleclick1 = () => {
         setdatatoshow(filteredData1);
-        buttonref1.current.style.backgroundColor = "#00668c";
-        buttonref2.current.style.backgroundColor = "#71c4ef";
+        buttonref1.current.style.backgroundColor = "var(--primary-100)";
+        buttonref2.current.style.backgroundColor = "var(--primary-200)";
     }
 
     const  handleclick2 = () => {
         setdatatoshow(filteredData2);
-        buttonref1.current.style.backgroundColor = "#71c4ef";
-        buttonref2.current.style.backgroundColor = "#00668c";
+        buttonref1.current.style.backgroundColor = "var(--primary-200)";
+        buttonref2.current.style.backgroundColor = "var(--primary-100)";
     }
 
     return (
