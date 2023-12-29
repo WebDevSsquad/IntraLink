@@ -134,9 +134,8 @@ const authController = {
       const user = await pool.query(`SELECT EXISTS (
                                         SELECT 1
                                         FROM public."User"
-                                        WHERE user_id = ${user_id});`
-                                    );
-                                    
+                                        WHERE user_id = ${user_id});`);
+
       if (!user) {
         res.status(404).json({ message: "Couldn't find user" });
       }
@@ -168,6 +167,36 @@ const authController = {
         where pro.manager_id = ${req.user.user_id};`
       );
       res.status(201).json({ message: "Projects Got successfully", projects });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        error: "An error occurred while getting your Posts.Please try again.",
+      });
+    }
+  },
+  GetUserRank: async (req, res) => {
+    try {
+      let avg_rating = 0;
+      let managerRank = await pool.query(
+        `CALL projectmanagerrank(${req.user.user_id},${avg_rating});`
+      );
+      managerRank = managerRank.rows[0].rank;
+      let taskRank = await pool.query(
+        `CALL task_rank(${req.user.user_id},${avg_rating});`
+      );
+      taskRank = taskRank.rows[0].rank;
+      let conRank = await pool.query(
+        `CALL con_rank(${req.user.user_id},${avg_rating});`
+      );
+      conRank = conRank.rows[0].rank;
+      res
+        .status(201)
+        .json({
+          message: "Projects Got successfully",
+          managerRank,
+          taskRank,
+          conRank,
+        });
     } catch (error) {
       console.log(error);
       res.status(500).json({

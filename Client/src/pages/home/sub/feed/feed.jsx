@@ -1,5 +1,5 @@
 import {
-  deleteObject,
+  // deleteObject,
   getDownloadURL,
   ref,
   uploadBytes,
@@ -22,8 +22,8 @@ export default function Feed() {
   const userPhoto = useSelector((state) => state.user.picture);
   const [postImg, setPostImg] = useState("/assets/postimg.svg"); //! the uploaded image
   const [postImgUpload, setPostImgUpload] = useState(null); //!the uploaded image in base64 format
-  const [uploaded, setUploaded] = useState({ message: "null" }); //! to know if upload operation of image is completed
-  const [imgurl, setImageUrl] = useState(""); //! the uploaded image url
+  // const [uploaded, setUploaded] = useState({ message: "null" }); //! to know if upload operation of image is completed
+  // const [imgurl, setImageUrl] = useState(""); //! the uploaded image url
   const descriptionRef = useRef(null); //! the description of the post
   const addPostRef = useRef(null); //!
   const posts = useSelector((state) => state.feed.posts);
@@ -63,20 +63,20 @@ export default function Feed() {
     }, 1000);
   };
 
-  const deleteImage = (Image, ImageName) => {
-    if (Image !== "/darkuser.png") {
-      const prevImageUrl = "Resume Personal Image/" + ImageName;
-      console.log("enter");
-      const prevImageRef = ref(storage, prevImageUrl); // get the reference from the url
-      deleteObject(prevImageRef) // delete the image
-        .then(() => {
-          console.log("Image deleted successfully");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  };
+  // const deleteImage = (Image, ImageName) => {
+  //   if (Image !== "/darkuser.png") {
+  //     const prevImageUrl = "Resume Personal Image/" + ImageName;
+  //     console.log("enter");
+  //     const prevImageRef = ref(storage, prevImageUrl); // get the reference from the url
+  //     deleteObject(prevImageRef) // delete the image
+  //       .then(() => {
+  //         console.log("Image deleted successfully");
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   }
+  // };
 
   const handelUploadImage = () => {
     if (postImgUpload) {
@@ -87,24 +87,24 @@ export default function Feed() {
           getDownloadURL(imageRef)
             .then((url) => {
               console.log(url);
-              setImageUrl(url);
+              // setImageUrl(url);
               addPost(url);
             })
             .then(() => {
               console.log("Image uploaded successfully");
-              setUploaded({ message: "true" });
+              // setUploaded({ message: "true" });
             })
             .catch((error) => {
               console.log(error);
-              setUploaded({ message: "error" });
+              // setUploaded({ message: "error" });
             });
         })
         .catch((error) => {
           console.log(error);
-          setUploaded({ message: "error" });
+          // setUploaded({ message: "error" });
         });
     } else {
-      setUploaded({ message: "no uploaded image" });
+      // setUploaded({ message: "no uploaded image" });
       addPost("null");
     }
   };
@@ -146,7 +146,7 @@ export default function Feed() {
       return;
     }
     handelUploadImage();
-    setUploaded({ message: "null" });
+    // setUploaded({ message: "null" });
   };
 
   const uploadPhoto = (

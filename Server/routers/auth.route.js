@@ -8,4 +8,5 @@ authRouter.post("/logIn", authController.login);
 authRouter.post("/image", authController.updateImage);
 authRouter.get("/me", authMiddleware, authController.me);
 authRouter.get("/project", authMiddleware, authController.GetProject);
+authRouter.get("/rank", authMiddleware, authController.GetUserRank);
 export default authRouter;

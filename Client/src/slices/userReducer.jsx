@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  
   loggedIn: false,
   fetch: false,
   expires: true,
@@ -18,12 +17,24 @@ const initialState = {
   phone: "",
   about: "",
   skills: [],
+  taskRank: 0,
+  managerRank: 0,
+  conRank: 0,
 };
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    updateTaskRank: (state, action) => {
+      state.taskRank = action.payload;
+    },
+    updateManagerRank: (state, action) => {
+      state.managerRank = action.payload;
+    },
+    updateConRank: (state, action) => {
+      state.conRank = action.payload;
+    },
     updateLoggedIn: (state, action) => {
       state.loggedIn = action.payload;
     },
@@ -92,5 +103,8 @@ export const {
   updatePhone,
   updateAbout,
   updateSkills,
+  updateTaskRank,
+  updateManagerRank,
+  updateConRank,  
 } = userSlice.actions;
 export default userSlice.reducer;
