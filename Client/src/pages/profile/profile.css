@@ -41,6 +41,12 @@
   position: relative;
   overflow: hidden;
 }
+<<<<<<< Updated upstream
+=======
+.profile-image-full img {
+  object-fit: cover;
+}
+>>>>>>> Stashed changes
 
 .image-overlay {
   position: absolute;
@@ -55,11 +61,11 @@
   z-index: 1;
 }
 
-.profile-image-full:hover .image-overlay {
+.profile-image-hov:hover .image-overlay {
   opacity: 1;
 }
 
-.profile-image-full:hover img {
+.profile-image-hov:hover img {
   filter: brightness(0.5);
 }
 
@@ -71,9 +77,6 @@
   border: 5px solid var(--primary-300);
   padding: 1px;
   transition: filter 0.3s ease;
-  &:hover {
-    filter: brightness(80%);
-  }
 }
 
 .filter-section {
@@ -242,7 +245,7 @@
   margin-bottom: 20px;
 }
 
-.project-card {
+.project-show-card {
   background-color: var(--bg-300);
   border-radius: 10px;
   padding: 10px;
@@ -261,6 +264,25 @@
 }
 
 .message-button {
+  background-color: var(--accent-100);
+  color: var(--text-100);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: var(--accent-200);
+    color: var(--text-200);
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.logout-button {
   background-color: var(--accent-100);
   color: var(--text-100);
   padding: 10px 20px;

@@ -121,7 +121,7 @@ export default function Register() {
             dispatch(updatePhone(data.user.phone));
           if (data.user.about !== undefined)
             dispatch(updateAbout(data.user.about));
-          if (data.user.skills !== undefined && data.user.skills !== null)
+          if (data.user.skills !== undefined)
             dispatch(updateSkills(data.user.skills));
           console.log(data.user);
           // ---------------------------------------------------------------------------

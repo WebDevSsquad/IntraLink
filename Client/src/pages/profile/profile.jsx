@@ -1,4 +1,10 @@
+<<<<<<< Updated upstream
 import { useRef, useState, useEffect } from "react";
+=======
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRef, useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+>>>>>>> Stashed changes
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,7 +28,9 @@ export default function Profile() {
   const dispatch = useDispatch();
 
   const divider = <div className="divider" />;
-  const id = useSelector((state) => state.user.userID);
+  const logged_id = useSelector((state) => state.user.userID);
+  const { user_id } = useParams();
+  const sameID = logged_id === user_id;
   const inputRef = useRef("");
   const [isProfileImageHovered, setIsProfileImageHovered] = useState(false);
   const [profilePicture, setProfilePicture] = useState("");
@@ -42,11 +50,18 @@ export default function Profile() {
     const fetchData = async () => {
       try {
         const response = await fetch(
+<<<<<<< Updated upstream
           `http://localhost:8080/profile/get_user_info/${id}`
         );
         const data = await response.json();
         const info = data.userInfo.rows[0];
         //console.log(info);
+=======
+          `http://localhost:8080/profile/get_user_info/${user_id}`
+        );
+        const data = await response.json();
+        const info = data.userInfo.rows[0];
+>>>>>>> Stashed changes
         setFullName(info.firstname + " " + info.lastname);
         setEmail(info.email);
         setProfilePicture(info.picture);
@@ -107,7 +122,7 @@ export default function Profile() {
   const updateUserData = async (newData) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/profile/update_user_info/${id}`,
+        `http://localhost:8080/profile/update_user_info/${user_id}`,
         {
           method: "POST",
           headers: {
@@ -127,7 +142,7 @@ export default function Profile() {
     console.log(newAbout);
     try {
       const response = await fetch(
-        `http://localhost:8080/profile/update_about/${id}`,
+        `http://localhost:8080/profile/update_about/${user_id}`,
         {
           method: "POST",
           headers: {
@@ -146,7 +161,7 @@ export default function Profile() {
   const updateSkillData = async (newSkill) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/profile/update_skills/${id}`,
+        `http://localhost:8080/profile/update_skills/${user_id}`,
         {
           method: "POST",
           headers: {
@@ -165,7 +180,7 @@ export default function Profile() {
   const removeSkillData = async (index) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/profile/remove_skill/${id}`,
+        `http://localhost:8080/profile/remove_skill/${user_id}`,
         {
           method: "POST",
           headers: {
@@ -192,16 +207,16 @@ export default function Profile() {
     >
       <div className="profile-card">
         <div
-          className="profile-image-full"
+          className={`profile-image-full ${sameID ? "profile-image-hov" : ""}`}
           onMouseEnter={() => setIsProfileImageHovered(true)}
           onMouseLeave={() => setIsProfileImageHovered(false)}
         >
           <img
             src={profilePicture}
             alt="Profile Picture"
-            className="profile-image"
+            className={`profile-image ${sameID ? "profile-image-hov" : ""}`}
           />
-          {isProfileImageHovered && (
+          {isProfileImageHovered && sameID && (
             <div
               className="image-overlay"
               onClick={() => setIsEditFormOpen(true)}
@@ -232,11 +247,16 @@ export default function Profile() {
         </div>
         <div className="profile-description">
           <h1>{fullName}</h1>
+          {/* (change) */}
           <p className="job-title">Project Manager</p>
         </div>
+<<<<<<< Updated upstream
         <button className="message-button">
           Message
         </button>
+=======
+        {!sameID && <button className="message-button">Message</button>}
+>>>>>>> Stashed changes
         <div className="user-info">
           <div className="icon-container">
             <FontAwesomeIcon icon={faPhone} className="font-icon" />
@@ -263,6 +283,7 @@ export default function Profile() {
             </span>
           </div>
         </div>
+        {sameID && <button className="logout-button">LogOut</button>}
       </div>
 
       <div className="middle-section">
@@ -315,12 +336,14 @@ export default function Profile() {
                     <div className="about-text">
                       <p>{about}</p>
                     </div>
-                    <div
-                      className="edit-circle-container"
-                      onClick={() => setIsEditingAbout(true)}
-                    >
-                      <FontAwesomeIcon icon={faPen} className="arrow-icon" />
-                    </div>
+                    {sameID && (
+                      <div
+                        className="edit-circle-container"
+                        onClick={() => setIsEditingAbout(true)}
+                      >
+                        <FontAwesomeIcon icon={faPen} className="arrow-icon" />
+                      </div>
+                    )}
                   </>
                 )}
               </div>
@@ -331,6 +354,7 @@ export default function Profile() {
             <>
               <div className="skills">
                 <div className="skill-buttons">
+<<<<<<< Updated upstream
                   {skills.map((skill, index) => (
                     <div className="skill-button" key={index}>
                       <div className="skill-text">{skill}</div>
@@ -342,6 +366,20 @@ export default function Profile() {
                     </div>
                   ))}
                   <AddSkillButton onAddSkill={handleAddSkill} />
+=======
+                  {skills !== null &&
+                    skills.map((skill, index) => (
+                      <div className="skill-button" key={index}>
+                        <div className="skill-text">{skill}</div>
+                        <FontAwesomeIcon
+                          icon={faTimes}
+                          className="remove-skill-icon"
+                          onClick={() => handleRemoveSkill(index)}
+                        />
+                      </div>
+                    ))}
+                  {sameID && <AddSkillButton onAddSkill={handleAddSkill} />}
+>>>>>>> Stashed changes
                 </div>
               </div>
             </>
@@ -380,15 +418,15 @@ export default function Profile() {
         {divider}
 
         {/* Fake Project Cards */}
-        <div className="project-card">
+        <div className="project-show-card">
           <div className="project-title">Project Alpha</div>
         </div>
 
-        <div className="project-card">
+        <div className="project-show-card">
           <div className="project-title">Project Beta</div>
         </div>
 
-        <div className="project-card">
+        <div className="project-show-card">
           <div className="project-title">Project Gamma</div>
         </div>
       </div>

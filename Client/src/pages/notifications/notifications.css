@@ -1,0 +1,64 @@
+.notification-page-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.notification-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  border: 1px solid var(--text-200);
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: var(--bg-200);
+}
+.page-title {
+  text-align: center;
+  color: var(--text-100);
+}
+
+.profile-picture {
+  width: 150px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 10px;
+  border: 3px solid var(--primary-300);
+}
+
+.notification-details {
+  flex-grow: 1;
+}
+
+.sender-name {
+  margin: 0;
+  font-size: 1.2em;
+  color: var(--text-100);
+}
+
+.project-name {
+  margin: 5px 0;
+  font-weight: bold;
+  color: var(--text-100);
+}
+
+.notification-text {
+  color: var(--text-100);
+}
+
+.accept-button {
+  margin-top: 20px;
+  padding: 5px 10px;
+  background-color: var(--accent-100);
+  color: var(--text-100);
+  border: none;
+  border-radius: 3px;
+  font-size: 20px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: var(--accent-200);
+    cursor: pointer;
+  }
+}

@@ -39,7 +39,7 @@ const EditForm = ({
     <form className="edit-form" onSubmit={handleSave}>
       <h1>Edit Profile</h1>
       <div className="line"></div>
-
+      {uploadPhoto}
       <div className="input-wrapper">
         <label>Phone</label>
         <input
@@ -89,7 +89,10 @@ const EditForm = ({
           onColor="#4CAF50"
         />
       </div>
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
       {validPhone ? (
         <input className="save" type="submit" value="Save" />
       ) : (
@@ -100,3 +103,15 @@ const EditForm = ({
 };
 
 export default EditForm;
+<<<<<<< Updated upstream
+=======
+
+EditForm.propTypes = {
+  email: PropTypes.string.isRequired,
+  phone: PropTypes.string.isRequired,
+  location: PropTypes.string.isRequired,
+  isAvailableTM: PropTypes.bool.isRequired,
+  isAvailableCon: PropTypes.bool.isRequired,
+  onSave: PropTypes.func.isRequired,
+};
+>>>>>>> Stashed changes
