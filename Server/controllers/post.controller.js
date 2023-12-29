@@ -23,7 +23,7 @@ const postController = {
                                       '${image}','${formattedDate}');`);
       console.log(post);
       let posts = await pool.query(
-        `select po.*,u.username,u.picture,u.user_id from public."Post" po,public."Project" pro,public."User" u 
+        `select po.*,u.username from public."Post" po,public."Project" pro,public."User" u 
         where po.project_id=pro.project_id and pro.manager_id=u.user_id;`
       );
       res.status(201).json({ message: "Post created successfully", posts });
@@ -43,13 +43,9 @@ const postController = {
     try {
       const { postID } = req.body;
 
-      await pool.query(`delete from public."Post" where post_id='${postID}'`);
-      let posts = await pool.query(
-        `select po.*,u.username,u.picture,u.user_id from public."Post" po,public."Project" pro,public."User" u 
-        where po.project_id=pro.project_id and pro.manager_id=u.user_id;`
-      );
-      res.status(201).json({ message: "Post created successfully", posts });
-      
+      await pool.query(`delete from public."Post" where postID='${postID}'`);
+
+      res.status(200).json({ message: "Post Deleted successfully" });
     } catch (error) {
       console.log(error);
       res.status(500).json({
@@ -60,17 +56,10 @@ const postController = {
   Get: async (req, res) => {
     try {
       let posts = await pool.query(
-        `select po.*,u.username,u.picture,u.user_id from public."Post" po,public."Project" pro,public."User" u 
+        `select po.*,u.username from public."Post" po,public."Project" pro,public."User" u 
         where po.project_id=pro.project_id and pro.manager_id=u.user_id;`
       );
-      let ranks =
-        await pool.query(`SELECT pro.manager_id ,avg(pu.rating) as rank
-      FROM public."Purchase" pu, public."Offer" o, public."Project" pro
-          WHERE 
-          pu.offer_id = o.offer_id AND
-          o.project_id = pro.project_id
-      group by pro.manager_id order by pro.manager_id asc;`);
-      res.status(201).json({ message: "Posts Got successfully", posts, ranks });
+      res.status(201).json({ message: "Posts Got successfully", posts });
     } catch (error) {
       console.log(error);
       res.status(500).json({

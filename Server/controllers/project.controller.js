@@ -8,7 +8,7 @@ const projectController = {
       return res.status(422).json(error.details);
     }
     try {
-      const { projectname, description } = req.body;
+      const { projectID, description, image } = req.body;
       const currentDate = new Date();
       const year = currentDate.getFullYear();
       const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Month is zero-indexed
@@ -17,20 +17,16 @@ const projectController = {
       const formattedDate = `${year}-${month}-${day}`;
 
       let post =
-        await pool.query(`INSERT INTO public."Project" (projectname,description,startdate,manager_id) 
-                                      VALUES ('${projectname}',
+        await pool.query(`INSERT INTO public."Post" (project_id,description,image,publishdate) 
+                                      VALUES ('${projectID}',
                                       '${description}',
-                                      '${formattedDate}',
-                                      '${req.user.user_id}'
-                                      );`);
+                                      '${image}','${formattedDate}');`);
 
-      let managerProjects = await pool.query(
-        `select pro.* from  public."Project" pro
-                                        where pro.manager_id = ${req.user.user_id};`
+      let posts = await pool.query(
+        `select po.*,u.username from public."Post" po,public."Project" pro,public."User" u 
+        where po.project_id=pro.project_id and pro.manager_id=u.user_id;`
       );
-      res
-        .status(201)
-        .json({ message: "Post created successfully", managerProjects });
+      res.status(201).json({ message: "Post created successfully", posts });
     } catch (error) {
       console.log(error);
       res.status(500).json({
@@ -71,14 +67,7 @@ const projectController = {
         `select pro.* from  public."Project" pro,public."Task" t
         where (t.contributor_id = ${req.user.user_id} and pro.project_id = t.project_id);`
       );
-      res
-        .status(201)
-        .json({
-          message: "Projects Got successfully",
-          managerProjects,
-          taskProjects,
-          conProjects,
-        });
+      res.status(201).json({ message: "Projects Got successfully", managerProjects, taskProjects, conProjects });
     } catch (error) {
       console.log(error);
       res.status(500).json({

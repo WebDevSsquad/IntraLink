@@ -71,10 +71,11 @@
   }
 
   .Part-preview h2 {
-    font-size: 22px !important;
+    font-size: 22px;
     font-weight: bolder;
     color: var(--text-100);
     padding-right: 100px;
+
   }
 
   .Part-list .taskmanagerinfo {

@@ -4,16 +4,13 @@ import {
   ref,
   uploadBytes,
 } from "firebase/storage";
+import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 } from "uuid";
 import { storage } from "../../../../firebase";
-import {
-  updatePosts,
-  updateRanks,
-  updateTPosts,
-} from "../../../../slices/feedReducer";
+import { updatePosts } from "../../../../slices/feedReducer";
 import "./feed.css";
 import ComboBox from "./sub/combobox/combobox";
 import Post from "./sub/post/post";
@@ -25,14 +22,14 @@ export default function Feed() {
   const userPhoto = useSelector((state) => state.user.picture);
   const [postImg, setPostImg] = useState("/assets/postimg.svg"); //! the uploaded image
   const [postImgUpload, setPostImgUpload] = useState(null); //!the uploaded image in base64 format
+  // const [uploaded, setUploaded] = useState({ message: "null" }); //! to know if upload operation of image is completed
+  // const [imgurl, setImageUrl] = useState(""); //! the uploaded image url
   const descriptionRef = useRef(null); //! the description of the post
   const addPostRef = useRef(null); //!
-  // const posts = useSelector((state) => state.feed.posts);
+  const posts = useSelector((state) => state.feed.posts);
   const selectedProject = useSelector((state) => state.feed.selectedProject);
   const [items, setItems] = useState(Array.from({ length: 20 }));
   const [toggled, setToggled] = useState(true);
-  const managerRank = useSelector((state) => state.user.managerRank);
-  const filteredposts = useSelector((state) => state.feed.tempposts);
 
   useEffect(() => {
     fetchMoreData();
@@ -57,8 +54,6 @@ export default function Feed() {
         .then((data) => {
           console.log(data.posts.rows);
           dispatch(updatePosts(data.posts.rows));
-          dispatch(updateTPosts(data.posts.rows));
-          dispatch(updateRanks(data.ranks.rows));
         });
     } catch (err) {
       console.log(err);
@@ -67,6 +62,21 @@ export default function Feed() {
       setItems(Array.from({ length: 20 }));
     }, 1000);
   };
+
+  // const deleteImage = (Image, ImageName) => {
+  //   if (Image !== "/darkuser.png") {
+  //     const prevImageUrl = "Resume Personal Image/" + ImageName;
+  //     console.log("enter");
+  //     const prevImageRef = ref(storage, prevImageUrl); // get the reference from the url
+  //     deleteObject(prevImageRef) // delete the image
+  //       .then(() => {
+  //         console.log("Image deleted successfully");
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   }
+  // };
 
   const handelUploadImage = () => {
     if (postImgUpload) {
@@ -124,7 +134,6 @@ export default function Feed() {
         .then((data) => {
           console.log(data.posts.rows);
           dispatch(updatePosts(data.posts.rows));
-          dispatch(updateTPosts(data.posts.rows));
         });
     } catch (err) {
       console.log(err);
@@ -188,7 +197,7 @@ export default function Feed() {
         <div className="post-top-right">
           <div className="post_project_manager_rank">
             <img src={rankicon} className="post_rank_icon" />
-            {managerRank}
+            50
           </div>
         </div>
       </div>
@@ -228,16 +237,13 @@ export default function Feed() {
           // loader={<h4 className="LoadingMessage">Loading...</h4>}
           height={"50rem"}
         >
-          {filteredposts.map((post, index) => (
+          {posts.map((post, index) => (
             <Post
               key={index}
               username={post.username}
               image={post.image}
               description={post.description}
               date={post.publishdate}
-              userima={post.picture}
-              userid={post.user_id}
-              postID={post.post_id}
             />
           ))}
         </InfiniteScroll>
@@ -245,3 +251,9 @@ export default function Feed() {
     </>
   );
 }
+
+Feed.propTypes = {
+  homeRef: PropTypes.shape({
+    current: PropTypes.instanceOf(Element),
+  }).isRequired,
+};

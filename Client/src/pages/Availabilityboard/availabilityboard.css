@@ -1,104 +1,150 @@
-
 .availability_main {
-    width:100%;
-    height: fit-content;
-    min-height: 100vh;
-    background-color: var(--bg-100);
+  width: 100%;
+  height: fit-content;
+  min-height: 100vh;
+  background-color: var(--bg-100);
 }
 
 .centered-ava-container {
-    width: 60%;
-    display: flex;
-    margin: auto;
-    margin-top: 90px;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .ava-content {
-    width: 100%;
-    padding: 20px;
-  }
+  width: 60%;
+  display: flex;
+  margin: auto;
+  margin-top: 90px;
+  justify-content: center;
+  align-items: center;
+}
 
-  .ava-content .ava-users{
-        position: relative;
-        display: flex;
-        width: 50vw;
-        padding:10px 30px 10px 30px;
-        margin: 110px 200px 0px 90px;
-        background-color: var(--bg-100);
-        border-radius: 20px;
-        border-bottom: 1px solid var(--accent-100);
-        transition: 0.4s ease;
-  }
+.ava-content {
+  width: 100%;
+  padding: 20px;
+}
 
-  .ava-content .ava-users:hover {
-    background-color: var(--primary-100);
-    box-shadow: 1px 3px 5px var(--text-300);
-    transform: scale(1.007);
-  }
+.ava-content .ava-users {
+  position: relative;
+  display: flex;
+  width: 50vw;
+  padding: 10px 30px 10px 30px;
+  margin: 110px 200px 0px 90px;
+  background-color: var(--bg-100);
+  border-radius: 20px;
+  border-bottom: 1px solid var(--accent-100);
+  transition: 0.4s ease;
+}
 
-  .ava-content .ava-users .username{
-    width: 36%;
-    text-align: left;
-    color: var(--text-100);
-  } 
+.ava-content .ava-users:hover {
+  background-color: var(--primary-100);
+  box-shadow: 1px 3px 5px var(--text-300);
+  transform: scale(1.007);
+}
 
-  .ava-content .ava-users .useremail{
-    color: var(--text-100);
-  }
+.ava-content .ava-users .username {
+  width: 36%;
+  text-align: left;
+  color: var(--text-100);
+}
 
-  .ava-content .ava-users .userrank{
-    color: var(--text-100);
-  } 
+.ava-content .ava-users .useremail {
+  color: var(--text-100);
+}
 
+.ava-content .ava-users .userrank {
+  color: var(--text-100);
+}
 
-  .buttons-ava-container {
-    display: flex;
-    justify-content: space-around;
-  }
-  
-  .buttons-ava-container button {
-    padding: 10px;
-    background-color: var(--primary-200);
-    color: var(--text-100);
-    border: none;
-    border-radius: 40px;
-    cursor: pointer;
-    transition: 0.5s ease;
-    &:focus{
+.buttons-ava-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.buttons-ava-container button {
+  padding: 10px;
+  background-color: var(--primary-200);
+  color: var(--text-100);
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: 0.5s ease;
+  &:focus {
     outline: none;
-    }
-    &:hover{
-        transform: scale(1.03);
-    }
   }
+  &:hover {
+    transform: scale(1.03);
+  }
+}
 
-  .buttons-ava-container .b1{
-    background-color: var(--primary-100);
-  }
+.buttons-ava-container .b1 {
+  background-color: var(--primary-100);
+}
 
-  .ava-content .ava-users .buttontoreq{
-    position: absolute;
-    margin: 0px;
-    padding: 0px;
-    padding-left: 3px;
-    margin-bottom: 3px;
-    width: 85px;
-    height: 20px;
-    bottom: 0px;
-    right: 6px;
-    border-radius: 20px;
-    border: none;
-    background-color: var(--primary-100);
-    color: var(--text-100);
-    cursor: pointer;
-    transition: 0.5s ease;
-    &:focus{
-        outline: none;
-    }
-    &:hover{
-      background-color: var(--bg-100);
-      transform: scale(1.03);
-    }
+.ava-content .ava-users .buttontoreq {
+  position: absolute;
+  margin: 0px;
+  padding: 0px;
+  padding-left: 3px;
+  margin-bottom: 3px;
+  width: 85px;
+  height: 20px;
+  bottom: 0px;
+  right: 6px;
+  border-radius: 20px;
+  border: none;
+  background-color: var(--primary-100);
+  color: var(--text-100);
+  cursor: pointer;
+  transition: 0.5s ease;
+  &:focus {
+    outline: none;
   }
+  &:hover {
+    background-color: var(--bg-100);
+    transform: scale(1.03);
+  }
+}
+
+.invitation-title {
+  color: var(--text-100);
+}
+
+.popup-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.larger-popup {
+  width: 400px;
+}
+
+.popup-buttons {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.popup-button {
+  margin-left: 10px;
+  padding: 8px 15px;
+  background-color: var(--accent-100);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.popup-buttons button:hover {
+  background-color: var(--accent-200);
+}
+.fullDimensions {
+  width: 100%;
+  height: 100%;
+}
+.popup-overlay {
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  display: none;
+  display: block;
+}

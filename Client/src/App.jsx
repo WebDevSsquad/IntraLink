@@ -6,6 +6,7 @@ import { ResetData } from "./components/resetdata/resetdata";
 import Home from "./pages/home/home";
 import LandingPage from "./pages/landing_page/landing_page";
 import Profile from "./pages/profile/profile";
+import Notifications from "./pages/notifications/notifications";
 import Register from "./pages/register/register";
 import store from "./slices/store";
 import {
@@ -105,6 +106,7 @@ function InnerApp() {
     localStorage.getItem("token") !== null &&
     localStorage.getItem("token") !== undefined
   ) {
+    console.log("Still Logged Injhggjkhgjkjh");
     stillLoggedIn();
   }
 
@@ -114,17 +116,20 @@ function InnerApp() {
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
           <Route exact path="/home" element={<Home />} />
-          <Route exact path="/profile" element={<Profile />} />
+          <Route exact path="/profile/:user_id" element={<Profile />} />
           <Route exact path="/login" element={<Register />} />
           <Route exact path="/signup" element={<Register />} />
           <Route exact path="/dashboard" element={<Home />} />
-          <Route exact path="/market" element={<Home />} />
           <Route exact path="/chat" element={<Chat />} />
           <Route exact path="userduties/:user_id" element={<UserDuties />} />
-          <Route exact path="/availabilityboard" element={<AvailabilityBoard />} />
+          <Route
+            exact
+            path="/availabilityboard"
+            element={<AvailabilityBoard />}
+          />
           <Route exact path="/parts/:id" element={<Part />} />
           <Route exact path="/Tasks/:project_id/:part_id" element={<Task />} />
-          <Route exact path="/subscription" element={<Subscription />} />
+          <Route exact path="/notifications" element={<Notifications />} />
         </Routes>
       </div>
     </Router>
@@ -135,7 +140,6 @@ import UserDuties from "./pages/user-duties/UserDuties";
 import Part from "./pages/Part/part";
 import Task from "./pages/Task/task";
 import AvailabilityBoard from "./pages/Availabilityboard/availabilityboard";
-import Subscription from "./pages/subscription/subscription";
 
 function App() {
   return (

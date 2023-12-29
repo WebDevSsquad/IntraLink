@@ -99,7 +99,7 @@
   align-items: flex-start;
   flex-direction: column;
 }
-.project-top .project-top-left .projectname {
+.projectname {
   color: var(--text-300);
   font-size: 1.5rem;
   font-weight: 700;

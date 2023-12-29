@@ -1,14 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import feedReducer from "./feedReducer";
-import marketReducer from "./marketReducer";
-import projectReducer from "./projectReducer";
 import userReducer from "./userReducer";
+import projectReducer from "./projectReducer";
 const store = configureStore({
   reducer: {
-    market: marketReducer,
     user: userReducer,
     feed: feedReducer,
-    project: projectReducer,
+    project: projectReducer
   },
 });
 export default store;

@@ -4,8 +4,6 @@ const initialState = {
   posts: [],
   projects: [],
   selectedProject: -1,
-  ranks: [],
-  tempposts: [],
 };
 
 export const feedSlice = createSlice({
@@ -21,20 +19,8 @@ export const feedSlice = createSlice({
     updateSelectedProject: (state, action) => {
       state.selectedProject = action.payload;
     },
-    updateRanks: (state, action) => {
-      state.ranks = action.payload;
-    },
-    updateTPosts: (state, action) => {
-      state.tempposts = action.payload;
-    },
   },
 });
 
-export const {
-  updateSelectedProject,
-  updatePosts,
-  updateProjects,
-  updateRanks,
-  updateTPosts,
-} = feedSlice.actions;
+export const { updateSelectedProject, updatePosts,updateProjects } = feedSlice.actions;
 export default feedSlice.reducer;

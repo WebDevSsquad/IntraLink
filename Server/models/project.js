@@ -2,8 +2,9 @@ import Joi from "joi";
 
 // Sign up validation schema
 const addSchema = Joi.object({
-  projectname: Joi.string().required(),
+  projectID: Joi.number().required(),
   description: Joi.string().required(),
+  image: Joi.string().required(),
 });
 
 // Log in validation schema
