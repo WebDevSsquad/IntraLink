@@ -248,6 +248,7 @@ export default function Feed() {
               date={post.publishdate}
               userima={post.picture}
               userid={post.user_id}
+              postID={post.post_id}
             />
           ))}
         </InfiniteScroll>

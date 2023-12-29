@@ -109,3 +109,13 @@
   width: 100%;
   height: auto;
 }
+.post-top-right{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.DeletePost{
+ margin-top: 5px;
+}
