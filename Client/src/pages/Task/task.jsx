@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useState } from "react";
 import TaskList from "./tasklist";
-import "./Task.css";
+import "./task.css";
 import { useParams } from "react-router-dom";
 import { useEffect } from 'react';
 import HomeBar from '../home/sub/home_bar/home_bar';
