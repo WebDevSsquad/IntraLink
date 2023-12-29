@@ -10,7 +10,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 } from "uuid";
 import { storage } from "../../../../firebase";
-import { updatePosts } from "../../../../slices/feedReducer";
+import { updatePosts, updateRanks } from "../../../../slices/feedReducer";
 import "./feed.css";
 import ComboBox from "./sub/combobox/combobox";
 import Post from "./sub/post/post";
@@ -54,6 +54,7 @@ export default function Feed() {
         .then((data) => {
           console.log(data.posts.rows);
           dispatch(updatePosts(data.posts.rows));
+          dispatch(updateRanks(data.ranks.rows));
         });
     } catch (err) {
       console.log(err);
@@ -134,6 +135,7 @@ export default function Feed() {
         .then((data) => {
           console.log(data.posts.rows);
           dispatch(updatePosts(data.posts.rows));
+          dispatch(updateRanks(data.ranks.rows));
         });
     } catch (err) {
       console.log(err);
@@ -244,6 +246,8 @@ export default function Feed() {
               image={post.image}
               description={post.description}
               date={post.publishdate}
+              userima={post.picture}
+              userid={post.user_id}
             />
           ))}
         </InfiniteScroll>

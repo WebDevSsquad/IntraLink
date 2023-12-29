@@ -11,7 +11,7 @@ import userDutiesRouter from "./routers/userDutiesRoute.js";
 import avaRouter from "./routers/available.route.js";
 import partRouter from "./routers/part.route.js";
 import taskRouter from "./routers/task.routter.js";
-
+import marketRouter from "./routers/market.route.js";
 dotenv.config();
 
 const app = express();
@@ -40,7 +40,12 @@ pool.connect((err, client, release) => {
 app.use("/auth", authRouter);
 app.use("/post",authMiddleware,postRouter);
 app.use("/dashboard",authMiddleware,projectRouter);
+
+app.use("/market",marketRouter);
+
 app.use("/profile", ProfileRouter);
+
+
 
 app.use("/chat", chatRouter);
 

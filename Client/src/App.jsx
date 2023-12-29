@@ -119,6 +119,7 @@ function InnerApp() {
           <Route exact path="/login" element={<Register />} />
           <Route exact path="/signup" element={<Register />} />
           <Route exact path="/dashboard" element={<Home />} />
+          <Route exact path="/market" element={<Home />} />
           <Route exact path="/chat" element={<Chat />} />
           <Route exact path="userduties/:user_id" element={<UserDuties />} />
           <Route exact path="/availabilityboard" element={<AvailabilityBoard />} />

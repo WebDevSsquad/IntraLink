@@ -1,0 +1,123 @@
+.offer-container {
+  background-color: var(--bg-100);
+  color: var(--text-100);
+  break-inside: avoid;
+  width: 20rem;
+  height: auto;
+  padding: 1rem;
+  margin: 2rem;
+  border-radius: 30px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 3px 2px 32px -11px rgba(0, 0, 0, 0.5);
+}
+.offer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+}
+.offer-container .project_rank_icon {
+  margin-right: 10px;
+}
+.offer-container .project_manager_rank {
+  font-size: large;
+  font-weight: 800;
+  color: #00668c;
+}
+.offer-top-left {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
+}
+.manager_info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.offer-username {
+  color: var(--text-300);
+  font-size: 1rem;
+  font-weight: 700;
+}
+.offer-date {
+  color: var(--bg-300);
+  font-size: 0.6rem;
+}
+.offer-bottom{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;    
+}
+.offer-price{
+  color: var(--online);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.offer-bottom-right {
+  align-self: flex-end;
+}
+.buy-button {
+  color: var(--bg-100);
+  width: 9rem;
+  font-size: 1.3rem;
+  background-color: var(--accent-400);
+  box-shadow: 10px 10px 14px 1px rgba(00, 00, 00, 0.2);
+  border-radius: 30px;
+  padding: 0.5rem;
+  transition: all 0.5s;
+}
+.offer-bottom-right:hover .buy-button {
+  transform: translateZ(-2px);
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.offer-center {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0.5rem;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+.offer-text {
+  color: var(--text-100);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+  text-align: left;
+  width: 100%;
+  word-wrap: break-word;
+}
+.offer-profile-img_container {
+  width: 3rem;
+  height: 3rem;
+  overflow: hidden;
+  border-radius: 100%;
+  box-shadow: 10px 10px 14px 1px rgba(00, 00, 00, 0.2);
+}
+.offer-profile-img {
+  width: 100%;
+  height: auto;
+}
+.offer-img_container {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  border-radius: 20px;
+}
+.offer-img {
+  border-radius: 20px;
+  width: 100%;
+  height: auto;
+}
