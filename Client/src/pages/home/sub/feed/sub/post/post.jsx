@@ -67,8 +67,11 @@ export default function Post({
           return res.json();
         })
         .then((data) => {
-          deleteImage(prevurl);
-          console.log(data.posts.rows);
+          if (prevurl!="null"&&prevurl!=null&&prevurl!=undefined) {
+            console.log(prevurl);
+            deleteImage(prevurl);
+          }
+          // console.log(data.posts.rows);
           dispatch(updatePosts(data.posts.rows));
         });
     } catch (err) {
