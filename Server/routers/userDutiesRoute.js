@@ -11,5 +11,9 @@ userDutiesRouter.get(
   "/getUserTasks/:userID",
   userDutiesController.getUserTasks
 );
+userDutiesRouter.get(
+  "/getUserParts/:userID",
+  userDutiesController.getUserParts
+);
 
 export default userDutiesRouter;

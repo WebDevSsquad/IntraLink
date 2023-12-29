@@ -45,6 +45,10 @@
   overflow-y: auto;
 }
 
+.projects-div {
+  display: flex;
+}
+
 .no-projects-div,
 .no-parts-div,
 .no-tasks-div {
@@ -54,7 +58,8 @@
 }
 
 .project-card,
-.task-card {
+.task-card,
+.part-card {
   height: fit-content;
   width: calc(100% / 3 - 20px);
   padding: 20px;
@@ -69,6 +74,7 @@
     transform: scale(1.08);
     box-shadow: -1px 1px 5px var(--text-200);
   }
+  color: var(--text-100);
 }
 
 .project-card-info {
@@ -125,4 +131,8 @@
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 10px;
+}
+
+.part-card-name {
+  color: var(--text-100);
 }

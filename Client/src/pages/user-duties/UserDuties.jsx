@@ -3,6 +3,7 @@ import "./user-duties.css";
 import { Link, Route, Routes, useParams } from "react-router-dom";
 import UserTasks from "./UserTasks";
 import UserProjects from "./UserProjects";
+import UserParts from "./UserParts";
 
 export default function UserDuties() {
   const projectRef = useRef(null);
@@ -13,6 +14,7 @@ export default function UserDuties() {
   const taskTabRef = useRef(null);
   const [projects, setProjects] = useState([]);
   const [tasks, setTasks] = useState([]);
+  const [parts, setParts] = useState([]);
   const [activeTab, setActiveTab] = useState(0);
   const { user_id } = useParams();
   console.log(user_id);
@@ -41,15 +43,28 @@ export default function UserDuties() {
         });
     };
 
+    const fetchParts = async () => {
+      await fetch(`http://localhost:8080/userDuties/getUserParts/${user_id}`)
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data);
+          setParts(data.parts);
+          console.log(parts);
+        });
+    };
+
     fetchProjects();
     fetchTasks();
+    fetchParts();
   }, [activeTab]);
 
   return (
     <div className="userdutiescontainer">
       <div className="leftcontainer">
         <div
-          className="projects-choice"
+          className="projects-choice choice-active"
           ref={projectTabRef}
           onClick={() => {
             projectRef.current.style.display = "flex";
@@ -96,9 +111,7 @@ export default function UserDuties() {
       </div>
       <div className="rightcontainer">
         <UserProjects pref={projectRef} projects={projects} />
-        <div ref={partRef} className="parts-div">
-          partsDiv
-        </div>
+        <UserParts paref={partRef} parts={parts} />
         <UserTasks uref={taskRef} tasks={tasks} />
       </div>
     </div>
