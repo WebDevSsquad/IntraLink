@@ -119,11 +119,15 @@ function InnerApp() {
           <Route exact path="/login" element={<Register />} />
           <Route exact path="/signup" element={<Register />} />
           <Route exact path="/dashboard" element={<Home />} />
+          <Route path="/chat" element={<Chat />} />
+          <Route path="userduties/:user_id" element={<UserDuties />} />
         </Routes>
       </div>
     </Router>
   );
 }
+import Chat from "./pages/realtime-chat/Chat";
+import UserDuties from "./pages/user-duties/UserDuties";
 
 function App() {
   return (

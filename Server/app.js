@@ -2,10 +2,13 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import pool from "./db.js"; // Import the pool
+import pool from "./db.js"; // Import the pool
 import authMiddleware from "./middlewares/auth.middleware.js";
 import authRouter from "./routers/auth.route.js";
 import postRouter from "./routers/post.route.js";
 import projectRouter from "./routers/project.route.js";import ProfileRouter from "./routers/profile.route.js";
+import chatRouter from "./routers/chatRoute.js";
+import userDutiesRouter from "./routers/userDutiesRoute.js";
 
 dotenv.config();
 
@@ -36,6 +39,10 @@ app.use("/auth", authRouter);
 app.use("/post",authMiddleware,postRouter);
 app.use("/dashboard",authMiddleware,projectRouter);
 app.use("/profile", ProfileRouter);
+
+app.use("/chat", chatRouter);
+
+app.use("/userDuties", userDutiesRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

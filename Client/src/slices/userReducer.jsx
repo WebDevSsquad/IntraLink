@@ -83,6 +83,18 @@ export const userSlice = createSlice({
     updateSkills: (state, action) => {
       state.skills = action.payload;
     },
+    updateLocation: (state, action) => {
+      state.location = action.payload;
+    },
+    updatePhone: (state, action) => {
+      state.phone = action.payload;
+    },
+    updateAbout: (state, action) => {
+      state.about = action.payload;
+    },
+    updateSkills: (state, action) => {
+      state.skills = action.payload;
+    },
   },
 });
 
