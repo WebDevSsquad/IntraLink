@@ -12,7 +12,9 @@ const ComboBox = () => {
   const projects = useSelector((state) => state.feed.projects);
   const [selectedValue, setSelectedValue] = useState("");
   const dispatch = useDispatch();
-
+  useEffect(() => {
+    dispatch(updateSelectedProject(projects[0].project_id));
+  }, []);
   const handleSelectChange = (event) => {
     setSelectedValue(event.target.value);
     for (let i = 0; i < projects.length; i++) {
@@ -39,7 +41,7 @@ const ComboBox = () => {
         })
         .then((data) => {
           data.projects.rows.length > 0
-            ?  dispatch(updateSelectedProject(data.projects.rows[0].project_id))
+            ? dispatch(updateSelectedProject(data.projects.rows[0].project_id))
             : dispatch(updateSelectedProject(-1));
           dispatch(updateProjects(data.projects.rows));
         });
