@@ -121,6 +121,9 @@ function InnerApp() {
           <Route exact path="/dashboard" element={<Home />} />
           <Route exact path="/chat" element={<Chat />} />
           <Route exact path="userduties/:user_id" element={<UserDuties />} />
+          <Route exact path="/availabilityboard" element={<AvailabilityBoard />} />
+          <Route exact path="/parts/:id" element={<Part />} />
+          <Route exact path="/Tasks/:project_id/:part_id" element={<Task />} />
         </Routes>
       </div>
     </Router>
@@ -128,6 +131,9 @@ function InnerApp() {
 }
 import Chat from "./pages/realtime-chat/Chat";
 import UserDuties from "./pages/user-duties/UserDuties";
+import Part from "./pages/Part/part";
+import Task from "./pages/Task/task";
+import AvailabilityBoard from "./pages/Availabilityboard/availabilityboard";
 
 function App() {
   return (

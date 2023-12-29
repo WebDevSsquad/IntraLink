@@ -8,6 +8,9 @@ import postRouter from "./routers/post.route.js";
 import projectRouter from "./routers/project.route.js";import ProfileRouter from "./routers/profile.route.js";
 import chatRouter from "./routers/chatRoute.js";
 import userDutiesRouter from "./routers/userDutiesRoute.js";
+import avaRouter from "./routers/available.route.js";
+import partRouter from "./routers/part.route.js";
+import taskRouter from "./routers/task.routter.js";
 
 dotenv.config();
 
@@ -42,6 +45,12 @@ app.use("/profile", ProfileRouter);
 app.use("/chat", chatRouter);
 
 app.use("/userDuties", userDutiesRouter);
+
+app.use("/availability",avaRouter);
+
+app.use("/partsinfo",partRouter);
+
+app.use("/tasksinfo",taskRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

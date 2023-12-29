@@ -1,0 +1,183 @@
+.Parts_main {
+    width:100%;
+    height: fit-content;
+    min-height: 100vh;
+    background-color: var(--bg-100);
+}
+
+.Parts_main .search-container{
+    position: relative;
+    margin-top: 18vh;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.Parts_main .search-bar-parts{
+    height: 30px;
+    width: 400px;
+    background-color: var(--bg-100);
+    border-radius: 20px;
+    color: var(--text-100);
+    padding-left: 10px;
+    padding-right: 25px;
+    cursor: text;
+    &:focus{
+        outline: none;
+    }
+}
+
+.Parts_main .search-icon{
+    position: absolute;
+    color: black;
+    bottom: 8px;
+    right: 8px;
+}
+
+.Part-list{
+    width: 100%;
+    display: grid;
+    flex-wrap: wrap;
+    grid-template-columns: 2fr 3fr 2fr;
+    margin-top: 5vh;
+}
+
+.map-parts {
+  position: relative;
+  transition: 0.4s ease;
+  margin-top: 50px;
+  &:hover{
+    transform: scale(1.02);
+  }
+}
+
+.Part-preview {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 70%;
+    padding: 10px 16px;
+    margin-top: 20px;
+    background-color: var(--bg-100);
+    border-radius: 20px;
+    border-bottom: 1px solid var(--accent-100);
+    transition: 0.4s ease;
+  }
+
+  .Part-preview:hover {
+    background-color: var(--primary-200);
+    box-shadow: 1px 3px 5px var(--text-300);
+    transform: scale(1.02);
+  }
+
+  .Part-preview h2 {
+    font-size: 22px;
+    font-weight: bolder;
+    color: var(--text-100);
+    padding-right: 100px;
+
+  }
+
+  .Part-list .taskmanagerinfo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .Part-list .taskmanagerinfo p {
+    font-size: 20px;
+    font-weight: bolder;
+    color: var(--text-100);
+    margin-top: 5px;
+  }
+
+  .Part-list .buttontorequest{
+    position: absolute;
+    font-size: 15px;
+    width: 90px;
+    height: 15px;
+    bottom: 3px;
+    right: 9px;
+    color: var(--text-100);
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: var(--primary-100);
+    padding: 0;
+    padding-left: 4px;
+    transition: 0.5s ease;
+    &:focus{
+        outline: none;
+    }
+    &:hover{
+        background-color: var(--primary-200);
+        color: antiquewhite;
+        transform: scale(1.08);
+    }
+  }
+
+  .Part-list .firstpart{
+    position: relative;
+    width: 90%;
+    height: 55vh;
+    margin-left: 15px;
+    background-color: var(--primary-100);
+    border-radius: 20px;
+    padding: 10px;
+  }
+  
+  .Part-list .firstpart .projectinfo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .Part-list .firstpart .projectname{
+    margin-top: 10px;
+  }
+
+  .Part-list .firstpart .projectinfo .status{
+    margin-top: 15px;
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+  }
+
+  .notfinishedproject{
+    background-color: green ;
+  }
+
+  .finishedproject{
+    background-color: red;
+  }
+
+  .Part-list .firstpart .projectmanagerusername{
+    margin-top: 4px;
+  }
+
+  .Part-list .firstpart .projectmanageremail{
+    margin-top: 3px;
+  }
+
+  .Part-list .firstpart .projectdescription{
+    margin-top: 3px;
+  }
+
+  .Part-list .firstpart h3{
+    margin-top: 20px;
+  }
+
+  .Part-list .firstpart .projectstartdate{
+    position: absolute;
+    bottom: 50px;
+    left: 10px;
+  }
+
+  .Part-list .firstpart .projectduedate{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+  }
+
+
