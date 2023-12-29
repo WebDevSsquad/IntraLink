@@ -67,6 +67,9 @@ export default function Ball({ specific, speed, display }) {
     else if (theme=="Hire"){
       navigate("/availabilityboard");
     }
+    else if (theme=="Market"){
+      navigate("/market");
+    }
   };
 
   return (

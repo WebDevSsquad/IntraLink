@@ -1,6 +1,6 @@
 import pool from "../db.js";
-import { addSchema, deleteSchema } from "../models/post.js";
-const postController = {
+import { addSchema, deleteSchema } from "../models/market.js";
+const marketController = {
   Add: async (req, res) => {
     const { error } = addSchema.validate(req.body, { abortEarly: false });
     if (error) {
@@ -23,7 +23,7 @@ const postController = {
                                       '${image}','${formattedDate}');`);
       console.log(post);
       let posts = await pool.query(
-        `select po.*,u.username,u.picture from public."Post" po,public."Project" pro,public."User" u 
+        `select po.*,u.username from public."Post" po,public."Project" pro,public."User" u 
         where po.project_id=pro.project_id and pro.manager_id=u.user_id;`
       );
       res.status(201).json({ message: "Post created successfully", posts });
@@ -55,24 +55,23 @@ const postController = {
   },
   Get: async (req, res) => {
     try {
-      let posts = await pool.query(
-        `select po.*,u.username,u.picture,u.user_id from public."Post" po,public."Project" pro,public."User" u 
-        where po.project_id=pro.project_id and pro.manager_id=u.user_id;`
-      );
-      let ranks =
-        await pool.query(`SELECT pro.manager_id ,avg(pu.rating) as rank
+      let offers =
+        await pool.query(`select m.*, u.username,u.picture,u.user_id, pro.projectname ,pro.description 
+      from public."Offer" m , public."Project" pro, public."User" u  where m.project_id = pro.project_id and pro.manager_id = u.user_id;`);
+      let ranks = await pool.query(`SELECT pro.manager_id ,avg(pu.rating) as rank
       FROM public."Purchase" pu, public."Offer" o, public."Project" pro
           WHERE 
           pu.offer_id = o.offer_id AND
           o.project_id = pro.project_id
       group by pro.manager_id order by pro.manager_id asc;`);
-      res.status(201).json({ message: "Posts Got successfully", posts ,ranks });
+     
+      res.status(201).json({ message: "Offers Got successfully", offers,ranks });
     } catch (error) {
       console.log(error);
       res.status(500).json({
-        error: "An error occurred while getting your Posts.Please try again.",
+        error: "An error occurred while getting your offers.Please try again.",
       });
     }
   },
 };
-export default postController;
+export default marketController;
