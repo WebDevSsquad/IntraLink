@@ -105,7 +105,6 @@ function InnerApp() {
     localStorage.getItem("token") !== null &&
     localStorage.getItem("token") !== undefined
   ) {
-    console.log("Still Logged Injhggjkhgjkjh");
     stillLoggedIn();
   }
 

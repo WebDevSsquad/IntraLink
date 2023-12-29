@@ -4,7 +4,6 @@ import {
   ref,
   uploadBytes,
 } from "firebase/storage";
-import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useDispatch, useSelector } from "react-redux";
@@ -256,9 +255,3 @@ export default function Feed() {
     </>
   );
 }
-
-Feed.propTypes = {
-  homeRef: PropTypes.shape({
-    current: PropTypes.instanceOf(Element),
-  }).isRequired,
-};
