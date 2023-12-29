@@ -3,10 +3,11 @@ import "./home_bar.css";
 import rankiconPM from "/assets/rankPM.svg";
 import rankiconTM from "/assets/rankTM.svg";
 import searchicon from "/assets/search.svg";
+import { useNavigate } from "react-router";
 export default function HomeBar() {
   const userName = useSelector((state) => state.user.userName);
   const userPhoto = useSelector((state) => state.user.picture);
-
+  const navigate =useNavigate();
   return (
     <>
       <div className="homeBar">
@@ -27,7 +28,7 @@ export default function HomeBar() {
           <img src={searchicon} className="search_icon" />
           <input className="search_input" type="text" placeholder="Search..." />
         </div>
-        <div className="userphoto">
+        <div className="userphoto" onClick={()=>{navigate('/profile')}}>
           <img src={userPhoto} />
         </div>
       </div>

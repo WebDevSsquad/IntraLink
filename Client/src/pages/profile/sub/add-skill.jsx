@@ -1,15 +1,15 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import  { useEffect, useRef, useState } from "react";
 import "./add-skill.css";
 
+import PropTypes from "prop-types";
+
 const AddSkillButton = ({ onAddSkill }) => {
-  const dispatch = useDispatch();
+  // Component code here
   const [isModalOpen, setModalOpen] = useState(false);
   const [newSkill, setNewSkill] = useState("");
   const inputRef = useRef(null);
-  const skills = useSelector((state) => state.user.initialSkills);
   useEffect(() => {
     if (isModalOpen) {
       inputRef.current.focus();
@@ -36,12 +36,11 @@ const AddSkillButton = ({ onAddSkill }) => {
   };
 
   return (
-    <div className="add-skill-button skill-button">
-      <FontAwesomeIcon
-        icon={faPlus}
-        className="plus-icon"
-        onClick={() => setModalOpen(true)}
-      />
+    <div
+      className="add-skill-button skill-button"
+     
+    >
+      <FontAwesomeIcon icon={faPlus} className="plus-icon"  onClick={() => setModalOpen(true)}/>
       {isModalOpen && (
         <div className="add-skill-modal-overlay">
           <div className="add-skill-modal">
@@ -80,3 +79,6 @@ const AddSkillButton = ({ onAddSkill }) => {
 };
 
 export default AddSkillButton;
+AddSkillButton.propTypes = {
+  onAddSkill: PropTypes.func.isRequired,
+};

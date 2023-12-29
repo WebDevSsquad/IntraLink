@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  
   loggedIn: false,
   fetch: false,
   expires: true,
@@ -13,10 +14,6 @@ const initialState = {
   userID: "",
   isAvailable_Tm: true,
   isAvailable_Con: false,
-  location: "",
-  phone: "",
-  about: "",
-  skills: [],
   location: "",
   phone: "",
   about: "",
@@ -75,18 +72,6 @@ export const userSlice = createSlice({
     updateSkills: (state, action) => {
       state.skills = action.payload;
     },
-    updateLocation: (state, action) => {
-      state.location = action.payload;
-    },
-    updatePhone: (state, action) => {
-      state.phone = action.payload;
-    },
-    updateAbout: (state, action) => {
-      state.about = action.payload;
-    },
-    updateSkills: (state, action) => {
-      state.skills = action.payload;
-    },
   },
 });
 
@@ -103,10 +88,6 @@ export const {
   updateUserID,
   updateIsAvailable_Tm,
   updateIsAvailable_Con,
-  updateLocation,
-  updatePhone,
-  updateAbout,
-  updateSkills,
   updateLocation,
   updatePhone,
   updateAbout,

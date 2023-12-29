@@ -4,8 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   updateAbout,
   updateEmail,
-  updateAbout,
-  updateEmail,
   updateExpires,
   updateFetch,
   updateFirstName,
@@ -15,11 +13,7 @@ import {
   updateLocation,
   updateLoggedIn,
   updatePhone,
-  updatePhone,
   updatePicture,
-  updateSkills,
-  updateUserID,
-  updateUserName,
   updateSkills,
   updateUserID,
   updateUserName,
@@ -78,7 +72,6 @@ export default function Register() {
 
     const signup = {
       image: `/assets/${theme}User.svg`,
-      image: `/assets/${theme}User.svg`,
       username: UserName,
       firstname: FirstName,
       lastname: LastName,
@@ -100,11 +93,6 @@ export default function Register() {
     fetch(url, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify(
-        location.pathname === "/login" || location.pathname === "/logIn"
-          ? login
-          : signup
-      ),
       body: JSON.stringify(
         location.pathname === "/login" || location.pathname === "/logIn"
           ? login
@@ -141,12 +129,11 @@ export default function Register() {
             dispatch(updatePhone(data.user.phone));
           if (data.user.about !== undefined)
             dispatch(updateAbout(data.user.about));
-          if (data.user.skills !== undefined)
+          if (data.user.skills !== undefined && data.user.skills !== null)
             dispatch(updateSkills(data.user.skills));
           console.log(data.user);
           // ---------------------------------------------------------------------------
           localStorage.setItem("token", data.token);
-
 
           dispatch(updateLoggedIn(true));
           dispatch(updateExpires(false));

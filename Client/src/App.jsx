@@ -1,10 +1,6 @@
 import { useEffect } from "react";
 import { Provider, useDispatch, useSelector } from "react-redux";
-import {
-  Route,
-  BrowserRouter as Router,
-  Routes,
-} from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
 import { ResetData } from "./components/resetdata/resetdata";
 import Home from "./pages/home/home";
@@ -69,8 +65,8 @@ function InnerApp() {
           dispatch(updatePicture(data.user.picture));
         if (data.user.firstname !== undefined)
           dispatch(updateFirstName(data.user.firstname));
-        if (data.user.secondname !== undefined)
-          dispatch(updateLastName(data.user.secondname));
+        if (data.user.lastname !== undefined)
+          dispatch(updateLastName(data.user.lastname));
         if (data.user.user_id !== undefined)
           dispatch(updateUserID(data.user.user_id));
         if (data.user.username !== undefined)
@@ -87,7 +83,7 @@ function InnerApp() {
           dispatch(updatePhone(data.user.phone));
         if (data.user.about !== undefined)
           dispatch(updateAbout(data.user.about));
-        if (data.user.skills !== undefined)
+        if (data.user.skills !== undefined && data.user.skills !== null)
           dispatch(updateSkills(data.user.skills));
         dispatch(updateFetch(true));
       })
@@ -119,10 +115,10 @@ function InnerApp() {
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
           <Route exact path="/home" element={<Home />} />
-          <Route exact path="/profile" element={<Profile />} /> 
+          <Route exact path="/profile" element={<Profile />} />
           <Route exact path="/login" element={<Register />} />
           <Route exact path="/signup" element={<Register />} />
-          <Route exact path="/dashboard" element={<Home />} />       
+          <Route exact path="/dashboard" element={<Home />} />
         </Routes>
       </div>
     </Router>

@@ -134,13 +134,14 @@ const authController = {
       const user = await pool.query(`SELECT EXISTS (
                                         SELECT 1
                                         FROM public."User"
-                                        WHERE user_id = '${user_id}'
-                                    );`);
+                                        WHERE user_id = ${user_id});`
+                                    );
+                                    
       if (!user) {
         res.status(404).json({ message: "Couldn't find user" });
       }
       await pool.query(
-        `UPDATE public."User" SET image = '${image}' WHERE user_id = '${user_id};`
+        `UPDATE public."User" SET picture = '${image}' WHERE user_id = ${user_id};`
       );
       res.status(200).json({ message: "Updated in successfully" });
     } catch (error) {

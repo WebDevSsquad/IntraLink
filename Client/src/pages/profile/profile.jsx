@@ -1,21 +1,29 @@
-import { useRef, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Popup from "reactjs-popup";
 
 import {
-  faTimes,
-  faPhone,
-  faMapMarkerAlt,
-  faEnvelope,
-  faArrowTrendUp,
   faArrowTrendDown,
+  faArrowTrendUp,
+  faEnvelope,
+  faMapMarkerAlt,
   faPen,
+  faPhone,
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import AddSkillButton from "./sub/add-skill";
 import EditForm from "./sub/edit-form-popup";
 
+import {
+  updateAbout,
+  updateEmail,
+  updateIsAvailable_Con,
+  updateIsAvailable_Tm,
+  updateLocation,
+  updatePhone,
+  updateSkills,
+} from "../../slices/userReducer";
 import "./profile.css";
 
 export default function Profile() {
@@ -24,59 +32,62 @@ export default function Profile() {
   const divider = <div className="divider" />;
   const id = useSelector((state) => state.user.userID);
   const inputRef = useRef("");
+
+  const profilePicture = useSelector((state) => state.user.picture);
+  const firstName = useSelector((state) => state.user.firstName);
+  const lastName = useSelector((state) => state.user.lastName);
+  const fullName = `${firstName} ${lastName}`;
+  const skills = useSelector((state) => state.user.skills);
+  const phone = useSelector((state) => state.user.phone);
+  const about = useSelector((state) => state.user.about);
+  const location = useSelector((state) => state.user.location);
+  const email = useSelector((state) => state.user.email);
+  const isAvailableTM = useSelector((state) => state.user.isAvailable_Tm);
+  const isAvailableCon = useSelector((state) => state.user.isAvailable_Con);
+
   const [isProfileImageHovered, setIsProfileImageHovered] = useState(false);
-  const [profilePicture, setProfilePicture] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [skills, setSkills] = useState([]);
-  const [phone, setPhone] = useState("");
-  const [about, setAbout] = useState("");
-  const [location, setLocation] = useState("");
-  const [email, setEmail] = useState("");
   const [activeSection, setActiveSection] = useState("About");
   const [isEditFormOpen, setIsEditFormOpen] = useState(false);
-  const [isAvailableTM, setIsAvailableTM] = useState(false);
-  const [isAvailableCon, setIsAvailableCon] = useState(false);
   const [isEditingAbout, setIsEditingAbout] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:8080/profile/get_user_info/${id}`
-        );
-        const data = await response.json();
-        const info = data.userInfo.rows[0];
-        //console.log(info);
-        setFullName(info.firstname + " " + info.lastname);
-        setEmail(info.email);
-        setProfilePicture(info.picture);
-        setSkills(info.skills);
-        setIsAvailableTM(info.available_tm);
-        setIsAvailableCon(info.available_con);
-        setLocation(info.location);
-        setPhone(info.phone);
-        setAbout(info.about);
-      } catch (error) {
-        console.error("Error fetching Data:", error);
-      }
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `http://localhost:8080/profile/get_user_info/${id}`
+  //       );
+  //       const data = await response.json();
+  //       const info = data.userInfo.rows[0];
+  //       //console.log(info);
+  //       setFullName(info.firstname + " " + info.lastname);
+  //       setEmail(info.email);
+  //       setProfilePicture(info.picture);
+  //       setSkills(info.skills);
+  //       setIsAvailableTM(info.available_tm);
+  //       setIsAvailableCon(info.available_con);
+  //       setLocation(info.location);
+  //       setPhone(info.phone);
+  //       setAbout(info.about);
+  //     } catch (error) {
+  //       console.error("Error fetching Data:", error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
 
   const handleRemoveSkill = (index) => {
     const updatedSkills = [...skills];
     updatedSkills.splice(index, 1);
-    setSkills(updatedSkills);
+    dispatch(updateSkills(updatedSkills));
     removeSkillData(index + 1);
   };
 
   const handleAddSkill = (newSkill) => {
-    setSkills([...skills, newSkill]);
+    dispatch(updateSkills([...skills, newSkill]));
     updateSkillData(newSkill);
   };
   const handleSetAbout = () => {
-    setAbout(inputRef.current.value);
-    updateAbout(inputRef.current.value);
+    dispatch(updateAbout(inputRef.current.value));
+    updateAboutData(inputRef.current.value);
   };
   const handleEditedInfo = (editedData) => {
     const {
@@ -87,11 +98,11 @@ export default function Profile() {
       phone = "",
     } = editedData;
 
-    setEmail(email);
-    setPhone(phone);
-    setLocation(location);
-    setIsAvailableTM(isAvailableTM);
-    setIsAvailableCon(isAvailableCon);
+    dispatch(updateEmail(email));
+    dispatch(updatePhone(phone));
+    dispatch(updateIsAvailable_Tm(isAvailableTM));
+    dispatch(updateIsAvailable_Con(isAvailableCon));
+    dispatch(updateLocation(location));
 
     const newData = {
       available_con: isAvailableCon,
@@ -123,7 +134,7 @@ export default function Profile() {
       console.error("Error updating user data:", error);
     }
   };
-  const updateAbout = async (newAbout) => {
+  const updateAboutData = async (newAbout) => {
     console.log(newAbout);
     try {
       const response = await fetch(
@@ -234,9 +245,7 @@ export default function Profile() {
           <h1>{fullName}</h1>
           <p className="job-title">Project Manager</p>
         </div>
-        <button className="message-button">
-          Message
-        </button>
+        {/* <button className="message-button">Message</button> */}
         <div className="user-info">
           <div className="icon-container">
             <FontAwesomeIcon icon={faPhone} className="font-icon" />
@@ -288,7 +297,7 @@ export default function Profile() {
                     <div className="edit-about-container">
                       <textarea
                         value={about}
-                        onChange={(e) => setAbout(e.target.value)}
+                        onChange={(e) => dispatch(updateAbout(e.target.value))}
                         className="edit-textarea"
                         autoFocus
                         onFocus={(e) => {
@@ -331,16 +340,17 @@ export default function Profile() {
             <>
               <div className="skills">
                 <div className="skill-buttons">
-                  {skills.map((skill, index) => (
-                    <div className="skill-button" key={index}>
-                      <div className="skill-text">{skill}</div>
-                      <FontAwesomeIcon
-                        icon={faTimes}
-                        className="remove-skill-icon"
-                        onClick={() => handleRemoveSkill(index)}
-                      />
-                    </div>
-                  ))}
+                  {
+                    skills.map((skill, index) => (
+                      <div className="skill-button" key={index}>
+                        <div className="skill-text">{skill}</div>
+                        <FontAwesomeIcon
+                          icon={faTimes}
+                          className="remove-skill-icon"
+                          onClick={() => handleRemoveSkill(index)}
+                        />
+                      </div>
+                    ))}
                   <AddSkillButton onAddSkill={handleAddSkill} />
                 </div>
               </div>

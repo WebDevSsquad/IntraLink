@@ -41,6 +41,10 @@
   position: relative;
   overflow: hidden;
 }
+.profile-image-full img {
+  object-fit:cover;
+}
+
 
 .image-overlay {
   position: absolute;
