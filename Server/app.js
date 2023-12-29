@@ -11,6 +11,7 @@ import userDutiesRouter from "./routers/userDutiesRoute.js";
 import avaRouter from "./routers/available.route.js";
 import partRouter from "./routers/part.route.js";
 import taskRouter from "./routers/task.routter.js";
+import subRouter from "./routers/subscription.route.js";
 
 dotenv.config();
 
@@ -51,6 +52,8 @@ app.use("/availability",avaRouter);
 app.use("/partsinfo",partRouter);
 
 app.use("/tasksinfo",taskRouter);
+
+app.use("/subscription",subRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

@@ -124,6 +124,7 @@ function InnerApp() {
           <Route exact path="/availabilityboard" element={<AvailabilityBoard />} />
           <Route exact path="/parts/:id" element={<Part />} />
           <Route exact path="/Tasks/:project_id/:part_id" element={<Task />} />
+          <Route exact path="/subscription" element={<Subscription />} />
         </Routes>
       </div>
     </Router>
@@ -134,6 +135,7 @@ import UserDuties from "./pages/user-duties/UserDuties";
 import Part from "./pages/Part/part";
 import Task from "./pages/Task/task";
 import AvailabilityBoard from "./pages/Availabilityboard/availabilityboard";
+import Subscription from "./pages/subscription/subscription";
 
 function App() {
   return (
